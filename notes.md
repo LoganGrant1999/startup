@@ -1,0 +1,2 @@
+# Github Repository Pushing and Pulling
+###### In this excercise I learned how to create a repository in Github and in VS code, and how to push and pull changes between the two locations. I also created a [ReadMe file](https://github.com/LoganGrant1999/startup/blob/main/README.md).
