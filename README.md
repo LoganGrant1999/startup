@@ -21,7 +21,7 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
 
 ## Technologies Overview
 - **HTML**
-- kljflakjfsdlkj
+    - kljflakjfsdlkj
 - **CSS**
 - **JavaScript**
 - **React**
