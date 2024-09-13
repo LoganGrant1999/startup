@@ -4,7 +4,9 @@
 FanVote brings the excitement of live sports to your fingertips by letting you vote in real-time on who you think will win upcoming and ongoing games. Whether it's soccer, basketball, or any other major sport, users can see live updates, engage in friendly competition with others, and track the accuracy of their predictions. FanVote transforms sports watching into an interactive experience, making it fun to see how your votes stack up against your friends and the rest of the world. 
 
 ## Design Sketches
+**Sign In Page**
 ![Sign-in Page](./Images/sign-in.png)
+**Vote Page**
 ![Vote Page](./Images/vote-page.png)
 
 ## Key Features
