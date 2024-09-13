@@ -17,9 +17,17 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
 - Unique user profiles**
 - User results persistently stored on their profile
 - Real time voting results displayed after vote is placed
-- Game Data Auytomatically fetched from [third party API] (https://developer.sportradar.com/getting-started/docs/coverage-information)
+- Game Data Auytomatically fetched from [third party API](https://developer.sportradar.com/getting-started/docs/coverage-information)
 
-
+## Technologies Overview
+- **HTML**
+- kljflakjfsdlkj
+- **CSS**
+- **JavaScript**
+- **React**
+- **Service**
+- **DB/Login** 
+- **WebSocket**
 
 
 
