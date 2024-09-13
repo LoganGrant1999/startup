@@ -21,14 +21,22 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
 
 ## Technologies Overview
 - **HTML**
-    - kljflakjfsdlkj
+    - Will provide structure for login page and voting page
 - **CSS**
+    - Will provide styling for application to ensure that it displays correctly on varying screen types
+    - Will enable good spacing, color choice, and contrast
 - **JavaScript**
+    - Provides login, choice display, enables voting, displays votes to other users, backend endpoint calls
 - **React**
+    - Single page application with views componentized and reactive to users actions
+    - Framework ties together HTML, CSS, and Javascript for interactive frontend
 - **Service**
+    - Backend Service endpoints for retrieving votes, submitting votes, and retrieving correct vote streak
+    - Displays upcoming and live sports games using the [SportsRadar](https://developer.sportradar.com/getting-started/docs/coverage-information) service
 - **DB/Login** 
+    - Stores users, votes, and correct prediction streak in database
+    - Users can register and login 
+    - Credentials are stored in a database
+    - Authentication required in order to vote/start a prediction streak
 - **WebSocket**
-
-
-
-
+    - When a user votes, their vote is shown to all users. There is also a leaderboard displaying the 3 longest active correct prediction streak
