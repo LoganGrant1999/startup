@@ -111,10 +111,3 @@
     border: solid thin rgb(117, 0, 0);
     background-color: #300;
   }
-  
-  .center {
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-  
