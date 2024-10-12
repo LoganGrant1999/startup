@@ -1,14 +1,22 @@
 body {
+  background-color: #2C2C2E;
   display: flex;
   flex-direction: column;
   min-width: 375px;
 }
 
+h1 {
+  color: #D1D1D1;
+}
+
 header {
   flex: 0 80px;
+  color: #E5E5E5;
+  background-color: #0A0A23;
 }
 
 main {
+  background-color: #2C2C2E;
   flex: 1 calc(100vh - 110px);
   display: flex;
   flex-direction: column;
@@ -23,15 +31,10 @@ footer {
 menu {
   flex: 1;
   display: flex;
-  /*  overwrite Bootstrap so the menu does not wrap */
   flex-direction: row !important;
   list-style: none;
 }
 
-.navbar-brand {
-  padding-left: 0.3em;
-  border-bottom: solid rgb(182, 182, 182) thin;
-}
 
 menu .nav-item {
   padding: 0 0.3em;
