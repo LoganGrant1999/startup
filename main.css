@@ -28,6 +28,8 @@ main {
 }
 
 footer {
+  color: #E5E5E5;
+  background-color: #2C2C2E;
   flex: 0 30px;
 }
 
@@ -43,7 +45,7 @@ menu .nav-item {
   padding: 0 0.3em;
 }
 
-footer a {
+footer a{
   float: right;
 }
 
