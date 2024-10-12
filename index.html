@@ -22,11 +22,27 @@
   <body>
     <header>
       <h1>FanVote</h1>
-      <hr />
     </header>
 
     <main class="container-fluid text-center">
-      <h1>Welcome to FanVote</h1>
+
+      <div>
+        <div class = "aligner">
+          <h1 class = "header-text">Welcome to FanVote</h1>
+        </div>
+        <form method="get" action="predictions.html">
+          <div class="input-group mb-3">
+            <span class="input-group-text">@</span>
+            <input class="form-control" type="text" placeholder="your@email.com" />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">🔒</span>
+            <input class="form-control" type="password" placeholder="password" />
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="submit" class="btn btn-secondary">Create</button>
+        </form>
+      </div>
 
       <p>
         FanVote brings the excitement of live sports to your fingertips by letting you vote in real-time on who you think will win upcoming and ongoing games.
@@ -35,18 +51,6 @@
         and the rest of the world.
       </p>
 
-      <form method="get" action="predictions.html">
-        <div>
-          <span>@</span>
-          <input type="text" placeholder="your@email.com" />
-        </div>
-        <div>
-          <span>🔒</span>
-          <input type="password" placeholder="password" />
-        </div>
-        <button type="submit">Login</button>
-        <button type="submit">Create</button>
-      </form>
     </main>
 
     <footer>

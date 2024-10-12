@@ -7,12 +7,11 @@ body {
 
 h1 {
   color: #D1D1D1;
-  padding-left: 10px;
 }
 
 
 header {
-  flex: 0 80px;
+  flex: 0 55px;
   color: #E5E5E5;
   background-color: #0A0A23;
 }
@@ -41,10 +40,6 @@ menu {
 }
 
 
-menu .nav-item {
-  padding: 0 0.3em;
-}
-
 footer a{
   color: #0DCAF0;
   float: right;
@@ -61,3 +56,4 @@ footer a{
     flex: 1 100vh;
   }
 }
+
