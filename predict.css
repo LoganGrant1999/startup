@@ -21,6 +21,13 @@ h1 {
   order: 0;
 }
 
+h1.upcoming {
+  color: #D1D1D1;
+  border-bottom: solid #E5E5E5;
+  text-align: center;
+
+}
+
 header {
   flex: 0 55px;
   color: #E5E5E5;
@@ -91,6 +98,13 @@ footer {
 
 footer a {
   float: right;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
 }
 
 @media (max-height: 600px) {
