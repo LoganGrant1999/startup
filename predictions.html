@@ -23,7 +23,7 @@
       <nav>
         <menu>
           <li><a href="index.html">Home</a></li>
-          <li><a href="#">Predictions</a></li>
+          <li><a class="nav-link-active" href="#">Predictions</a></li>
           <li><a href="account.html">My Account</a></li>
         </menu>
       </nav>
@@ -31,24 +31,31 @@
     </header>
 
     <main>
-      <div class="user">
-        Player:
-        <span class="user-name">Current User</span>
-      </div>
+      <div class="user-and-leaderboard">
 
-      <!-- Placeholder for WebSockets to display realtime leaderboard -->
-      <ul class="leaderboard">
-        <li class="user-name">Kelly has predicted 6 in a row!</li>
-        <li class="user-name">Chris has predicted 4 in a row!</li>
-        <li class="user-name">Jake has predicted 3 in a row!</li>
-      </ul>
+        <div class="user">
+
+          <h3>Player: Current User</h3>
+
+          <div>
+            <label for="count">Prediction Streak:</label>
+            <input type="text" id="count" value="--" readonly />
+          </div>
+
+        </div>
+
+        <!-- Placeholder for WebSockets to display realtime leaderboard -->
+        <div class="Leaderboard">
+          <h3 class="leader-title">Leaderboard</h3>
+          <ul class="scores">
+            <li class="user-name">Kelly has predicted 6 in a row!</li>
+            <li class="user-name">Chris has predicted 4 in a row!</li>
+            <li class="user-name">Jake has predicted 3 in a row!</li>
+          </ul>
+        </div>
+      </div>
 
       <br />
-
-      <div>
-        <label for="count">Prediction Streak:</label>
-        <input type="text" id="count" value="--" readonly />
-      </div>
 
       <form>
         <br><br>
