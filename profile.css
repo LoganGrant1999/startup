@@ -21,6 +21,10 @@ h1 {
   order: 0;
 }
 
+h3 {
+  border-bottom: solid #E5E5E5;
+}
+
 header {
   flex: 0 55px;
   color: #E5E5E5;
@@ -29,6 +33,19 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+}
+
+.streak {
+  font-weight: bolder;
+}
+
+.email {
+  font-weight: bolder;
+}
+
+ul {
+  background-color: #D1D1D1;
+  color:#2C2C2E;
 }
 
 main {
@@ -94,6 +111,13 @@ footer a {
   border: 5px solid #E5E5E5;
 }
 
+.log-out {
+  color:#0DCAF0;
+}
+
+.log-out:hover {
+  font-weight: bolder;
+}
 
 @media (max-height: 600px) {
   header {
