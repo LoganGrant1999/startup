@@ -74,7 +74,6 @@ nav a:hover{
   font-weight: bolder;
 }
 
-
 div.user-and-leaderboard {
   display: flex;
   justify-content: space-between;
@@ -105,6 +104,19 @@ footer a {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 300px;
   grid-gap: 1em;
+}
+
+.image-box {
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#image img {
+  border: 5px solid #E5E5E5;
 }
 
 @media (max-height: 600px) {
