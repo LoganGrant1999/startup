@@ -2,6 +2,7 @@ body {
   background-color: #2C2C2E;
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-width: 375px;
   min-height: 100vh;
   margin: 0;
@@ -20,15 +21,6 @@ h1 {
   order: 0;
 }
 
-
-nav a {
-  color: #0DCAF0;
-}
-
-nav a:hover{
-  font-weight: bolder;
-}
-
 header {
   flex: 0 55px;
   color: #E5E5E5;
@@ -43,16 +35,13 @@ main {
   font-style:sans-serif;
   color: #E5E5E5;
   background-color: #2C2C2E;
-  flex: 1 calc(100vh - 110px);
-  min-height: calc(100vh - 110px);
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
-}
-
-footer {
-  flex: 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 menu {
@@ -69,9 +58,42 @@ nav {
   order: 1;
 }
 
+nav a {
+  color: #0DCAF0;
+}
+
+a.nav-link-active {
+  color:#D1D1D1;
+}
+
+nav a:hover{
+  font-weight: bolder;
+}
+
+footer {
+  flex-shrink: 0;
+  background-color: #0A0A23;
+}
+
 footer a {
   float: right;
 }
+
+
+
+.image-box {
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#image img {
+  border: 5px solid #E5E5E5;
+}
+
 
 @media (max-height: 600px) {
   header {

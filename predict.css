@@ -119,6 +119,7 @@ footer a {
   border: 5px solid #E5E5E5;
 }
 
+
 @media (max-height: 600px) {
   header {
     display: none;
