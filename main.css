@@ -23,9 +23,11 @@ header {
   flex: 0 55px;
   color: #E5E5E5;
   background-color: #0A0A23;
+
 }
 
 main {
+  font-style:sans-serif;
   color: #E5E5E5;
   background-color: #2C2C2E;
   flex: 1 calc(100vh - 110px);
