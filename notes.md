@@ -23,5 +23,6 @@ This exercise covers setting up Caddy to obtain HTTPS and TLS web certificates f
 5. **Hit Esc, :, wq to exit the editor**
 6. **sudo service caddy restart**
 
+**Midterm Notes**
 
 
