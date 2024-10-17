@@ -117,6 +117,10 @@ footer a {
 
 #image img {
   border: 5px solid #E5E5E5;
+  max-width: 80%;
+  object-fit: contain;
+  width: 80%;
+  height: auto;
 }
 
 
