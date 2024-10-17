@@ -52,3 +52,13 @@ For this deliverable, I built out the structure of my application using HTML.
 - [x] **Images**: There are 2 different sports banner images, one on the predictions page and one on the account page.
 - [x] **DB/Login**: An input box and submit button are provided for login. The prediction history on the account page represents data pulled from the database and displayed to the user.
 - [x] **WebSocket**: The leaderboard on the predictions page shows where a WebSocket will be used to show a leaderboard in real time of the longest correct prediction streaks.
+
+# CSS Deliverable
+For this deliverable I properly styled the application into its final appearance using CSS.
+
+- [x] **Header, footer, and main body content**: My header, footer, and main body content are properly styled.
+- [x] **Navigation Elements**: There are properly styled and functional navigation elements in the top right of both the predictions and account pages. 
+- [x] **Responsive to window resizing**: All elements of the web page, including images and grid elements, resize with the window and are responsively styled and designed
+- [x] **Application Elements**: All application elements have good contrast and whitespace.
+- [x] **Application Text Content**: I used consistent fonts and text colors.
+- [x] **Application Immages**: All application images are responsively designed and have a border. They resize with the size of the window.
