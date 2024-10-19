@@ -336,6 +336,56 @@
 - The main HTML file in a web app should be index.html
 
 ## HTML Structure
-```html
+- There is a distinction between structure elements that are block vs inline. A block element is meant to be a distinct block in the flow of the content structure. An inline element is meant to be inline with the content flwo of a block element. In other words, inline elements do not disrupt the flow of a block element's content. For example, the blcok element div(division) could have an inline element b in order to bring attention to a portion of its sub-text.
 
-<body> <p>Body</p> <header> <p>Header - <span>Span</span></p> <nav> Navigation <div>Div</div> <div>Div</div> </nav> </header> <main> <section> <p>Section</p> <ul> <li>List</li> <li>List</li> <li>List</li> </ul> </section> <section> <p>Section</p> <table> <tr> <th>Table</th> <th>Table</th> <th>Table</th> </tr> <tr> <td>table</td> <td>table</td> <td>table</td> </tr> </table> </section> <aside> <p>Aside</p> </aside> </main> <footer> <div>Footer - <span>Span</span></div> </footer> </body> \```
+
+
+- Example
+```
+<body>
+  <p>Body</p>
+  <header>
+    <p>Header - <span>Span</span></p>
+    <nav>
+      Navigation
+      <div>Div</div>
+      <div>Div</div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <p>Section</p>
+      <ul>
+        <li>List</li>
+        <li>List</li>
+        <li>List</li>
+      </ul>
+    </section>
+    <section>
+      <p>Section</p>
+      <table>
+        <tr>
+          <th>Table</th>
+          <th>Table</th>
+          <th>Table</th>
+        </tr>
+        <tr>
+          <td>table</td>
+          <td>table</td>
+          <td>table</td>
+        </tr>
+      </table>
+    </section>
+    <aside>
+      <p>Aside</p>
+    </aside>
+  </main>
+
+  <footer>
+    <div>Footer - <span>Span</span></div>
+  </footer>
+</body>
+```
+
+
