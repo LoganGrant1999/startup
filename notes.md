@@ -314,6 +314,20 @@
     - svg : scalabel vector graphic content
     - iframe : inline frame of another HTML page
 - Comments in HTML are started with `<!-- commented text -->`
-
-
- 
+- Special Characters in HTML are used for defining file format. Basically, if a '<' or a '&' is part of the content on your page, you need to tell VS Code that it is textual content and not an HTML element.
+- Character | Entities
+    - `&` → `&amp;`
+    - `<` → `&lt;`
+    - `>` → `&gt;`
+    - `"` → `&quot;`
+    - `'` → `&apos;`
+    - 😀 → `&#128512;`
+- HTML versions:
+| Year  | Version | Features                                      |
+|-------|---------|-----------------------------------------------|
+| 1990  | HTML1   | format tags                                   |
+| 1995  | HTML2   | tables, internationalization                  |
+| 1997  | HTML3   | MathML, CSS, frame tags                       |
+| 1999  | HTML4   | external CSS                                  |
+| 2014  | HTML5   | email, password, media, and semantic tags     |
+- The main HTML file in a web app should be index.html
