@@ -65,7 +65,7 @@
 - Three Distinct Phases
     - The formation of the internet that supports the communication of web applications
     - The creation of HTML and HTTP that made it possible to share hyperlinked docs (Web1.0)
-    - The creation of CSS and Javascript that enabled interactive web applications
+    - The creation of CSS and Javascript that enabled interactive web applications (Web 2.0)
 
 # Web Server Setup
 
@@ -168,4 +168,98 @@
         root * /usr/share/caddy
         file_server
    }
-    - Whenever Caddy recieves an HTTP request for any domain name on port 80 it will use the path of the request to find a corresponding file in this directory. For example, a request for http://fanvote.click/index.html will look for a file named index.html in the public_html directory 
+    - Whenever Caddy recieves an HTTP request for any domain name on port 80 it will use the path of the request to find a corresponding file in this directory. For example, a request for http://fanvote.click/index.html it will look for a file named index.html in the public_html directory 
+
+## HTTPS, TLS, and Web Certificates
+- HTTPS stands for Secure Hypertext Transport Protocol
+- Having a secure connection means that all the data is enrypted usingthe TLS protocol
+- TLS works by negotiating a shared secret that is then used to encrypt the data. This can be seen with curl and the parameter  -v
+    - curl - v -s https://byu.edu > /dev/null
+- The > /dev/null redirection throws away the acutal HTTP response
+- A core peice of this negotiation is the exchange of aweb certificate that identifies the domain name of the server creating the secure connection.
+- Let's Encrypt made it free and and easy to get web certificates
+- Caddy uses Let's Encrypt to generate a web certificate every time an HTTPS request is made for a domain name that Caddy doesn't have a web certificate for. It does this by asking Let's Encrypt to verify that the domain for the requested certificate is actually owned by the requester. 
+- How to use Caddy as a gateway to our different services and host our static web app files:
+    - 1. Open a console window
+    - 2. Use ssh console program to shell into your production environment server
+        - ssh -i [key pair file] ubuntu@[your domain here]
+    - 3. Edit Caddy's configuration file found in the ubuntu user's home directory
+        - cd ~
+        - vi Caddyfile
+    - 4. Modify the Caddy rule for handling requests to port 80 (HTTP), to instead handle request for your domain name. By not specifying a port rule will serve up files using port 443 (HTTPS), and any request to port 80 will automatically redirect the browser to port 443. Replace :80 with your domian name and delete the colon
+    - 5. Modify the Caddy rules that route the traffic for the two web applications that we will build. To do this replace the two places where yourdomain appears with your domain name.
+    - 6. Review the Caddyfile to make sure it looks right. 
+    - 7. Save the file and exit VI
+        - :wq
+    - 8. Restart Caddy so that your changes tak effect. 
+        - sudo service caddy restart
+
+## The Console
+- Consoles (terminal) need to be POSIX compliant
+- printf 'hello\n' -> hello
+- ls -la lists all of the files that in a directory in long format
+- The two primary purposes of the console are to view the files on the computer and to execute commands. 
+- Types of console commands
+    - echo: Output the parameters of the command
+    - cd: change directory
+    - mkdir: make directory
+    - rmdir: remove directory
+    - rm: remove file(s)
+    - mv: move files(s)
+    - cp: copy files
+    - ls: list files
+    - curl: command line client URL browser
+    - grep: regular expression search
+    - find: find files
+    - top: view running processes with CPU and memory usage
+    - df: view disk stats
+    - cat: output the contents of a file
+    - less: interactively output the contents of a file
+    - wc: Count the words in a file
+    - ps: View the currently running processes
+    - kill: kill a currently running process
+    - sudo: Execute a comand as a super user(admin)
+    - ssh: Create a secure shell on a remote computer
+    - scp: Securley copy files to a remote computer
+    - history: show the history of commands
+    - ping: Check if a website is up
+    - tracert: Trace the connections to a website
+    - dig: Show the DNS info for a domain
+    - man: Look up a command in the manual
+- How to chain the input and output of commands using special characters:
+    - |: take the output from the command on the left and pipe or pass it to the command on the right
+    - (>) : Redirect output to a file. Overwrite it if it exists
+    - (>>) : Redirect output to a file. Append it if it exists
+- Keystrokes with special meaining in the console:
+    - CTRL-R: Use type ahead to find previous commands
+    - CTRL-C: Kill the currently running command
+
+## Editors
+- The code editor is the workspace of a web app developer. 
+- VI or Vim
+    - To use VI, open your console and change directory to one that holds some code that you want to work on. 
+        - vi index.html
+    - There are two modes in VI, command mode and insert mode. Command mode is the default. To edit a doc, use the command "i" to enter insert mode. To exit insert mode, press ESC and then :q
+    - VI commands:
+        - :h : help
+        - i : enter insert mode
+        - u : undo
+        - CTRL-r : redo
+        - gg : go to beginning of file
+        - G : go to end of file
+        - / : search for text that you type after /
+        - n : next search match
+        - N : previous search match
+        - v : visually select text
+        - y : Yank or copy selected text to clipboard
+        - p : paste clipboard
+        - CTRL-wv : split window vertically
+        - CTRL-ww : Toggle windows
+        - CTRL-wq : Close current window
+        - :e : Open a file
+        - :w : write file(save)
+        - :q : quit (:q! to quit without saving)
+        
+
+
+ 
