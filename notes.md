@@ -40,3 +40,132 @@
 - Git supports the ability to branch your code. This allows you to work on variations of the code while still allowing progress on the main branch. For example, if you wanted to work on a new feature named A without interrupting work on the master branch, you would use the git branch A command to create a new branch named A, then start working on the new branch with the git checkout A command. Now commits can be done to either the master branch or the A branch. When you want to combine the work done on both branches, you checkout the master branch and execute git merge A. If you decide you want to abandon the new feature, then you just don't ever merge it back into the master branch.
 - Be aware that if you store large binary files (images or videos), you will make a copy each time you commit and could use significant storage doing so. 
 
+## GitHub
+- GitHub is a cloud based service taht makes the management of cloning repositories much easier
+- We will use GitHub for 1. Hosting instruction, 2. Publilcly hosing our project repositories, 3. Keeping notes
+- You can create a repository in your development environment using git init and then connect it upstream to a repsoitory on GitHub, but it's a lot easier to create your repository first on GitHub and then clone it to your dev environment. This automatically links them together
+- You clone a repository by providing the GitHub repository's URL as a parameter to the git clone command from in a console window. You can get a copy of the URL from the repository's GitHub page and clicking on the green Code button, and then clicking on the copy button next to the HTTPS URL.
+- When you clone a repository it is placed in a subdirectory named with the name of the repository. So make sure you are in the directory where you keep all of your source repositories before you run the command.
+    - git clone https://github.com/webprogramming260/startup-example.git
+    - cd startup-example
+- This is the pattern that you want to make a reflexive part of your development process.
+    - Pull the repository's latest changes from GitHub (git pull)
+    - Make changes to the code
+    - Commit the changes (git commit)
+    - Push the changes to GitHub (git push)
+- The first time you make a push request to a repository Git will ask you how you want to identify yourself and what credential (e.g. password) to use in order to authenticate with GitHub. You will need to create a Personal Access Token and provide that as your password.Make sure you use the email that you provided for your GitHub account.
+    - git config --global user.email "you@example.com"
+    - git config --global user.name "Your name"
+- You can run the fetch command in terminal to see what changes have been made on GitHub without chaning your local environment. Then, run the status Git command to see the differences between clones and see that we are missing a commit. Then you can use pull to sync your local environment with the repository
+    - git fetch
+    - git status
+    - git pull
+- Forking a repository clones it to GitHub, and then you can pull it into your environment
+## A Brief History of Web Programming
+- Three Distinct Phases
+    - The formation of the internet that supports the communication of web applications
+    - The creation of HTML and HTTP that made it possible to share hyperlinked docs (Web1.0)
+    - The creation of CSS and Javascript that enabled interactive web applications
+
+# Web Server Setup
+
+## Tech Stack
+- The collection of technologies that you use to create or deliver your web appp is called a technology stack
+- At the top of your stack is your web framework (ie. Angular, React, Vue, Svelte)
+- The framework then communicates with one or more web services to provide authentication, business, data, and persistent storage
+- The web service then uses backend services such as chaching, database, logging, and monitoring
+- Here is our tech stack:
+    - React for the web framework
+    - Caddy as the web server hosted on AWS
+    - Running web services with Node.js
+    - MongoDB as the database hosted on MongoDB Atlas
+
+## AWS - EC2
+- Steps to create a web server
+    - 1. Open the AWS console in your browser and login
+    - 2. Navigate to the EC2 service
+    - 3. Change you region to US East (N. Virginia) - us-east-1. This will make it so that your server is located there. This is cruc ial because the Amazon Machine Image you will use is only available there
+    - 4. Select the option to "Launch Instance"
+    - 5. Give your instance a meaningful name (i.e. owner-purpose-version)
+    - 6. Select your AMI
+    - 7. Select t3.nano, t3.micro, or t2.micro for the instance type depending on power needed
+    - 8. Create a new key pair and save it to your local dev environment. They are reusable
+    - 9. Make sure network settings are auto-assign public IP. Firewall(security group) should be "Create security group". Allow SSH, HTTP, and HTTPS traffic from anywhere
+    - 10. Launch instance
+
+## SSH into Your Server
+- SSH is used to shell into the server. It requires the public IP address from the EC@ instance and the location of your key pair file. 
+    - ssh -i [key pair file] ubuntu@[ip address]
+- You may get a warneing that your key pair file permissions are too open. If so,  then you can restrict the permissions on your file so that they aren't accessible to all users by running the chmod command in the terminal:
+    - chmod 600 [key pair file]
+- You can now run "ls -l" in the terminal to see the ubuntu user's home directory
+    - The public_html directory contains all of the static files that you are serving up directly through Caddy when using it as a web service
+    - The services directory is the place where you are going to install all of your web services when they are built
+- There are 2 choices to keep the same public IP address, and both are recommended to do at the same time:
+    - Never stop your server
+    - Assign an elastic IP address to your server so that it keeps the same address even if you stop it
+- Here is how to assign an elastic IP address:
+    - 1. Open the AWS console in your browser and login
+    - 2. Navigate to the EC2 Service
+    - 3. From the Menu on the left select "Network and Security | Elastic IPs"
+    - 4. Press the Allocate Elastic IP address Button
+    - 5. Press the Allocate Buttion
+    - 6. Select the newly displayed allocated  address and press the Actions button
+    - 7. Select the Associate Elastic IP address option
+    - 8. Click on the Instance box and select your server instance
+    - 9. Press Associate
+
+## Route 53
+- Route 53 is the AWS service that handles everything DNS related. It enables you to buy a domain name, host your domain on their DNS servers, and create DNS records
+- How to cpurchase a domain name on Route 53:
+    - 1. Open the AWS console in your browser and login
+    - 2. Navigate to the Route 53 service
+    - 3. Select the Domain > Registered domains option from the menu on the left
+    - 4. Push the Register Domain option
+    - 5.  Select the TLD that you want. AWS currently offers the .click TLD and .link
+    - 6. Put your desired root domain into the search box and press check to see if its available
+    - 7. Press Add to Cart
+    - 8. Fill out the contact details. This is sent to the authorized DNS registrar and is what shows up to the world for your domain. Once registration is complete, you can see this info using the console program "whois". 
+    - 9. Press Continue
+    - 10. Review everything and press Complete Order
+    - 11. Finally, it will show you have a hosted zone for your domain name
+
+- ONce you have a domain name, you can use it to create DNS records that will map domain names to IP addresses or other domain names. This is how this is done:
+    - 1. Open the AWS console in your browser and login
+    - 2. Navigtate to the Route 53 service
+    - 3. Select the Hosted Zones option from the menu on the left
+    - 4. You should see your domain anme listed here.
+    - 5. Click on your domain name to view the details. This should display existing DNS records with types such as NS and SOA
+    - 6. First, create the root domain DNS record. This will associate your domain name with your server's Ip address and allow you to use your domain name in the browser to navigate to the server:
+        - 1. Press the create record button
+        - 2. In the Value box enter the public IP address of your server
+        - 3. Press Create records
+        - 4. A new A type record should appear in your list of records that represents the root domain name and your server's public IP address
+    - 7. Next we will create a DNS record that will map to your server for any subdomain of your root domain name. THis is possible because DNS allows you to specify wildcards for a DNS record:
+        - 1. Press the Create Record button
+        - 2. In the Record name box enter the text *. This wildcard represents that any subdomain will match this record, so long as it is not explicitly defined by another DNS record.
+        - 3. In the Value box enter the public IP address of your server
+        - 4. Press Create records
+        - 5. A new A type record should appear in your list of records that represents the wildcard subdomain name and your server's public IP address
+- Some other record types are created. NS is the name server recored and it contains the names of authoratative name servers that authorize you to place DNS records in this DNS server. They add security. SOA records provide contact info about the owner of the domain name
+- How to lease a domain name:
+    - 1. Open the AWS browser console and login
+    - 2. Use Route 53 to purchase a domain name
+    - 3. Set up your DNS records in Route 53. Make sure you have a recored representing your root domain name and a wild card subdomain
+- DNS stands for Domain Name System
+-  You need a domain name to represent a web app so that you can create a secure HTTPS connection
+
+## Caddy
+- Caddy is a web service that listens for incoming HTTP requests. Caddy then serves up the requested statci files or routes the request to another web service. This abilitiy to route requests is called a gateway, or reverse proxy, and allows you to expose multiple web services as a single exxternal web service
+- Caddy handles all of the creation and rotation of web certificates. This allows us to easily support HTTPS
+- Caddy serves up all of your static HTML, CSS, and Javascript files. All of your early application work will be hosted as static files
+- Caddy acts as a gateway for subdomain  requests to your Simon and Startup application services. For example, when a request is made to simon.yourdomain Caddy will proxy the request to Simon appplication running with node.js as an internal wegb service
+- Configuration file: ~/Caddyfile
+    - Contains the definitions for routing HTTP requests that Cadddy receives. Ths is used to determine the location where static HTML files are loaded from, and also to proxy requests into the services you will create later. Never modify this manually except for when you confiure the domain name of your server
+- HTML Files: ~/public_html
+    - This is the directory of files taht Caddy serves up when requests are made to the root or your web server. This is configured in the Caddyfile discussed above. If you actually look at the Caddyfile you will see that the statitc file server is mapped to /usr/share/caddy. That is the location that the file link in the Upuntu user's hom directory, ~/public_html, is pointing to
+    - :80 {
+        root * /usr/share/caddy
+        file_server
+   }
+    - Whenever Caddy recieves an HTTP request for any domain name on port 80 it will use the path of the request to find a corresponding file in this directory. For example, a request for http://fanvote.click/index.html will look for a file named index.html in the public_html directory 
