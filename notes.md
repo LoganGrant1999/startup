@@ -259,7 +259,60 @@
         - :e : Open a file
         - :w : write file(save)
         - :q : quit (:q! to quit without saving)
-        
 
+# HTML
+
+## HTML Introduction
+- HTML stands for HyperText Markup Language
+- Originally designed to be a publishing format for web docs
+- Text is valid HTML. Elements and tags provide structure
+- HTML elements are represented with enclosing tags that may enclose other elements or text
+- Tags designate the start and end of an HTML element
+- open tags are denoted "<" and closing tags are denoted "/>"
+- The <html> element represents the top level page structure
+- The <head> element contains metadata about the page and page title
+- The <body> element represents the content structure
+- The <main> element represents the main content structure, as opposed to things like headers, footers, asides, and navigation content
+- Every HTML element may have attributes that describe specific details of the element. 
+    - The "id" attribute gives a unique ID to the element so that it can be distinguished
+    - The "class" attribute is another common element that designates the element as being classified into a named group of elements
+- A hyperlink in HTML is represented with an anchor (a) element that has an attribute containing the address of the hyperlink reference (href)
+    - <a href="https://fanvote.click">Go to Fanvote</a>
+- HTML defines a header (<!DOCTYPE html>) that tells the browser the type and version of the doc. This should be at the top of every HTLM file.
+- Common HTML elements:
+    - html : page container
+    - head : Header info
+    - title : Title of the page
+    - meta : Metadata for the page such as character set or viewport settings
+    - script : Javascript reference
+    - include : External content reference
+    - body : The entire content body of the page
+    - header : Header of the main content
+    - footer : footer of the main content
+    - nav : Navigational inputs
+    - main : Main content of the page
+    - section : A section of the main content
+    - aside : Aside content from the main content
+    - div : A block division of content
+    - span : and inline span of content
+    - h<1-9> : Text heading (h1 biggest, h9 smallest)
+    - p : paragraph
+    - b : bring attention
+    - table : table
+    - tr : table row
+    - th : table header
+    - td : table data
+    - ol, ul : ordered or unordered list
+    - li : list item
+    - a : anchor text to a hyperlink
+    - img : graphical image reference
+    - dialog : interacteve component such as a confirmation
+    - form : A collection of user input
+    - input: User input field
+    - audio : audio content
+    - video : video content
+    - svg : scalabel vector graphic content
+    - iframe : inline frame of another HTML page
+- Comments in HTML are started with <!-- commented text -->
 
  
