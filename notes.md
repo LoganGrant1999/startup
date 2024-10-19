@@ -389,6 +389,9 @@
 ```
 ## HTML Input Elements
 
+
+- Elements for accepting input of user data:
+
 | Element   | Meaning                               | Example                                                   |
 |-----------|---------------------------------------|-----------------------------------------------------------|
 | form      | Input container and submission        | `<form action="form.html" method="post"> ... </form>`      |
@@ -402,6 +405,54 @@
 | output    | Output of input                       | `<output for="range">0</output>`                          |
 | meter     | Display value with a known range      | `<meter min="0" max="100" value="50"></meter>`            |
 
+
+- The main purpose of the form element is to submit the values of the inputs it contains
+- Thanks to Javascript, you don't have to have a form element to use input elements
+- Example of a textarea element:
+'''<form action="submission.html" method="post">
+  <label for="ta">TextArea: </label>
+  <textarea id="ta" name="ta-id">
+Some text
+  </textarea>
+  <button type="submit">Submit</button>
+</form>'''
+
+- Pressing the submit button above would send the follwing data to the web server. The browser generates data by combing the text area's name attribute with the current value of the text area:
+    - ta-id=Some+text
+- You can set the type of input that is received with the "type" attribute.
+- Types of inputs:
+| Type            | Meaning                           |
+|-----------------|-----------------------------------|
+| text            | Single line textual value         |
+| password        | Obscured password                 |
+| email           | Email address                     |
+| tel             | Telephone number                  |
+| url             | URL address                       |
+| number          | Numerical value                   |
+| checkbox        | Inclusive selection               |
+| radio           | Exclusive selection               |
+| range           | Range limited number              |
+| date            | Year, month, day                  |
+| datetime-local  | Date and time                     |
+| month           | Year, month                       |
+| week            | Week of year                      |
+| color           | Color                             |
+| file            | Local file                        |
+| submit          | Button to trigger form submission |
+
+- common attributes of input elements:
+
+| Attribute | Meaning                                                                 |
+|-----------|-------------------------------------------------------------------------|
+| name      | The name of the input. This is submitted as the name of the input if used in a form |
+| disabled  | Disables the ability for the user to interact with the input            |
+| value     | The initial value of the input                                          |
+| required  | Signifies that a value is required in order to be valid                 |
+
+- Several inputs have validation built into them. You can also specify the required attribute on an input element 
+- The pattern attribut exists on text, search, url, tel, email, and password to provide a regular expression that must match for the input to be considered as valid. 
+- Validation can also be built into your Javascript to check everything before submission
+- Give validation feedback early in the user experience
 
 
 
