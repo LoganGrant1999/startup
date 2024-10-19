@@ -461,6 +461,52 @@ Some text
 - How to render an image:
 ``` <img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" /> ```
 
+- Audio files can include controls if you want the user to be able to control the audio playback, otherwise there is not visual representation. Autoplay makes the audio play as soon as the audio file is loaded and loop keeps it playing in a loop
+
+- How to render audio:
+``` <audio controls src="testAudio.mp3"></audio> ```
+
+- Video has similar controls to audio. You may need to include crossorigin="anonymous" if you are requesting files from a different domain than the one serving your content
+
+- How to render video:
+``` <video controls width="300" crossorigin="anonymous"> <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" /> </video> ```
+
+- Internal Media elements svg and canvas allow you to actually create images directly within your HTML
+
+- SVG stands for Scalabel Vector Graphics. This is a way to render graphics inline in your HTML
+
+- SVG example
+``` <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" stroke="red" fill="red" style="border: 1px solid #000000"> <circle cx="150" cy="100" r="50" /> </svg> ```
+
+- Canvas was introduced to facilitate 2D drawing and animation. 
+
+- Canvas Example:
+
+```<canvas id="canvasDemo" width="300" height="200" style="border: 1px solid #000000"></canvas>```
+
+- Then you would Javascript to complete it
+
+## Deploy Script
+- Enter: ./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
+
+# CSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
