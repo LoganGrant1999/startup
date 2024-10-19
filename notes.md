@@ -276,8 +276,8 @@
 - Every HTML element may have attributes that describe specific details of the element. 
     - The "id" attribute gives a unique ID to the element so that it can be distinguished
     - The "class" attribute is another common element that designates the element as being classified into a named group of elements
-- A hyperlink in HTML is represented with an anchor (a) element that has an attribute containing the address of the hyperlink reference (href)
-    - <a href="https://fanvote.click">Go to Fanvote</a>
+- A hyperlink in HTML is represented with an anchor (`<a>`) element that has an attribute containing the address of the hyperlink reference (`href`)
+    - `<a href="https://fanvote.click">Go to Fanvote</a>`
 - HTML defines a header (<!DOCTYPE html>) that tells the browser the type and version of the doc. This should be at the top of every HTLM file.
 - Common HTML elements:
     - html : page container
@@ -313,6 +313,7 @@
     - video : video content
     - svg : scalabel vector graphic content
     - iframe : inline frame of another HTML page
-- Comments in HTML are started with <!-- commented text -->
+- Comments in HTML are started with `<!-- commented text -->`
+
 
  
