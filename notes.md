@@ -336,47 +336,6 @@
 - The main HTML file in a web app should be index.html
 
 ## HTML Structure
-<body>
-  <p>Body</p>
-  <header>
-    <p>Header - <span>Span</span></p>
-    <nav>
-      Navigation
-      <div>Div</div>
-      <div>Div</div>
-    </nav>
-  </header>
+```html
 
-  <main>
-    <section>
-      <p>Section</p>
-      <ul>
-        <li>List</li>
-        <li>List</li>
-        <li>List</li>
-      </ul>
-    </section>
-    <section>
-      <p>Section</p>
-      <table>
-        <tr>
-          <th>Table</th>
-          <th>Table</th>
-          <th>Table</th>
-        </tr>
-        <tr>
-          <td>table</td>
-          <td>table</td>
-          <td>table</td>
-        </tr>
-      </table>
-    </section>
-    <aside>
-      <p>Aside</p>
-    </aside>
-  </main>
-
-  <footer>
-    <div>Footer - <span>Span</span></div>
-  </footer>
-</body>
+<body> <p>Body</p> <header> <p>Header - <span>Span</span></p> <nav> Navigation <div>Div</div> <div>Div</div> </nav> </header> <main> <section> <p>Section</p> <ul> <li>List</li> <li>List</li> <li>List</li> </ul> </section> <section> <p>Section</p> <table> <tr> <th>Table</th> <th>Table</th> <th>Table</th> </tr> <tr> <td>table</td> <td>table</td> <td>table</td> </tr> </table> </section> <aside> <p>Aside</p> </aside> </main> <footer> <div>Footer - <span>Span</span></div> </footer> </body> \```
