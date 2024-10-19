@@ -421,7 +421,6 @@ Some text
     - ta-id=Some+text
 - You can set the type of input that is received with the "type" attribute.
 - Types of inputs:
-
 | Type            | Meaning                           |
 |-----------------|-----------------------------------|
 | text            | Single line textual value         |
@@ -433,7 +432,13 @@ Some text
 | checkbox        | Inclusive selection               |
 | radio           | Exclusive selection               |
 | range           | Range limited number              |
-| date         
+| date            | Year, month, day                  |
+| datetime-local  | Date and time                     |
+| month           | Year, month                       |
+| week            | Week of year                      |
+| color           | Color                             |
+| file            | Local file                        |
+| submit          | Button to trigger form submission |
 
 - common attributes of input elements:
 
@@ -454,7 +459,7 @@ Some text
 - img, audio, and video are references to an external file, while svg and canvas both contain the code to render a visual image that can be animated
 - Use a full path to the reference if the image is not stored in your directory
 - How to render an image:
-<img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" />
+``` <img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" /> ```
 
 
 
