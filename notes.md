@@ -811,6 +811,8 @@ p {
 }
 ```
 
+![CSS Display Image](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/css/responsive/cssDisplay.jpg)
+
 
 
 
