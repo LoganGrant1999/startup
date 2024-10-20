@@ -770,7 +770,46 @@ p {
 }
 ```
 
+## Responsive Design
+- The ability to configure the interface so the application accommodates and takes advantage of the screen's size and orientation is called responsive design
 
+- Some elements of HTML and CSS are already fluid (ie paragraph tags), however there are other features that can completely change the layout of the application based on the devie's size and orientation
+
+- The CSS display property enables you to change how an HTML element is displayed by the browser. Here are some common display property options:
+
+| Value  | Meaning                                                                                                  |
+|--------|----------------------------------------------------------------------------------------------------------|
+| none   | Don't display this element. The element still exists, but the browser will not render it.                 |
+| block  | Display this element with a width that fills its parent element. A p or div element has block display by default. |
+| inline | Display this element with a width that is only as big as its content. A b or span element has inline display by default. |
+| flex   | Display this element's children in a flexible orientation.                                                |
+| grid   | Display this element's children in a grid orientation.                                                    |
+
+- Here is an example of how to implement different display types:
+
+```css
+.none {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+```
 
 
 
