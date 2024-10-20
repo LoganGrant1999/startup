@@ -975,6 +975,13 @@ section:nth-child(2) {
 ```
 
 
+## Debugging CSS
+
+- You can use the browser's developer tool to inspect the CSS properties and vizualize the HTML layout. Using the Google Chrome debugger, you can access the dev tools by right clicking on the HTML page element that you want to debug and selecting the inspect option. The elements tab shows you different elements and you will visually see what the padding, borders, and margins are set to. The Styles pane shows all ofthe CSS properties applied to the currently selected element. If you scroll down to the bottom of the styles pane, you will see the CSS box. By moving the cursor over the different parts of the CSS box, it will highlight the different parts in the browser window.
+
+- You can change any of the CSS properties, and even add new properties directly in the debugger. This allows you to see what each property is contributing and change them to see how that impacts the rendering. This is a great way to figure out what CSS works best without having to continually change the CSS file and refresh the browser.
+
+## CSS Frameworks
 
 
 
