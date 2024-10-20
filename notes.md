@@ -983,6 +983,71 @@ section:nth-child(2) {
 
 ## CSS Frameworks
 
+- CSS frameworks provide functions and components that commonly appear in web applications. 
+
+- Tailwind is a new CSS framework and its associated with the library Tailwind UI. Tailwind uses smaller definitions that are applied specifically to individual HTML elements. This moves much of the CSS representation out of the CSS file and directly into the HTML:
+
+```html
+<div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+  <img class="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src="profile.png" />
+  <p class="text-lg font-medium">“Tailwind CSS”</p>
+</div>
+```
+
+- Boostrap can be integrated into web applications simply by referencing the Bootstrap CSS files from their content delivery network (CDN). You then add the HTML link elements to your head element like this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    ...
+  </body>
+</html>
+```
+
+- If you are using Bootstrap components that require Javascript (carousel, buttons, etc), you will also need to includ Bootstrap's Javascript module. You add this by putting the follwoing at the end of your HTML body element:
+
+```html
+<body>
+  ...
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"
+  ></script>
+</body>
+```
+
+- You can use the Node Package Manager (NPM) to download Bootstrap and include it in your source code. That way you don't have to rely on someone else's server to provide you with a vital piece of you app. To include Bootstrap in your app using NPM, run the follwing in terminal: "npm install bootstrap@5.2.3"
+
+- When we use the Bootstrap "btn" CSS class, the button gets a nice looking rounded appearance. The Bootstrap "btn-primary" class shades the button with the current primary color for the app (blue default). The follwoing shows a bootstrap button:
+
+```html
+// Bootstrap styled button
+<button type="button" class="btn btn-primary">Bootstrap</button>
+
+// Default browser styled button
+<button type="button">Plain</button>
+```
+
+# Javascript
+
+
+
+
+
+
+
 
 
 
