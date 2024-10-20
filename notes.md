@@ -61,6 +61,22 @@
     - git status
     - git pull
 - Forking a repository clones it to GitHub, and then you can pull it into your environment
+
+- You can clone a repository from Github.com to your local computer. This pulls down a full copy of all the repository data. 
+  - 1. On GitHub, navigate to the main page of the repository
+  - 2. Click the Code button
+  - 3. Copy the UTL for the repository 
+    - To clone the repository using HTTPS, under HTTPS click the clipboard
+    - To clone using an SSH key, click SSH and then the clipboard
+    - To clone using GitHub CLI, Click GitHub CLI and then the clipboard
+  - 4. Open terminal
+  - 5. Change the current working directory to the location where you want the cloned directory
+  - 6. Type "git clone", then past the url you copied
+    - "git clone [the url you copied]
+  - 7. Press enter to create the local clone
+
+- Personal access tokens are an alternative to using passwords for authentication to GitHub  when using the GitHub API or the command line. They are intended to access GitHub on your behalf. There are two types: fine grained and personal(classic). Fine grained is recommended. 
+
 ## A Brief History of Web Programming
 - Three Distinct Phases
     - The formation of the internet that supports the communication of web applications
@@ -79,6 +95,7 @@
     - Caddy as the web server hosted on AWS
     - Running web services with Node.js
     - MongoDB as the database hosted on MongoDB Atlas
+
 
 ## AWS - EC2
 - Steps to create a web server
@@ -259,6 +276,9 @@
         - :e : Open a file
         - :w : write file(save)
         - :q : quit (:q! to quit without saving)
+
+## Asking a good question
+- Make sure questions are on-topic, suitable, search reasearch before posting a question, Wrtie a title that summarizes the specific problem, Introduce the problem before posting any code, help others reproduce the problem, Include all relevant tags, proofread before posting, Respond to feedback after posting, and Look for help asking for help
 
 # HTML
 
@@ -1040,9 +1060,52 @@ section:nth-child(2) {
 <button type="button">Plain</button>
 ```
 
+- Example of how to include Bootstrap's CSS and JS. Place the link tag in the headd for our CSS and the script tag for our JS bundle bofore the closing body tag:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+- Bootstrap requires HTML5
+
+```html
+<!doctype html>
+<html lang="en">
+  ...
+</html>
+```
+
+- It also requires a responsive meta tag. It is developed mobile first:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+- Bootstrap switches the global box-sizing value from content-box to border-box. This ensures padding doesn't affect the final computed width of an element. 
+
+```css
+.selector-for-some-widget {
+  box-sizing: content-box;
+}
+```
+- Bootstrap uses reboot to correct inconsistencies across browsers and devices.
+
+
 # Javascript
 
-- Do required readings for: GitHub, Asking Questions, CSS Frameworks
+
 
 
 
