@@ -582,7 +582,11 @@ Some text
 | General sibling  | A list of siblings       | div ~ p       | Any p that has a div sibling                     |
 | Adjacent sibling | A list of adjacent sibling| div + p      | Any p that has an adjacent div sibling           |
 
-- We can use the general sibling combinator to increase the whitespace padding on the left of paragraphs that are siblings of a level two heading 
+- We can use the general sibling combinator to increase the whitespace padding on the left of paragraphs that are siblings of a level two heading. 
+
+- in shorthand for padding, one value in a selector applies it to all sides of the slector. If there are two values, the first is top and bottom, the second is right and left. If there are 3 valuse, The first applies to the top, the next to left and right, and the last to the bottom. If there are 4 values, the first applies to the top, the second to the right, the third to the bottom, the fourth to the left
+
+- in shorthand for border-radius, a single value applies to all corners, two values applies the first value to the top left corner and the second value applies to the top right and bottom left. If you have 4 values the first goes to the top left, the second to the top right, then bottom right, then bottom left
 
 ```css
 h2 ~ p {
@@ -1104,6 +1108,106 @@ section:nth-child(2) {
 
 
 # Javascript
+
+## Javascript Introduction
+
+- Javascript is a weakly typed language. It is typically executed using an interpreter at runtime instead of compliling it into a machine specific binary at buld time. This makes it portable, but allows for errors. These errors typically only get discovered when the program crashes at execution. 
+
+- The following JavaScript will concatenate three strings together and then thow away the result:
+
+```
+'Hello' + ' ' + 'world';
+```
+
+- Use the console.log function to output the string to the debugger console:
+
+```javascript
+console.log('Hello' + ' ' + 'world');
+// OUTPUT: Hello world
+```
+
+- You can also write your own functions:
+
+```javascript
+function join(a, b) {
+  return a + ' ' + b;
+}
+
+console.log(join('Hello', 'world'));
+// OUTPUT: Hello world
+```
+
+
+- Comments in Javascript are written like this:
+
+```javascript
+// Line comment
+
+/*
+Block comment
+*/
+```
+
+- You should end Javascript statements with a semi colon. Code blocks, and their resulting scope, are defined with curly braces
+
+## Javascript Console
+
+- The Javascript console object provides interaction with the Javascript runtime's debugger console. This usage of console should not be confused with you operating system's console (terminal). The console object provides functionality for outputting the value of text and objects, running timers, and coutning iterations. These are useful debugging tools wehn you can actually execute your code in an interactive debugger (VS code)
+
+- The basic usage of the console object is to output a log message:
+
+```javascript
+console.log('hello');
+// OUTPUT: hello
+```
+
+- You can format messages with Javascript's placeholders:
+  - %s is a string placeholder
+  - %d is a number placeholder (int or float)
+  - %i is a integer placeholder
+  - %f is a float placeholder
+  - %o is an object placeholder
+  - %j is a JSON placeholder
+  - %c is a placeholder to apply  CSS styles to output text
+
+- You can create formatted messages in the log parameter:
+
+```javascript
+console.log('hello %s', 'world');
+// OUTPUT: hello world
+```
+- You can even specify CSS declarations in order to style the log output:
+
+```javascript
+console.log('%c JavaScript Demo', 'font-size:1.5em; color:green;');
+// OUTPUT: JavaScript Demo //in large green text
+```
+
+- If you are tyring to see how long a piece of codie is running you can wrap it with time and timeEnd calls and it will output the duration between the time and timeEnd calls:
+
+```javascript
+console.time('demo time');
+// ... some code that takes a long time.
+console.timeEnd('demo time');
+// OUTPUT: demo time: 9762.74 ms
+```
+
+```javascript
+console.time('log time');
+console.log('%c Hello World', 'color: purple');
+console.timeEnd('log time');
+```
+
+- You can count how many times a block of code is called using the "count" function. This count is not zero indexed:
+
+```javascript
+console.count('a');
+// OUTPUT: a: 1
+console.count('a');
+// OUTPUT: a: 2
+console.count('b');
+// OUTPUT: b: 1
+```
 
 
 
