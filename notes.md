@@ -537,6 +537,7 @@ Some text
 
 - The most current version of CSS is CSS3. The specification was divided into modules so that they could be implemented at different levels of maturity.
 
+## CSS Selectors
 - You select an element in CSS with this format:
 
     ```css
@@ -561,6 +562,56 @@ Some text
 | General sibling  | A list of siblings       | div ~ p       | Any p that has a div sibling                     |
 | Adjacent sibling | A list of adjacent sibling| div + p      | Any p that has an adjacent div sibling           |
 
+- We can use the general sibling combinator to increase the whitespace padding on the left of paragraphs that are siblings of a level two heading 
+
+```css
+h2 ~ p {
+  padding-left: 0.5em;
+}
+```
+
+-  If we want to apply styling to content in a certain class, we use class selectors. Here is an example of one for class="summary" (which would be in the HTML)
+
+```css
+.summary {
+  font-weight: bold;
+}
+```
+
+- You can combine the element name and class selectors to select tags within a class. Here is all of the p tags in the summary class:
+
+```css
+p.summary {
+  font-weight: bold;
+}
+```
+
+- You can also apply selectors directly to elements with a unique ID. No 2 elements of the HTML should have the same ID. This is an example of applying styling to the physics ID:
+
+```css
+#physics {
+  border-left: solid 1em purple;
+}
+```
+
+- Attribute selectors allow you to select elements based upon their attributes.
+    - You can use an attribute selector to select any element with a given attribute: a[href].
+    - You can also specify a required value for an attribute: a[href="./fish.png"] in order for the selector to match.
+    - Attribute selectors also support wildcards: p[href*="https://"].
+
+```css
+p[class='summary'] {
+  color: red;
+}
+```
+
+- CSS also has several psuedo selectors which select based on positional relationships, mouse interations, hyperlink visitation status, and attributes. 
+
+```css
+section:hover {
+  border-left: solid 1em purple;
+}
+```
 
 
 
