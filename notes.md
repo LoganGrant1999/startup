@@ -492,6 +492,76 @@ Some text
 - Enter: ./deployFiles.sh -k ~/keys/production.pem -h yourdomain.click -s simon
 
 # CSS
+## CSS Intro
+- CSS converts the structure of HTML into a vibrant, responsive experience
+- With CSS, a programmer can animate the page, deploy custom fonts, respond to user actions, and dynamically alter the entire layout of the page based on the size of a device and its orientation
+- CSS is primarily concerned with defining rulesets. Each rule has a selector that selects elements to apply the rule to, and one or more declarations that represent the property to style with the given property value
+- There are 3 ways to associate CSS with HTMl
+    - 1. Ust the style attribute of an HTML element and explicity assign one or more declarations
+
+    ```html
+    <p style="color:green">CSS</p>
+    ```
+
+    - 2. You can use the HTML style element to define CSS rules within the HTML doc. The style element should appear in the head element of the document so that the rules apply universally
+
+    ```html
+        <head>
+        <style>
+            p {
+            color: green;
+            }
+        </style>
+        </head>
+        <body>
+        <p>CSS</p>
+        </body>
+    ```
+
+    - 3. You can use the link element to create a hyperlink reference to an external file containing CSS rules. This must appear in the head element of the doc
+
+    ```html
+    <link rel="stylesheet" href="styles.css" />
+    ```
+
+    ```p {
+        color: green;
+       }
+    ```
+
+- CSS rules cascade down from the highest nodes in the DOM tree to the lowest level. lower level declarations override higher level ones
+
+- CSS defines everything as boxes. When you apply styles, you apply them to a specific rectanglular region. The innermost box holds the element's content (text or image). Next is the padding (background color). After padding is the border (color, thickness, line style). Finally is the margin. The margin is considered external to the actual styling of the box and therefore only represents whitespace. 
+
+- By default, the width and hieght of an element is defined by the width and height of the content box. You can change the box-sizing CSS property from the default value of content-box to border-box in order to redefine the width and the height to also include the padding and the border. This makes it easier to style the elements when their visual size matches their acutal size
+
+- The most current version of CSS is CSS3. The specification was divided into modules so that they could be implemented at different levels of maturity.
+
+- You select an element in CSS with this format:
+
+    ```css
+    body {
+    font-family: sans-serif;
+    }
+    ```
+
+- If you want to change an element, but only the instances of that element inside of another element, you can use a descendant combinator that is defined with a space delimited list of values where each item in the list is a descendant of the previous item. this would apply the color to all h2 decendants of the section element:
+
+    ```css
+    section h2 {
+    color: #004400;
+    }
+    ```
+-  There are other combinators as well:
+
+| Combinator       | Meaning                 | Example       | Description                                     |
+|------------------|-------------------------|---------------|-------------------------------------------------|
+| Descendant       | A list of descendants    | body section  | Any section that is a descendant of a body       |
+| Child            | A list of direct children| section > p   | Any p that is a direct child of a section        |
+| General sibling  | A list of siblings       | div ~ p       | Any p that has a div sibling                     |
+| Adjacent sibling | A list of adjacent sibling| div + p      | Any p that has an adjacent div sibling           |
+
+
 
 
 
