@@ -1042,7 +1042,7 @@ section:nth-child(2) {
 
 # Javascript
 
-
+- Do required readings for: GitHub, Asking Questions, CSS Frameworks
 
 
 
