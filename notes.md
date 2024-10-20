@@ -440,6 +440,7 @@ Some text
 | file            | Local file                        |
 | submit          | Button to trigger form submission |
 
+
 - common attributes of input elements:
 
 | Attribute | Meaning                                                                 |
