@@ -811,7 +811,78 @@ p {
 }
 ```
 
+- The code above would render like is shown below. Look at how each different element shows up to get an idea of what each display option does:
+
 ![CSS Display Image](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/css/responsive/cssDisplay.jpg)
+
+- You can use this meta tag to make sure that your browser doesn't scale pages, making it so that smartphones can automatically scale your page to fit the device viewing it. This would be placed in the head of the html:
+
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+```
+
+- The Float property in css moves an element to the left or right of it's container element and allows inline elements to wrap around it. This could be used to wrap a paragraph of text around an aside. It would be implemented like this:
+
+```css
+aside {
+  float: right;
+  padding: 3em;
+  margin: 0.5em;
+  border: black solid thin;
+}
+```
+
+- the @media selector dynamically detects the size and orientation of the device and applies CSS rules to represent the structure of the HTML in a way that accommodates the change
+
+- We use the @media selector to tell us which side of teh screen (viewport) is longest. A media query takes one or more predicates separated by boolean operators. In our case, we simply want to know if the screen is oriendted in portrait mode or not. If so, then we transform all of our div elements by rotating them 270 degrees
+
+```css
+@media (orientation: portrait) {
+  div {
+    transform: rotate(270deg);
+  }
+}
+```
+
+- You can also use media queries to make entire pieces of your application disappear, or move to a different location. If we had an aside that was helpful when the screen is wide, but took up too much room on a narrow screen, we could use this media query to make it disappear:
+
+```css
+@media (orientation: portrait) {
+  aside {
+    display: none;
+  }
+}
+```
+
+## Grid
+
+- Grid is useful when you want to display a group of child elements in a responsive grid. It starts with a container element that has a bunch of child elements:
+
+```html
+<div class="container">
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+  <div class="card"></div>
+</div>
+```
+
+We can turn this into a responsive grid by including a CSS display property with the value of grid on the container element. This tells the browser that all of the children of this element are to be displayed in a grid flow. the grid-template-columns property specifies the layout of the grid columns. We set this to repeatedly define each column to auto-fill the parent element's width with children that are resized to a minimum of 300 pixels and a max of one equal fractional unit (1fr) of the parents' total width. A fractional unit is dynamically computed by splitting up the parent element's width into equal parts. Next, we fix the height of the rows to be exactly 300 pixels by specifying the grid-auto-rows property. Finally, we finish off the grid configuration by setting the grid-gap property to have a gap of at least 1 em between each grid item:
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
+}
+```
+
 
 
 
