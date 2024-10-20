@@ -681,6 +681,97 @@ p {
 | RGB function| rgb(128, 255, 128, 0.5)         | Red, green, and blue as a percentage or number between 0 and 255, with an optional alpha opacity percentage                             |
 | HSL        | hsl(180, 30%, 90%, 0.5)          | Hue, saturation, and light, with an optional opacity percentage. Hue is the position on the 365 degree color wheel (red is 0 and 255). Saturation is how gray the color is, and light is how bright the color is. |
 
+## CSS Fonts
+- The CSS font-family property defines what fonts should be used. The property value represents an ordered list of fonts. The first font in the list that is available with be used. 
+
+- There are 4 major families of fonts
+    - 1. Serif: have extra strokes (serifs are small strokes attached to the ends of a characther's major strokes)
+    - 2. sans-serif: don't have extra strokes
+    - 3. fixed: all characters are the same size
+    - 4. symbol: represent non-language characters (arrows and emojis)
+
+-If you want to use fonts not found on the standard user's computer, you can have the browser load a font using @font-face:
+
+```css
+@font-face {
+  font-family: 'Quicksand';
+  src: url('https://cs260.click/fonts/quicksand.ttf');
+}
+
+p {
+  font-family: Quicksand;
+}
+```
+
+- If you don't want to host font files on your server, then you can load them from a font provider, like Google. :
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Microbe&display=swap');
+
+p {
+  font-family: 'Rubik Microbe';
+}
+```
+
+## CSS Animation
+
+- Using CSS to animate your components is an easy way to make your application feel alive and interactive. You create CSS animations using the animation properties and defining keyframes for what the element should look like at different times
+
+- We have a paragraph of centered text and we want to zoom in until its size is 20% of the view height:
+
+```css
+p {
+  text-align: center;
+  font-size: 20vh;
+}
+```
+
+- To make this happen, we specify that we are animating the selected elements by adding the animation-name property with a value of demo. This name refers to the keyframes that will be specified later. The keyframes tell CSS what properties should be appllied at different key points in the animation sequence. We also add an animation-duration property in order to specify that the animation should last for three seconds:
+
+```css
+p {
+  text-align: center;
+  font-size: 20vh;
+
+  animation-name: demo;
+  animation-duration: 3s;
+}
+```
+
+- Now we create keyframes. We define key points, and CSS generates a smoot transition between them. THis example starts with invisble text and zooms in until it's at full size:
+
+```css
+@keyframes demo {
+  from {
+    font-size: 0vh;
+  }
+
+  to {
+    font-size: 20vh;
+  }
+}
+```
+
+- You can make it look lik it bounces by adjusting the key frames like this:
+
+```css
+@keyframes demo {
+  from {
+    font-size: 0vh;
+  }
+
+  95% {
+    font-size: 21vh;
+  }
+
+  to {
+    font-size: 20vh;
+  }
+}
+```
+
+
+
 
 
 
