@@ -421,6 +421,7 @@ Some text
     - ta-id=Some+text
 - You can set the type of input that is received with the "type" attribute.
 - Types of inputs:
+
 | Type            | Meaning                           |
 |-----------------|-----------------------------------|
 | text            | Single line textual value         |
