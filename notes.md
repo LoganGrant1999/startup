@@ -3151,13 +3151,361 @@ console.log(x);
 
 - You can continue exectuion of the code by pressing f10 to step to the next line, f11 to step into a function call, or f5 to continue running from the current line. When the last line of code executes the debugger will automatically exit and you will need to press f5 to start it running again. You can stop debugging at any time by pressing shift-f5.
 
-# Midterm Study guide and notes
+# Midterm Notes
 
-1. What does the link element do in HTML?
+## HTML and CSS
 
-    - The ```<link>``` element is used to define the relationship between the HTML doc and external sources like CSS files:
-
+### 1. What does the `<link>` element do in HTML?
+- **Answer:** The `<link>` element is used to link external resources, like CSS, to an HTML document.
+- **Example:**
+    ```html
+    <link rel="stylesheet" href="styles.css">
     ```
-    <link rel="stylesheet" href="styles.css>
+- **Note:** The `rel="stylesheet"` attribute specifies the relationship as a style sheet, and the `href` attribute provides the location of the stylesheet.
+
+---
+
+### 2. What does the `<div>` tag do in HTML?
+- **Answer:** The `<div>` tag is used to group block-level elements for styling or layout purposes.
+- **Example:**
+    ```html
+    <div>
+      <p>This is a paragraph inside a div.</p>
+    </div>
     ```
-    - This will style the styles.css file to the HTML doc, applying the styles defined in that file to the doc
+- **Note:** The `<div>` tag doesn’t inherently add any styling but serves as a container that can be styled with CSS or manipulated with JavaScript.
+
+---
+
+### 3. What is the difference between the `#title` and `.grid` selectors in CSS?
+- **Answer:** 
+  - `#title` selects an element with the `id="title"`.
+  - `.grid` selects all elements with the `class="grid"`.
+- **Example:**
+    ```css
+    #title {
+      color: blue;
+    }
+    .grid {
+      display: grid;
+    }
+    ```
+- **Note:** IDs are unique and should be used for single elements, while classes can be reused for multiple elements.
+
+---
+
+### 4. What is the difference between padding and margin in CSS?
+- **Answer:**
+  - **Padding**: The space inside an element, between the content and the border.
+  - **Margin**: The space outside an element, between the border and other elements.
+- **Example:**
+    ```css
+    .box {
+      padding: 10px;
+      margin: 20px;
+    }
+    ```
+- **Note:** Padding affects the element’s internal space, while margin controls the spacing between elements on the page.
+
+---
+
+### 5. How will images be displayed using Flexbox?
+- **Answer:** If Flexbox is applied to a container with images, they will align based on the flex properties (e.g., `flex-direction`, `justify-content`, `align-items`).
+- **Example:**
+    ```css
+    .container {
+      display: flex;
+      justify-content: space-around;
+    }
+    ```
+- **Note:** Flexbox is a powerful layout model in CSS that allows flexible and responsive arrangement of items within a container.
+
+---
+
+### 6. What does the following padding CSS do?
+- **Answer:** This padding sets 10px on the top and bottom and 20px on the left and right.
+- **Example:**
+    ```css
+    .box {
+      padding: 10px 20px;
+    }
+    ```
+- **Note:** Padding can have different values for vertical (top/bottom) and horizontal (left/right) sides if two values are specified.
+
+---
+
+## JavaScript
+
+### 7. What does the arrow function syntax do?
+- **Answer:** The arrow function is a shorthand way to write functions in JavaScript.
+- **Example:**
+    ```javascript
+    const add = (a, b) => a + b;
+    console.log(add(2, 3)); // Output: 5
+    ```
+- **Note:** Arrow functions are concise, but they do not have their own `this` context, which can affect how they interact with objects and methods.
+
+---
+
+### 8. What does the `.map()` function do with an array?
+- **Answer:** The `map()` function applies a provided function to every element in an array and returns a new array with the results.
+- **Example:**
+    ```javascript
+    const arr = [1, 2, 3];
+    const doubled = arr.map(x => x * 2);
+    console.log(doubled); // Output: [2, 4, 6]
+    ```
+- **Note:** `map()` is commonly used to transform arrays without modifying the original array.
+
+---
+
+### 9. What does the code using `getElementById` and `addEventListener` do?
+- **Answer:** The code attaches a click event listener to a button, which triggers an alert when the button is clicked.
+- **Example:**
+    ```javascript
+    document.getElementById('btn').addEventListener('click', () => alert('Button clicked'));
+    ```
+- **Note:** `addEventListener()` is used to attach event handlers to elements without overriding existing event handlers.
+
+---
+
+### 10. What does the `#` selector in JavaScript do?
+- **Answer:** The `#` selector in `querySelector()` selects an element by its ID and allows you to manipulate it.
+- **Example:**
+    ```javascript
+    document.querySelector('#myElement').style.color = 'blue';
+    ```
+- **Note:** `querySelector()` returns the first element that matches the selector, in this case, an element with `id="myElement"`.
+
+---
+
+## DOM and Elements
+
+### 11. Which statements are true about the DOM?
+- **Answer:** The DOM (Document Object Model) represents the structure of a webpage as a tree of objects. JavaScript can manipulate these objects to dynamically change the webpage.
+- **Note:** The DOM allows scripts to update content, structure, and styles on the page.
+
+---
+
+### 12. By default, what is the display property of a `<span>` element?
+- **Answer:** `inline`.
+- **Note:** Inline elements do not start on a new line and only take up as much width as necessary.
+
+---
+
+### 13. How would you use CSS to change the background color of all `div` elements to red?
+- **Answer:** Apply a CSS rule that targets all `div` elements and sets the background color.
+- **Example:**
+    ```css
+    div {
+      background-color: red;
+    }
+    ```
+
+---
+
+### 14. How would you display an image with a hyperlink in HTML?
+- **Answer:** Use an anchor (`<a>`) tag with an image (`<img>`) tag inside it.
+- **Example:**
+    ```html
+    <a href="https://example.com">
+      <img src="image.jpg" alt="Description">
+    </a>
+    ```
+- **Note:** The image becomes clickable and directs users to the URL provided in the `<a>` tag.
+
+---
+
+### 15. What is the ordering of layers in the CSS box model, starting from the inside?
+- **Answer:** Content → Padding → Border → Margin.
+- **Note:** The CSS box model determines the spacing and layout of elements by applying styles to each layer.
+
+---
+
+### 16. How can you target and style specific text within an HTML element using CSS?
+- **Answer:** Use a class or ID to target the specific text you want to style.
+- **Example:**
+    ```html
+    <span class="highlight">trouble</span> double
+    ```
+    ```css
+    .highlight {
+      color: green;
+    }
+    ```
+
+---
+
+## JavaScript Loops and Conditions
+
+### 17. What will the following `for` loop output in the console?
+- **Answer:** It will output `0`, `1`, and `2`.
+- **Example:**
+    ```javascript
+    for (let i = 0; i < 3; i++) {
+      console.log(i);
+    }
+    ```
+
+---
+
+### 18. How would you use JavaScript to change the text color of an element with the ID `byu` to green?
+- **Answer:** Use `getElementById` and `style.color`.
+- **Example:**
+    ```javascript
+    document.getElementById('byu').style.color = 'green';
+    ```
+
+---
+
+## HTML Tags
+
+### 19. What are the opening tags for paragraph, ordered list, unordered list, and different heading levels?
+- **Answer:**
+  - Paragraph: `<p>`
+  - Ordered list: `<ol>`
+  - Unordered list: `<ul>`
+  - Second-level heading: `<h2>`
+  - First-level heading: `<h1>`
+  - Third-level heading: `<h3>`
+
+---
+
+### 20. How do you declare the document type to be HTML?
+- **Answer:**
+    ```html
+    <!DOCTYPE html>
+    ```
+
+---
+
+## JavaScript Syntax
+
+### 21. What is valid JavaScript syntax for `if`, `else`, `for`, `while`, and `switch` statements?
+- **Answer:**
+  - Example for `if-else`:
+    ```javascript
+    if (condition) {
+      // code
+    } else {
+      // code
+    }
+    ```
+
+---
+
+### 22. What is the correct syntax for creating a JavaScript object?
+- **Answer:**
+    ```javascript
+    const obj = {
+      key: 'value',
+      anotherKey: 10
+    };
+    ```
+
+---
+
+### 23. Can you add new properties to JavaScript objects?
+- **Answer:** Yes, new properties can be added to objects dynamically.
+- **Example:**
+    ```javascript
+    obj.newKey = 'newValue';
+    ```
+
+---
+
+### 24. How do you include JavaScript in an HTML page?
+- **Answer:** Use the `<script>` tag.
+- **Example:**
+    ```html
+    <script src="script.js"></script>
+    ```
+
+---
+
+### 25. How can you change the text "animal" to "crow" using JavaScript?
+- **Answer:** Use `getElementById` and `innerText`.
+- **Example:**
+    ```javascript
+    document.getElementById('animal').innerText = 'crow';
+    ```
+
+---
+
+## JSON and Console Commands
+
+### 26. What correctly describes JSON?
+- **Answer:** JSON (JavaScript Object Notation) is a lightweight format for storing and transporting data. It is easy to read and write and is widely used for API communication.
+
+---
+
+### 27. What do the following console commands do?
+- **Answer:**
+  - `chmod`: Changes file permissions.
+  - `pwd`: Prints the current directory.
+  - `cd`: Changes the current directory.
+  - `ls`: Lists files in a directory.
+  - `vim`/`nano`: Text editors.
+  - `mkdir`: Creates a new directory.
+  - `mv`: Moves or renames files.
+  - `rm`: Removes files or directories.
+  - `man`: Displays manual pages.
+  - `ssh`: Secure shell to a remote server.
+  - `ps`: Displays running processes.
+  - `wget`: Downloads files from the internet.
+  - `sudo`: Executes a command with superuser privileges.
+
+---
+
+### 28. Which console command creates a remote shell session?
+- **Answer:** `ssh`.
+
+---
+
+### 29. What is true when the `-la` parameter is specified for the `ls` command?
+- **Answer:** `ls -la` lists all files, including hidden files, and shows detailed information about each file (permissions, size, owner, etc.).
+
+---
+
+## Domain, Certificates, and Ports
+
+### 30. For the domain `banana.fruit.bozo.click`, what is the top-level domain, subdomain, and root domain?
+- **Answer:**
+  - Top-level domain (TLD): `.click`
+  - Subdomain: `banana`
+  - Root domain: `fruit.bozo`
+
+---
+
+### 31. Is a web certificate necessary for HTTPS?
+- **Answer:** Yes, a web certificate is required to establish secure HTTPS connections.
+
+---
+
+### 32. Can a DNS A record point to an IP address or another A record?
+- **Answer:** Yes, a DNS A record can point to an IP address or another A record.
+
+---
+
+### 33. What are the port numbers for HTTPS, HTTP, and SSH?
+- **Answer:**
+  - Port 443: HTTPS
+  - Port 80: HTTP
+  - Port 22: SSH
+
+---
+
+## JavaScript Promises
+
+### 34. What does the following code using Promises output?
+- **Answer:** It will output "Success" to the console.
+- **Example:**
+    ```javascript
+    let promise = new Promise((resolve, reject) => {
+      resolve('Success');
+    });
+
+    promise.then((message) => console.log(message));
+    // Output: 'Success'
+    ```
+
