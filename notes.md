@@ -3520,11 +3520,87 @@ console.log(x);
 ---
 
 ### 25. How can you change the text "animal" to "crow" using JavaScript?
-- **Answer:** Use `getElementById` and `innerText`.
+## Changing the Text "animal" to "crow" in JavaScript
+
+There are multiple ways to change the text content of an element with the ID `animal` to "crow" in JavaScript. Below are several approaches, each using a different method for selecting the element and modifying its text content.
+
+### 1. **Using `getElementById` and `innerText`**
+- **Description:** This is the most common and direct method for selecting an element by its `id` and updating its text content using `innerText`.
 - **Example:**
     ```javascript
     document.getElementById('animal').innerText = 'crow';
     ```
+
+### 2. **Using `querySelector` and `innerText`**
+- **Description:** `querySelector` allows you to select elements using any valid CSS selector. In this case, the `#` symbol is used to indicate the `id` of the element.
+- **Example:**
+    ```javascript
+    document.querySelector('#animal').innerText = 'crow';
+    ```
+
+### 3. **Using `getElementsByClassName` and `innerText`**
+- **Description:** If the element has a class instead of an ID, you can use `getElementsByClassName` to select it. This method returns a collection (HTMLCollection), so you need to access the first element using index `[0]`.
+- **Example:**
+    ```javascript
+    document.getElementsByClassName('animal')[0].innerText = 'crow';
+    ```
+
+### 4. **Using `getElementsByTagName` and `innerText`**
+- **Description:** You can select an element by its tag name (e.g., `<span>`, `<div>`, etc.). This method also returns an HTMLCollection, so you need to specify which element to modify.
+- **Example:**
+    ```javascript
+    document.getElementsByTagName('span')[0].innerText = 'crow';
+    ```
+
+### 5. **Using `innerHTML` instead of `innerText`**
+- **Description:** You can also use `innerHTML` to modify the text content. Unlike `innerText`, which only changes the visible text, `innerHTML` can modify both text and HTML content inside the element.
+- **Example:**
+    ```javascript
+    document.getElementById('animal').innerHTML = 'crow';
+    ```
+
+### 6. **Using `textContent`**
+- **Description:** `textContent` is similar to `innerText`, but it retrieves or sets the text content of an element, including hidden elements, without formatting it according to CSS.
+- **Example:**
+    ```javascript
+    document.getElementById('animal').textContent = 'crow';
+    ```
+
+### 7. **Using `querySelectorAll` with `textContent`**
+- **Description:** `querySelectorAll` is used to select all elements matching a given CSS selector. Since this method returns a NodeList, you would typically access the specific element using an index.
+- **Example:**
+    ```javascript
+    document.querySelectorAll('#animal')[0].textContent = 'crow';
+    ```
+
+### 8. **Using `document.all` (Deprecated)**
+- **Description:** `document.all` is an older way to access all elements on the page. This method is generally not recommended but can be used for legacy browsers.
+- **Example:**
+    ```javascript
+    document.all['animal'].innerText = 'crow';
+    ```
+
+### 9. **Using `setAttribute`**
+- **Description:** You can use `setAttribute` to modify the `textContent` or `innerText` of the element.
+- **Example:**
+    ```javascript
+    document.getElementById('animal').setAttribute('innerText', 'crow');
+    ```
+
+---
+
+### Summary of Methods:
+- **Direct ID Selection:**
+  - `getElementById('animal').innerText = 'crow';`
+  - `querySelector('#animal').innerText = 'crow';`
+- **Class or Tag-Based Selection:**
+  - `getElementsByClassName('animal')[0].innerText = 'crow';`
+  - `getElementsByTagName('span')[0].innerText = 'crow';`
+- **Modifying Text with Different Properties:**
+  - `innerText`, `innerHTML`, `textContent`, or `setAttribute`.
+  
+These methods provide flexibility depending on how the element is structured and what exactly you need to modify.
+
 
 ---
 
@@ -3594,7 +3670,9 @@ console.log(x);
 ## JavaScript Promises
 
 ### 34. What does the following code using Promises output?
-- **Answer:** It will output "Success" to the console.
+
+### 1. Basic Example of a Resolved Promise
+- **Answer:** It will output `"Success"` to the console because the `resolve()` method is called, which triggers the `.then()` block.
 - **Example:**
     ```javascript
     let promise = new Promise((resolve, reject) => {
@@ -3604,4 +3682,164 @@ console.log(x);
     promise.then((message) => console.log(message));
     // Output: 'Success'
     ```
+- **Explanatory Note:** The promise is immediately resolved with the value `"Success"`, and the `.then()` method captures this resolved value and logs it.
+
+---
+
+### 2. Example with a Rejected Promise
+- **Answer:** It will output `"Error"` to the console because the `reject()` method is called, which triggers the `.catch()` block.
+- **Example:**
+    ```javascript
+    let promise = new Promise((resolve, reject) => {
+      reject('Error');
+    });
+
+    promise
+      .then((message) => console.log(message))  // This won't be called
+      .catch((error) => console.log(error));
+    // Output: 'Error'
+    ```
+- **Explanatory Note:** When a promise is rejected, the `.catch()` method handles the rejection, logging `"Error"` in this case.
+
+---
+
+### 3. Promise with a Delayed Resolution
+- **Answer:** The promise will log `"Done"` to the console **after 2 seconds** because the `resolve()` method is called inside `setTimeout()` after 2000 milliseconds.
+- **Example:**
+    ```javascript
+    let promise = new Promise((resolve, reject) => {
+      setTimeout(() => resolve('Done'), 2000);
+    });
+
+    promise.then((message) => console.log(message));
+    // Output after 2 seconds: 'Done'
+    ```
+- **Explanatory Note:** The promise waits for 2 seconds before resolving and logging `"Done"` to the console.
+
+---
+
+### 4. Chaining Promises
+- **Answer:** The output will be `"Step 1"` and then `"Step 2"` in sequence, as `.then()` calls can be chained.
+- **Example:**
+    ```javascript
+    let promise = new Promise((resolve, reject) => {
+      resolve('Step 1');
+    });
+
+    promise
+      .then((message) => {
+        console.log(message);  // Output: 'Step 1'
+        return 'Step 2';
+      })
+      .then((nextMessage) => console.log(nextMessage));
+    // Output:
+    // 'Step 1'
+    // 'Step 2'
+    ```
+- **Explanatory Note:** Each `.then()` block returns a new promise, allowing for chaining. The value returned in the first `.then()` is passed to the second.
+
+---
+
+### 5. Promise with Both Resolve and Reject Cases
+- **Answer:** If the condition is met, it will resolve and log `"Success"`. If not, it will reject and log `"Failure"`.
+- **Example:**
+    ```javascript
+    let condition = true;
+
+    let promise = new Promise((resolve, reject) => {
+      if (condition) {
+        resolve('Success');
+      } else {
+        reject('Failure');
+      }
+    });
+
+    promise
+      .then((message) => console.log(message))  // Output if condition is true: 'Success'
+      .catch((error) => console.log(error));    // Output if condition is false: 'Failure'
+    ```
+- **Explanatory Note:** The promise resolves if the condition is true, otherwise it rejects. Both cases are handled using `.then()` for success and `.catch()` for failure.
+
+---
+
+### 6. Example with `Promise.all()`
+- **Answer:** It will log `"All done!"` when all promises resolve successfully. If any promise rejects, the `.catch()` block will log the rejection.
+- **Example:**
+    ```javascript
+    let promise1 = Promise.resolve('First');
+    let promise2 = Promise.resolve('Second');
+    let promise3 = Promise.resolve('Third');
+
+    Promise.all([promise1, promise2, promise3])
+      .then((messages) => console.log('All done!', messages))
+      .catch((error) => console.log('Failed:', error));
+    // Output: 'All done!' ['First', 'Second', 'Third']
+    ```
+- **Explanatory Note:** `Promise.all()` waits for all promises in the array to resolve. If they all succeed, the resolved values are passed as an array. If any promise rejects, the entire `Promise.all()` is rejected.
+
+---
+
+### 7. Example with `Promise.race()`
+- **Answer:** It will log the result of the promise that resolves first. In this case, `"Fast"` will be logged because `promise2` resolves before `promise1`.
+- **Example:**
+    ```javascript
+    let promise1 = new Promise((resolve) => setTimeout(() => resolve('Slow'), 3000));
+    let promise2 = new Promise((resolve) => setTimeout(() => resolve('Fast'), 1000));
+
+    Promise.race([promise1, promise2])
+      .then((message) => console.log(message));
+    // Output after 1 second: 'Fast'
+    ```
+- **Explanatory Note:** `Promise.race()` returns the result of the first promise to either resolve or reject. In this example, `promise2` resolves in 1 second, so it logs `"Fast"`.
+
+---
+
+### 8. Example with `.finally()`
+- **Answer:** `"Process finished"` will always be logged after the promise either resolves or rejects.
+- **Example:**
+    ```javascript
+    let promise = new Promise((resolve, reject) => {
+      resolve('Done');
+    });
+
+    promise
+      .then((message) => console.log(message))  // Output: 'Done'
+      .finally(() => console.log('Process finished'));
+    // Output: 'Process finished'
+    ```
+- **Explanatory Note:** `.finally()` is executed after the promise settles (whether resolved or rejected). It is typically used for cleanup operations.
+
+---
+
+### 9. Example with an Asynchronous Function Using `async`/`await`
+- **Answer:** `"Data received"` is logged after the simulated network request completes, followed by `"Processed"` once the data is handled.
+- **Example:**
+    ```javascript
+    async function fetchData() {
+      let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve('Data received'), 2000);
+      });
+
+      let result = await promise;
+      console.log(result);  // Output after 2 seconds: 'Data received'
+      console.log('Processed');  // Output immediately after: 'Processed'
+    }
+
+    fetchData();
+    ```
+- **Explanatory Note:** The `await` keyword pauses the function execution until the promise is resolved, ensuring that the result is logged in order.
+
+---
+
+### Summary of Methods:
+- **Basic Resolved Promise**: Directly logs the resolved value using `.then()`.
+- **Rejected Promise**: Handles errors using `.catch()`.
+- **Chaining Promises**: Allows multiple `.then()` blocks for sequential processing.
+- **`Promise.all()`**: Waits for all promises to resolve, or rejects if any fail.
+- **`Promise.race()`**: Returns the result of the fastest promise.
+- **`finally()`**: Runs code after the promise is settled, regardless of outcome.
+- **`async`/`await`**: Simplifies working with promises in an asynchronous function.
+
+These are various ways to work with Promises in JavaScript, each with different outcomes depending on how you handle the resolve and reject cases.
+
 
