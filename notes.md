@@ -3115,4 +3115,49 @@ What do you call a fish with no eyes? A fsh.
 
   ## Debugging Node.js
 
-  
+  - Previously your JS debugging was done by running the live server VS code extension and using the browser's debugging tools as it executed in the browers. now that you are writing JS that runs using Node.js, you need a way to to launch and debug your code that runs outside of the browser. One great way to do taht is to use the debugging tools built into VS code. To debug JS in VS code you first need some JS to debug. Open up VS Code and create a new file named main.js and paste the following code into the file.
+
+```
+let x = 1 + 1;
+
+console.log(x);
+
+function double(x) {
+  return x * 2;
+}
+
+x = double(x);
+
+console.log(x);
+```
+
+- You can now debug main.js in VS code by executing the "start debugging" command by pressing f5. The first time you run this, VS code will ask you waht debugger you want to use. Select "Node.js".
+
+![Web Services Debug Start](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingNode/webServicesDebugStart.png)
+
+- The code will execute and the debug console window will automatically open to show you the debugger output where you can see the results of the two "console.log" statements found in the code:
+
+![Web Services Debug Output](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingNode/webServicesDebugOutput.png)
+
+
+- You can pause execution of the code by setting a breakpoint. Move your cursor over to the far left side of the editor window. As you hover on the left side of the line numbers you will see a red dot appear. Click on the dot to set the breakpoint:
+
+![Web Services Debug Breakpoint](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingNode/webServicesDebugBreakpoint.png)
+
+
+- Now start the debugger again by pressing f5. The code will start running, but pause on the line with the breakpoint. You can then see the values of variables by looking at the variable window on the left, or by hovering your mouse over the variable you would like to inspect. 
+
+![Web Services Debug Paused](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingNode/webServicesDebugPaused.png)
+
+- You can continue exectuion of the code by pressing f10 to step to the next line, f11 to step into a function call, or f5 to continue running from the current line. When the last line of code executes the debugger will automatically exit and you will need to press f5 to start it running again. You can stop debugging at any time by pressing shift-f5.
+
+# Midterm Study guide and notes
+
+- 1. What does the link element do in HTML?
+
+    - The ```<link>``` element is used to define the relationship between the HTML doc and external sources like CSS files:
+
+    ```
+    <link rel="stylesheet" href="styles.css>
+    ```
+    - This will style the styles.css file to the HTML doc, applying the styles defined in that file to the doc
