@@ -2120,14 +2120,14 @@ console.log(e.print());
 
 - Regular expression support is built into JS. You use a regular expression to find text in a string so that you can replace it, or simply to know that it exists.
 
-- You can create a regular expression using the class constructor or a regular literal
+- You can create a regular expression using the class constructor or a regular literal. Below, the regular expression allows for the character a and then 0 or more occurances of b. i is a flag that states it's not case sensitive. 
 
 ```
 const objRegex = new RegExp('ab*', 'i');
 const literalRegex = /ab*/i;
 ```
 
-- This string class has several functions that accept regular expressions. These include math, replace, search, and split. FOr a quick test to see if there is a match, you can use the regular expression object's test function:
+- This string class has several functions that accept regular expressions. These include math, replace, search, and split. FOr a quick test to see if there is a match, you can use the regular expression object's test function. In this one, it looks for the exact string dog, cat or bird. g is a flag that says to find all, i says its case sensitive, m is a multiline flag:
 
 ```
 const petRegex = /(dog)|(cat)|(bird)/gim;
@@ -2143,46 +2143,35 @@ petRegex.test(text);
 // RETURNS: true
 ```
 
-- Regex Types:
-
-| Characters    | Meaning                                                                                                                                                                                                                             |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `[xyz]`, `[a-c]` | Character class: Matches any one of the enclosed characters. You can specify a range of characters using a hyphen. Example: `[abcd]` is the same as `[a-d]`. `[abcd-]` or `[\w-]` can also include a hyphen as a literal character.     |
-| `[^xyz]`, `[^a-c]` | Negated character class: Matches anything that is not enclosed in the square brackets. Example: `[^abc]` matches "o" in "bacon".                                                                                                  |
-| `.`            | Wildcard: Matches any single character except line terminators (`\n`, `\r`, etc.). Example: `/.y/` matches "my" in "my day".                                                                                                        |
-| `\d`           | Digit character class escape: Matches any digit (0-9). Equivalent to `[0-9]`. Example: `/\d/` matches "2" in "B2".                                                                                                                 |
-| `\D`           | Non-digit character class escape: Matches any non-digit character. Equivalent to `[^0-9]`. Example: `/\D/` matches "B" in "B2".                                                                                                     |
-| `\w`           | Word character class escape: Matches any alphanumeric character or underscore. Equivalent to `[A-Za-z0-9_]`. Example: `/\w/` matches "a" in "apple".                                                                                |
-| `\W`           | Non-word character class escape: Matches any character not included in `\w`. Equivalent to `[^A-Za-z0-9_]`. Example: `/\W/` matches "%" in "50%".                                                                                  |
-| `\s`           | White space character class escape: Matches any white space character (e.g., space, tab, etc.). Example: `/\s\w*/` matches " bar" in "foo bar".                                                                                     |
-| `\S`           | Non-white space character class escape: Matches any character other than white space. Example: `/\S\w*/` matches "foo" in "foo bar".                                                                                                |
-| `\t`           | Matches a horizontal tab.                                                                                                                                                                                                          |
-| `\r`           | Matches a carriage return.                                                                                                                                                                                                         |
-| `\n`           | Matches a linefeed.                                                                                                                                                                                                                |
-| `\v`           | Matches a vertical tab.                                                                                                                                                                                                            |
-| `\f`           | Matches a form-feed.                                                                                                                                                                                                               |
-| `[\b]`         | Matches a backspace. Note: If looking for the word-boundary assertion, use `\b`.                                                                                                                                                   |
-| `\0`           | Matches a NUL character.                                                                                                                                                                                                           |
-| `\cX`          | Matches a control character using caret notation. Example: `/\cM\cJ/` matches `\r\n`.                                                                                                                                              |
-| `\xhh`         | Matches the character with the hexadecimal code `hh`.                                                                                                                                                                              |
-| `\uhhhh`       | Matches the UTF-16 code-unit with value `hhhh`.                                                                                                                                                                                    |
-| `\u{hhhh}`     | Matches the character with Unicode value `U+hhhh`.                                                                                                                                                                                 |
-| `\p{UnicodeProperty}`, `\P{UnicodeProperty}` | Unicode character class escape: Matches a character based on its Unicode property (e.g., emoji, Han characters).                                                                                             |
-| `\`            | Escape character: Treats the next character specially or literally depending on context. Example: `/\b/` matches a word boundary, and `/a\*/` matches "a*" (literal asterisk).                                                      |
-| `x|y`          | Disjunction: Matches either "x" or "y". Example: `/green|red/` matches "green" or "red".                                                                                                                                           |
+| Character | Meaning                                                                                   | Example                                                   |
+|-----------|--------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| .         | Matches any single character except newline (\n, \r).                                       | /a.b/ matches "aab", "a9b", but not "ab".                 |
+| ^         | Matches the beginning of the input.                                                         | /^a/ matches "a" in "apple", but not in "banana".          |
+| $         | Matches the end of the input.                                                               | /a$/ matches "a" in "banana", but not in "apple".          |
+| *         | Matches 0 or more of the preceding character.                                               | /a*/ matches "aaa", "a", or an empty string.               |
+| +         | Matches 1 or more of the preceding character.                                               | /a+/ matches "aaa" and "a", but not an empty string.       |
+| ?         | Matches 0 or 1 of the preceding character.                                                  | /a?/ matches "a" and an empty string.                      |
+| \d        | Matches any digit (0-9).                                                                    | /\d/ matches "2" in "B2".                                  |
+| \D        | Matches any non-digit.                                                                      | /\D/ matches "B" in "B2".                                  |
+| \w        | Matches any word character (alphanumeric or underscore).                                    | /\w/ matches "a" in "apple".                               |
+| \W        | Matches any non-word character.                                                             | /\W/ matches " " (space) in "hello world".                 |
+| \s        | Matches any whitespace character (spaces, tabs, line breaks).                               | /\s/ matches spaces in "foo bar".                          |
+| \S        | Matches any non-whitespace character.                                                       | /\S/ matches "f" in "foo".                                 |
+| \b        | Matches a word boundary (position between a word and non-word character).                   | /\bcat\b/ matches "cat" in "The cat sat".                  |
+| \B        | Matches a non-word boundary.                                                                | /\Bcat/ matches "cat" in "scat".                           |
+| [abc]     | Character class: Matches any one of the enclosed characters (e.g., "a", "b", or "c").       | /[abc]/ matches "a" in "apple" and "b" in "banana".        |
+| [^abc]    | Negated character class: Matches any character not enclosed in the brackets.                | /[^abc]/ matches "d" in "dog".                             |
+| (a\|b)    | Alternation: Matches either "a" or "b".                                                     |                                                          |
+| {n,m}     | Matches between n and m occurrences of the preceding character.                             | /a{2,3}/ matches "aa" and "aaa", but not "a".              |
+| \         | Escape character: Treats the next character literally or gives it special meaning.          | /\./ matches a literal period ".".                         |
 
 
-Regex Assertions:
-
-| Character | Meaning                                                                                                                                                                                                                                                                                                                                                          |
-|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `^`       | Input boundary beginning assertion: Matches the beginning of input. With the multiline (`m`) flag, also matches after a line break. Example: `/^A/` matches "A" in "An A", but not "A" in "an A". (Note: It has a different meaning when used at the start of a character class).                                            |
-| `$`       | Input boundary end assertion: Matches the end of input. With the multiline (`m`) flag, also matches before a line break. Example: `/t$/` matches "t" in "eat" but not in "eater".                                                                                                                                            |
-| `\b`      | Word boundary assertion: Matches a word boundary (the boundary between a word character and a non-word character). Example: `/\bm/` matches "m" in "moon", but `/oo\b/` does not match "oo" in "moon" (since it's followed by "n", a word character).                                                                      |
-| `\B`      | Non-word boundary assertion: Matches where the previous and next characters are both words or both non-words. Example: `/\Bon/` matches "on" in "noon", and `/ye\B/` matches "ye" in "yesterday".                                                                                                                          |
-
-## 
-
-
-
+| Flag | Meaning                                                                                     | Example                                                              |
+|------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| g    | Global search: Finds all matches, not just the first.                                         | /dog/g matches all occurrences of "dog".                             |
+| i    | Case-insensitive search: Matches letters in both upper and lower case.                        | /dog/i matches "Dog", "DOG", or "dog".                               |
+| m    | Multiline search: ^ and $ match the start and end of each line (instead of the whole input).  | /^foo/m matches "foo" at the beginning of each line.                 |
+| s    | Dotall mode: . matches newline characters as well.                                            | /a.b/s matches "a\nb".                                               |
+| u    | Unicode: Treats the pattern as a sequence of Unicode code points.                             | /\u{61}/u matches the Unicode character "a".                         |
+| y    | Sticky: Matches from the last index position, even if global flag is used.                    | /foo/y tries to match exactly at the current lastIndex position.      |
 
