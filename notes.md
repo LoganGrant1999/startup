@@ -1904,7 +1904,60 @@ console.log(a.length);
 // OUTPUT: 4
 ```
 
-- 
+## JSON
+
+- Javascript Object Notation (JSON) was conceived by Douglas Crockford in 2001. It provides a simple, effective way to share and store data. By design it it easily convertible to and from Javascript objects. This makes it convenient when working with web technologies. 
+
+- JSON docs contain one of the follwing data types:
+
+| Type    | Example                         |
+|---------|---------------------------------|
+| string  | "crockford"                     |
+| number  | 42                              |
+| boolean | true                            |
+| array   | [null, 42, "crockford"]         |
+| object  | {"a":1, "b":"crockford"}        |
+| null    | null                            |
+
+-  Most commonly, a JSON doc conatins an object. Objects contain zero or more key value pairs. The key is always a string, and the value must be one of teh valid JSON data types. Key value pairs are delimited with commas. Curly braces delmit an object, square brackest and commas delimit arrays, and strings are always delimted with double quotes. Here's and example:
+
+```
+{
+  "class": {
+    "title": "web programming",
+    "description": "Amazing"
+  },
+  "enrollment": ["Marco", "Jana", "فَاطِمَة"],
+  "start": "2025-02-01",
+  "end": null
+}
+```
+
+- JSON is always encoded with UTF-8. This allows for the representation of global data.
+
+- You can convert JSON to and from Javascript using the JSON.parse (back to JS) and JSON.stringify (Create JSON) functions:
+
+```
+const obj = { a: 2, b: 'crockford', c: undefined };
+const json = JSON.stringify(obj);
+const objFromJson = JSON.parse(json);
+
+console.log(obj, json, objFromJson);
+
+// OUTPUT:
+// {a: 2, b: 'crockford', c: undefined}
+// {"a":2, "b":"crockford"}
+// {a: 2, b: 'crockford'}
+```
+
+- Note that in this example, JSON can't represent the JS undefined object andd so it gets dropped when converting from JS to JSON. It also would drop functions and symbols
+
+## Javascript Object and Classes
+
+- A JS object represents a collection of name value pairs referred to as properties. The property name must be of type string or symbol, but the value can be of any type. Objects also have common obect-oriented functionality such as constructors, a this pointer, static propterties and functions and inheritance.
+
+- Objects can be created with the "new" operator. This causes the object's constructor to be called. Once declared  you can add properties to the object by simply referencing the property name in an assignment. Any type of variable can be assigned to a property. This includes a sub-object, array, or funciton. The properties of an object can be referenced either with do(obj.prop) or bracket notation(obj['prop']). 
+
 
 
 
