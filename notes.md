@@ -2795,3 +2795,324 @@ coinToss
 
 ## Javascript Async/Await
 
+- JS promise objects are great for asynchronous execution, but as developers began to build large systems with promises they started wanting a more concise representation. This was provided with the introduction of the "async/await" syntax. The "await" keyword wraps the execution of a promise and removed theneed to chain functions. The "await" expression will block until the promise state moves to "fulfilled", or throws an exception if the state moves to "rejeted". For example, if we have a function that returns a coin toss promise:
+
+```
+const coinToss = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.1) {
+        resolve(Math.random() > 0.5 ? 'heads' : 'tails');
+      } else {
+        reject('fell off table');
+      }
+    }, 1000);
+  });
+};
+```
+- We can create equivalent executions with either a promise "then/catch" chain or an "await" with a "try/catch" block. 
+
+- Then/catch chain version:
+
+```
+coinToss()
+  .then((result) => console.log(`Toss result ${result}`))
+  .catch((err) => console.error(`Error: ${err}`))
+  .finally(() => console.log(`Toss completed`));
+```
+
+- Async, try/catch version:
+
+```
+try {
+  const result = await coinToss();
+  console.log(`Toss result ${result}`);
+} catch (err) {
+  console.error(`Error: ${err}`);
+} finally {
+  console.log(`Toss completed`);
+}
+```
+
+- One  more important restriction for working with "await" is that you can't call await unless it is called at the top level of the JS, or is in a function that is defined with the "async" keyword. Applying the "async" keyword transforms the function so that it returns a promisset hat will resolve to the value that was previously returned by the function. Basically this turns any function into an asynchronous functions, so that it can in turn make asynchronous requests. This is demonstrated with a function that makes animal noises. Notice that the return value is a simple string:
+
+```
+function cow() {
+  return 'moo';
+}
+console.log(cow());
+// OUTPUT: moo
+```
+
+- If we designate the function to be asynchronous then the return value becomes a promise that is immediately resolved and has a value that is the return value of the function
+
+```
+async function cow() {
+  return 'moo';
+}
+console.log(cow());
+// OUTPUT: Promise {<fulfilled>: 'moo'}
+```
+
+- We then change the cow function to explicitly create a promise instead of the automatically generated promise that the await keyword generates:
+
+```
+async function cow() {
+  return new Promise((resolve) => {
+    resolve('moo');
+  });
+}
+console.log(cow());
+// OUTPUT: Promise {<pending>}
+```
+
+- You can see that the promise is in the pending state because the promise's execution function has not yet resolved
+
+- The "async" keyword declares that a function returns a promise. The "await" keyword wraps a call to the "async" function, blocks execution until the promise has resolved, and then returns the result of the promise
+
+- We can demonstrate "await" in action with the cow promise from above. If we log the output from invoking "cow" then we see that the return value is a promise. However, if we prefix the call to the function with the await keyword, execution will stop until the promise has resolved, at which point the result of the promise is returned instead of the actual promise object: 
+
+```
+console.log(cow());
+// OUTPUT: Promise {<pending>}
+
+console.log(await cow());
+// OUTPUT: moo
+```
+
+- By combining "async", to define functions that return promises, with "await", to wait on the promise, you can create code that is asynchronous, but still mainatains the flow of the code without explicitly using callbacks
+
+- You can see the benefit for "async/await" clearly by considering a case where multiple promises are required. For example, when calling the "fetch" web API on an endpoint that returns JSON, you would need to resolve two promises. One for the network call, and one for converting the result to JSON. A promise implementation would look like the following:
+
+```
+const httpPromise = fetch('https://simon.cs260.click/api/user/me');
+const jsonPromise = httpPromise.then((r) => r.json());
+jsonPromise.then((j) => console.log(j));
+console.log('done');
+
+// OUTPUT: done
+// OUTPUT: {email: 'bud@mail.com', authenticated: true}
+```
+
+- With async/await, you can clarify the code intent by hiding the promise syntax, and also make the execution block until the promise is resolved
+
+```
+const httpResponse = await fetch('https://simon.cs260.click/api/user/me');
+const jsonResponse = await httpResponse.json();
+console.log(jsonResponse);
+console.log('done');
+
+// OUTPUT: {email: 'bud@mail.com', authenticated: true}
+// OUTPUT: done
+```
+
+## Debugging Javascript
+
+- It is inevitable that your code is going to have problems, or bugs, at some point. That may be while you are orignially authoring it, working on other code that changes assumed dependencies, or while enhancing the code with new functionality. 
+
+- Learning how to quickly discover and resolve bugs will greatly increase your value as a web developer. Additionally, debuggin skills can also be used during the development process. By following a pattern of writing a block of code and then stepping through or debugging the block, you gain confidence that the block is working as desired before moving on to the next block
+
+- One of the simplest ways to debug your JS code is to insert "console.log" functions that output the state of the code as it executes. For example, we can create a simple web app that has an HTML and JS file that demonstrates the difference between "let" and "var". By inserting "console.log" statements into the code, we can see what the value of each variable is as the code executes:
+
+- index.html
+
+```
+<body>
+  <h1>Debugging</h1>
+  <script src="index.js"></script>
+</body>
+```
+- index.js
+
+```
+var varCount = 20;
+let letCount = 20;
+
+console.log('Initial - var: %d, let: %d', varCount, letCount);
+
+for (var varCount = 1; varCount < 2; varCount++) {
+  for (let letCount = 1; letCount < 2; letCount++) {
+    console.log('Loop - var: %d, let: %d', varCount, letCount);
+  }
+}
+
+const h1El = document.querySelector('h1');
+h1El.textContent = `Result - var:${varCount}, let:${letCount}`;
+console.log('Final - var: %d, let: %d', varCount, letCount);
+```
+
+- Take the follwing steps to see the result of console debugging:
+  - 1. Create the above files in a test directory named testConsole
+  - 2. Open the testConsole directory in VSCode
+  - 3. Run index.html using the VSCode Live Server Extension
+  - 4. Open the Chrome browser debugger (F12)
+  - 5. Select the "Console" tab
+  - 6. Refresh the page
+
+- You'll see this:
+
+![JavaScript Debug Console](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingJavascript/javascriptDebugConsole.jpg)
+
+- You can use the debugger console window to inspect variables without using the "console.log" function from your code. For example, if you type varCount in the console window it will print out the current value of varCount. You can also execute JS directly in the console window. For example, if you type "varCount = 50" and press "Enter" it will change the current value of varCount:
+
+![JavaScript Debug Console Variables](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingJavascript/javascriptDebugConsoleVars.jpg)
+
+
+- "console.log" debugging is great for times when you just need to quickly see what is going on in your code, but to really understand the code as it executes you want to use the full capabilities of the browser's debugger.
+
+- Using the same setup we used for "console.log" debugging, open up chrome's browser debugger, but this time select the source tab. This will display the source files that comprise the currently rendered content:
+
+![JavaScript Debug Source](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingJavascript/javascriptDebugSource.jpg)
+
+- You can either select "index.js" from the source view on the left, or press "command-P" and then select "index.js" from the list that pops up. Then set a breakpoint on line 4 by clicking on the line number on the left of the displayed source code. This makes it so that the execution of code will pause whenever that line is executed. Refreshing the browser window will cause "index.js" to reload and pause on the breakpoint.
+
+![JavaScript Debug Breakpoint](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/debuggingJavascript/javascriptDebugBreakpoint.jpg)
+
+
+- With the browser paused in  the debugger you can move your mouse cursor over a variable to see its value, see what variables are in scope, set watches on variables, or use the console to interact with the code.
+
+- This gives you complete control to inspect what the JS code is doing and experiment with possible alternative directions for the code. Take some time to poke around in the debugger. Learning how to exploit its functionality will make you a much better web developer. 
+
+## Node.js
+
+- Node.js was the first successful app for deploying JS outside of a browser. JS can power your entire tech stack as a result. 
+
+- Browsers run JS using a JS interpreter and execution engine. Chrome based browsers use Google's V8 engine. Node.js took the V8 engine and ran it inside of a console app. When you run a JS program in Chrome or Node.js, it is V8 that reads your code and executes it.
+
+
+- Install Node.js on Mac with this:
+
+- "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash"
+- nvm intall --lts
+
+- Verify it is installed with "node -v" in the terminal
+
+- You can execute a line of JS with Node.js in the terminal with the "-e" parameter:
+
+- node -e "console.log(1+1)"
+
+- However, to do real work you need to execute an entire project composed of dozens or even hundreds of JS files. You can do this by creating a single starting JS file, name something like index.js, that references the code found in the rest of your project. You than execute your code by running "node" with "index.js" as a parameter. For example, with the follwoing JS saved to a file name index.js:
+
+```
+function countdown() {
+  let i = 0;
+  while (i++ < 5) {
+    console.log(`Counting ... ${i}`);
+  }
+}
+
+countdown();
+```
+
+- We can execute the JS by passing the file "node" and receive the following result:
+
+```
+➜  node index.js
+Counting ... 1
+Counting ... 2
+Counting ... 3
+Counting ... 4
+Counting ... 5
+```
+
+- You can also run "node" in intrepretive mode by executing it without any parameters and then typing your JS code directly into the interpreter:
+
+```
+➜ node
+Welcome to Node.js v16.15.1.
+> 1+1
+2
+> console.log('hello')
+hello
+```
+
+- While you could write all of the JS for everything you need, it is always helpful to use preexisting packages of JS for implementing common tasks. To load a package using Node.js, you must take 2 steps. First, install the package locally on your machine using the Node Package Manager (NPM) and then include a "require" statement in your code that references the package name. NPM is automatically installed with Node.js
+
+- NPM knows how to access a massive repository of preexisting packages. You can search for packages on the NPM website. However, before you can start using NPM to install packages you need to intialize your code to use NPM. This is done by creating a directory that will contain your JS and then running "npm init". NPM will step you through a series of quesitons about the project you are creating. You can press the return key for each of the questions if you want to accept the defaults. If you are always giong to accept all of the defaults you can use npm init -y and skip the QandA:
+
+```
+➜  mkdir npmtest
+➜  cd npmtest
+➜  npm init -y
+```
+
+- If you list the files in the directory you will notice that it has a file named "package.json". This file contains three main things: 1. Metadat about your projewct such as its name and the default entry JS file, 2. commands (scripts) that you can exectue to do things like run, test, or distribute your code, and 3. packags that this project depends upon. The following shows what your "package.json" looks like currently. It has some default metadata and a simple placeholder script that just runs the echo command when you execute "npm run test" from the console:
+
+```
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+```
+
+- With NPM initialized to work with your project, you can now use it to install a node package. As a simple example, we will install a package that know how to tell jokes. This package is called "give-me-a-joke". You can search for it on the NPM website, see how often it is intsalled, examine the source code, and learn about who created it. You installl it using "npm install" followed by the name of the package:
+
+```
+➜  npm install give-me-a-joke
+```
+
+- If you again examine the contents of the  "package.json" file you will see a reference to the newly installed package dependency. If you decide you no longer want a package dependency you can always remove it wiht the "npm uninstall <package name here>" console command
+
+- With the dependency added, the unnecessary metadata removed, the addition of a useful script to run the program, and also adding a desrciption, the "package.json" file should look like this:
+
+```
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "Simple Node.js demo",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "give-me-a-joke": "^0.5.1"
+  }
+}
+```
+
+- Note that when you start installing package dependencies, NPM will create an additional file name "package-lock.json" and a directory named "node_modules" in your project directory. The node_modules directory contains the actual JS files for the package and all of its dependent packages. As you install several packages this directory will get big. You do not want to check this directory into your source control system since it can be big and can be rebuilt using the info contained in the package.json and package-lock.json files. So make sure you include "node_modules" in your .gitignore file
+
+- When you clone your source code from GitHub to a new location, the first thing you should do is run "npm install" in the project directory. This will cause NPM to download all of the previously installed packages and recreate the "node_modules" directory. 
+
+- The "package-lock.json" file tracks the version of the package that you installed. That way if you rebuild your "node_modules" directory you will have the version of the package you initially installed and not the latest available version, which might not work with your code
+
+- With NPM and the joke package installed, you can now use the joke package in a JS file by referencing the package name as a parameter to the "require" function. This is then followed by a call to the joke's object's "getRandomDadJoke" function to actually generate a jok. Create a file named "index.js and past the following into it:
+
+```
+const giveMeAJoke = require('give-me-a-joke');
+giveMeAJoke.getRandomDadJoke((joke) => {
+  console.log(joke);
+});
+```
+
+- If you run this code using node.js you should get a result like this:
+
+```
+➜  node index.js
+What do you call a fish with no eyes? A fsh.
+```
+
+- This may seem like a lot of work but after you do it a few times it feels natural. These are the main steps:
+
+  - 1. Create your project directory
+  - 2. Initialize it for use with NPM by running "npm init -y"
+  - 3. Make sure ".gitignore" file contains "node_modules"
+  - 4. Install any desired packages with "npm install <package name here>"
+  - 5. Add "require('<package name here>')" to your apps JS
+  - 6. Use the code the package provides in your JS
+  - 7. Run your code with "node index.js"
+
+  - You should be aware that Ryan has created a successor to Node.js called Deno. This is more compliant with ECMAscript and has better performance. There are also other competitors, including Bun
+
+  ## Debugging Node.js
+
+  
