@@ -2280,5 +2280,70 @@ const [b, c] = a;
 console.log(b, c);
 // OUTPUT: 1,2
 ```
+- Note that even though it looks like you are declaring an array with the syntax on the left side of the expression, it is only specifying that you want to destructure those values out of the array
+
+- you can also do this with rest syntax:
+
+```
+const [b, c, ...others] = a;
+
+console.log(b, c, others);
+// OUTPUT: 1, 2, [4,5]
+```
+
+- This works in a similar manner for object, except with arrays, the assignment of the associated value was assumed by the positions in the two arrays. When destruturing objects, you explicitly specify the properites you want to pull from the source object
+
+```
+const o = { a: 1, b: 'animals', c: ['fish', 'cats'] };
+
+const { a, c } = o;
+
+console.log(a, c);
+// OUTPUT 1, ['fish', 'cats']
+```
+
+- You can also map names to new variables instead of just using the original property names:
+
+```
+const o = { a: 1, b: 'animals', c: ['fish', 'cats'] };
+
+const { a: count, b: type } = o;
+
+console.log(count, type);
+// OUTPUT 1, animals
+```
+
+Default values may also be provided for missing ones:
+
+```
+const { a, b = 22 } = {};
+const [c = 44] = [];
+
+console.log(a, b, c);
+// OUTPUT: undefined, 22, 44
+```
+
+- Note that all of the above examples created constant new variables. You can also use destructing to reassign existing variables
+
+```
+let a = 22;
+
+[a] = [1, 2, 3];
+
+console.log(a);
+// OUTPUT: 1
+```
 
 
+
+```
+const a = [1, 2, 4, 5];
+
+// Destructure the first two items and capture the rest
+const [ , , ...newArray] = a;
+
+console.log(newArray);
+// OUTPUT: [4, 5]
+```
+
+## 
