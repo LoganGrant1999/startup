@@ -1764,13 +1764,147 @@ a.sort(function (v1, v2) {
 a.sort((v1, v2) => v1 - v2);
 ```
 
+- Besides being compact, the arrow function syntax has some more important semantic differences from the standard syntax. This includes restrictions that arrow functions cannot be used for constructions or iterator generators
+
+- Regular constructor:
+
+```javascript
+// Regular constructor function
+function Person(name) {
+  this.name = name;   // 'this' refers to the new object being created
+}
+
+// Creating an instance of the Person object using the 'new' keyword
+const john = new Person('John');
+console.log(john.name);  // OUTPUT: John
+```
+
+- Incorrect constructor with arrow function (you can't do this)
+
+```javascript
+const Person = (name) => {
+  this.name = name;
+}
+
+const john = new Person('John');  // ERROR: Person is not a constructor
+```
+
+- Arrow functions also have special rules for the return keyword. The return keyword is optional if no curly braces are provided for the function and it contains a single expression. In that case, the result of the expression is automaticallly returned. If curly braces are provieded then the arrow function behaves just like a standard function.
+
+```javascript
+() => 3;
+// RETURNS: 3
+
+() => {
+  3;
+};
+// RETURNS: undefined
+
+() => {
+  return 3;
+};
+// RETURNS: 3
+```
+
+- Arrow functions inherit the "this" pointer from the scope in which they are created. This makes what is known as a "closure". A closure allows a function to continue referencing its creation scope, even after it has passed out of that scope. 
+
+- The function makeClosure returns an anonymous function using the arrow syntax. Notice that the a parameter isi overridden, a new b variable is created, and both a and b are referenced in the arrow function. Because of that reference, they are both part of teh closure for the returned function:
+
+```javascript
+function makeClosure(a) {
+  a = 'a2';  // Inside this function, 'a' is changed to 'a2'
+  const b = 'b2';  // A local constant 'b' is created
+  return () => [a, b];  // The arrow function "closes over" 'a' and 'b'
+}
+
+const a = 'a';  // This is the global 'a'
+const b = 'b';  // This is the global 'b'
+
+const closure = makeClosure(a);  // 'a' in makeClosure is changed to 'a2'
+
+console.log(closure());  // OUTPUT: ['a2', 'b2']
+// The closure retains the modified 'a' ('a2') and the locally created 'b' ('b2').
+
+console.log(a, b);  // OUTPUT: 'a', 'b'
+// The global 'a' and 'b' remain unchanged.
+```
+
+- When you declare a variable using const, the value cannot be reassigned within the same scope. However, you can still modify the properties of objects or reassign function parameters within a function.
+
+- Closures provide a valuable property wehn we execute JS within the scope af an HTML page because it can remember the values of variables when the function was created instead of what they are when they are executed
+
+- Debounce functions execute a specified function once within a given time window. Any requests to execute the debounce funtion more frequently than this will cause the time window to reset. This is important in cases where a user can trigger expensive events thousands of times per second. Without a debounce, the performance of your app can suffer. 
+
+- The following code calls the browser's window.addEventListener function to add a callback function that is invoked whenever the user scrolss the web page. The first parameter to addEventListener specifies that it wants to listen for scroll events. The second parameter provides the function to call when a scroll event happens. In this case, we call a function named debounce. It takes 2 parameters (the time window for executing the window function and the window function to call within that time limit). In this case, we'll exectue the arrow function eveery 500 milliseconds:
+
+```javascript
+window.addEventListener(
+  'scroll',
+  debounce(500, () => {
+    console.log('Executed an expensive calculation');
+  })
+);
+```
+ - The debounce function immplements the execution of windowFunc within the restricted time window by creating a closure that contains the current timeout and returning a function that will reset the timeout every time it is called. The returned function is what the scroll event will actually call when the sure scrolls the page. However, instead of directly executing the windowFunc, it sets a timer based on the value of windowMs. If the debounce function is called again before the window tiems out then it resets the timeout. The timeout variable essentially captures the closure of each time the timer runs
+
+ ```javascript
+function debounce(windowMs, windowFunc) {
+  let timeout;
+  return function () {
+    console.log('scroll event');
+    clearTimeout(timeout);
+    timeout = setTimeout(() => windowFunc(), windowMs);
+  };
+}
+```
+
+## Arrays
+
+- JS array objects represent a sequence of other objects and primitives. You can reference the members of the array using zero based indexing. You can create an array constructor using the array literal notation below:
+
+```
+const a = [1, 2, 3];
+console.log(a[1]);
+// OUTPUT: 2
+
+console.log(a.length);
+// OUTPUT: 3
+```
+
+- Here are some static functions for arrays: 
+
+| Function  | Meaning                                              | Example                                |
+|-----------|------------------------------------------------------|----------------------------------------|
+| push      | Add an item to the end of the array                  | a.push(4)                              |
+| pop       | Remove an item from the end of the array             | x = a.pop()                            |
+| slice     | Return a sub-array                                   | a.slice(1,-1)                          |
+| sort      | Run a function to sort an array in place             | a.sort((a,b) => b-a)                   |
+| values    | Creates an iterator for use with a for of loop       | for (i of a.values()) {...}            |
+| find      | Find the first item satisfied by a test function     | a.find(i => i < 2)                     |
+| forEach   | Run a function on each array item                    | a.forEach(console.log)                 |
+| reduce    | Run a function to reduce each array item to a single item | a.reduce((a, c) => a + c)         |
+| map       | Run a function to map an array to a new array        | a.map(i => i+i)                        |
+| filter    | Run a function to remove items                       | a.filter(i => i%2)                     |
+| every     | Run a function to test if all items match            | a.every(i => i < 3)                    |
+| some      | Run a function to test if any items match            | a.some(i => i < 1)                     |
+
+
+```
+const a = [1, 2, 3];
+
+console.log(a.map((i) => i + i));
+// OUTPUT: [2,4,6]
+console.log(a.reduce((v1, v2) => v1 + v2));
+// OUTPUT: 6
+console.log(a.sort((v1, v2) => v2 - v1));
+// OUTPUT: [3,2,1]
+
+a.push(4);
+console.log(a.length);
+// OUTPUT: 4
+```
+
 - 
-
-
-
-
-
-
 
 
 
