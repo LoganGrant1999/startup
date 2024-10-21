@@ -1958,6 +1958,228 @@ console.log(obj, json, objFromJson);
 
 - Objects can be created with the "new" operator. This causes the object's constructor to be called. Once declared  you can add properties to the object by simply referencing the property name in an assignment. Any type of variable can be assigned to a property. This includes a sub-object, array, or funciton. The properties of an object can be referenced either with do(obj.prop) or bracket notation(obj['prop']). 
 
+```
+const obj = new Object({ a: 3 });
+obj['b'] = 'fish';
+obj.c = [1, 2, 3];
+obj.hello = function () {
+  console.log('hello');
+};
+
+console.log(obj);
+// OUTPUT: {a: 3, b: 'fish', c: [1,2,3], hello: func}
+```
+
+- The ability to dynamically modify and object is useful with an indeterminate structure
+
+- Object can refer to the standard JS objects (Promises, map, object, function, date) or to the JS Object (new Object()) or it can refer to any JS object you create
+
+- You can also declare a variable of object type with the "object-literal" syntax. This syntax allows you to provide the initial composition of the object:
+
+```
+const obj = {
+  a: 3,
+  b: 'fish',
+};
+```
+
+- Object has several interesting functions that are associated with it. They are static:
+
+| Function | Meaning                              |
+|----------|--------------------------------------|
+| entries  | Returns an array of key-value pairs  |
+| keys     | Returns an array of keys             |
+| values   | Returns an array of values           |
+
+```
+const obj = {
+  a: 3,
+  b: 'fish',
+};
+
+console.log(Object.entries(obj));
+// OUTPUT: [['a', 3], ['b', 'fish']]
+console.log(Object.keys(obj));
+// OUTPUT: ['a', 'b']
+console.log(Object.values(obj));
+// OUTPUT: [3, 'fish']
+```
+
+- Any function that returns an object is considered a "constructor" and can be invoked with the "new" operator:
+
+```
+function Person(name) {
+  return {
+    name: name,
+  };
+}
+
+const p = new Person('Eich');
+console.log(p);
+// OUTPUT: {name: 'Eich'}
+```
+
+- Because objects can have any type of property value, you can create methods on the object as part of its encapsulation
+
+```
+function Person(name) {
+  return {
+    name: name,
+    log: function () {
+      console.log('My name is ' + this.name);
+    },
+  };
+}
+
+const p = new Person('Eich');
+p.log();
+// OUTPUT: My name is Eich
+```
+
+- The meaning of "this" depends upon the scope of where it is used, but in an object it refers to a pointer to the object
+
+- You can use classes to define objects. Using a class clarifies the intent to create a reusable container rather than a one off object. Class declarations look similar to declaring an object, but use a construcctor and assumed function declarations. The perons object would look like this as a class:
+
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  log() {
+    console.log('My name is ' + this.name);
+  }
+}
+
+const p = new Person('Eich');
+p.log();
+// OUTPUT: My name is Eich
+```
+
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  log() {
+    console.log('My name is ' + this.name);
+  }
+}
+
+const p = new Person('Eich');
+p.log();
+// OUTPUT: My name is Eich
+```
+
+- You can make properties and functions of classes private by prefixing them with a #:
+
+```
+class Person {
+  #name;
+
+  constructor(name) {
+    this.#name = name;
+  }
+}
+
+const p = new Person('Eich');
+p.#name = 'Lie';
+// OUTPUT: Uncaught SyntaxError: Private field '#name' must be declared in an enclosing class
+```
+- Classes can be extended by using the "extends" keyword to define inheritance. Parameters that need to be passed to the parent class are delivered using the "super" function. Any functions defined on teh child that have the same name as teh parent override the parent's implementation. A parent's function can be accessed by using the "super" keyword:
+
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  print() {
+    return 'My name is ' + this.name;
+  }
+}
+
+class Employee extends Person {
+  constructor(name, position) {
+    super(name);
+    this.position = position;
+  }
+
+  print() {
+    return super.print() + '. I am a ' + this.position;
+  }
+}
+
+const e = new Employee('Eich', 'programmer');
+console.log(e.print());
+// OUTPUT: My name is Eich. I am a programmer
+```
+
+## JS Regular Expressions
+
+- Regular expression support is built into JS. You use a regular expression to find text in a string so that you can replace it, or simply to know that it exists.
+
+- You can create a regular expression using the class constructor or a regular literal
+
+```
+const objRegex = new RegExp('ab*', 'i');
+const literalRegex = /ab*/i;
+```
+
+- This string class has several functions that accept regular expressions. These include math, replace, search, and split. FOr a quick test to see if there is a match, you can use the regular expression object's test function:
+
+```
+const petRegex = /(dog)|(cat)|(bird)/gim;
+const text = 'Both cats and dogs are pets, but not rocks.';
+
+text.match(petRegex);
+// RETURNS: ['cat', 'dog']
+
+text.replace(petRegex, 'animal');
+// RETURNS: Both animals and animals are pets, but not rocks.
+
+petRegex.test(text);
+// RETURNS: true
+```
+
+- Regex Types:
+
+| Characters    | Meaning                                                                                                                                                                                                                             |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `[xyz]`, `[a-c]` | Character class: Matches any one of the enclosed characters. You can specify a range of characters using a hyphen. Example: `[abcd]` is the same as `[a-d]`. `[abcd-]` or `[\w-]` can also include a hyphen as a literal character.     |
+| `[^xyz]`, `[^a-c]` | Negated character class: Matches anything that is not enclosed in the square brackets. Example: `[^abc]` matches "o" in "bacon".                                                                                                  |
+| `.`            | Wildcard: Matches any single character except line terminators (`\n`, `\r`, etc.). Example: `/.y/` matches "my" in "my day".                                                                                                        |
+| `\d`           | Digit character class escape: Matches any digit (0-9). Equivalent to `[0-9]`. Example: `/\d/` matches "2" in "B2".                                                                                                                 |
+| `\D`           | Non-digit character class escape: Matches any non-digit character. Equivalent to `[^0-9]`. Example: `/\D/` matches "B" in "B2".                                                                                                     |
+| `\w`           | Word character class escape: Matches any alphanumeric character or underscore. Equivalent to `[A-Za-z0-9_]`. Example: `/\w/` matches "a" in "apple".                                                                                |
+| `\W`           | Non-word character class escape: Matches any character not included in `\w`. Equivalent to `[^A-Za-z0-9_]`. Example: `/\W/` matches "%" in "50%".                                                                                  |
+| `\s`           | White space character class escape: Matches any white space character (e.g., space, tab, etc.). Example: `/\s\w*/` matches " bar" in "foo bar".                                                                                     |
+| `\S`           | Non-white space character class escape: Matches any character other than white space. Example: `/\S\w*/` matches "foo" in "foo bar".                                                                                                |
+| `\t`           | Matches a horizontal tab.                                                                                                                                                                                                          |
+| `\r`           | Matches a carriage return.                                                                                                                                                                                                         |
+| `\n`           | Matches a linefeed.                                                                                                                                                                                                                |
+| `\v`           | Matches a vertical tab.                                                                                                                                                                                                            |
+| `\f`           | Matches a form-feed.                                                                                                                                                                                                               |
+| `[\b]`         | Matches a backspace. Note: If looking for the word-boundary assertion, use `\b`.                                                                                                                                                   |
+| `\0`           | Matches a NUL character.                                                                                                                                                                                                           |
+| `\cX`          | Matches a control character using caret notation. Example: `/\cM\cJ/` matches `\r\n`.                                                                                                                                              |
+| `\xhh`         | Matches the character with the hexadecimal code `hh`.                                                                                                                                                                              |
+| `\uhhhh`       | Matches the UTF-16 code-unit with value `hhhh`.                                                                                                                                                                                    |
+| `\u{hhhh}`     | Matches the character with Unicode value `U+hhhh`.                                                                                                                                                                                 |
+| `\p{UnicodeProperty}`, `\P{UnicodeProperty}` | Unicode character class escape: Matches a character based on its Unicode property (e.g., emoji, Han characters).                                                                                             |
+| `\`            | Escape character: Treats the next character specially or literally depending on context. Example: `/\b/` matches a word boundary, and `/a\*/` matches "a*" (literal asterisk).                                                      |
+| `x|y`          | Disjunction: Matches either "x" or "y". Example: `/green|red/` matches "green" or "red".                                                                                                                                           |
+
+
+Regex Assertions:
+
+| Character | Meaning                                                                                                                                                                                                                                                                                                                                                          |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `^`       | Input boundary beginning assertion: Matches the beginning of input. With the multiline (`m`) flag, also matches after a line break. Example: `/^A/` matches "A" in "An A", but not "A" in "an A". (Note: It has a different meaning when used at the start of a character class).                                            |
+| `$`       | Input boundary end assertion: Matches the end of input. With the multiline (`m`) flag, also matches before a line break. Example: `/t$/` matches "t" in "eat" but not in "eater".                                                                                                                                            |
+| `\b`      | Word boundary assertion: Matches a word boundary (the boundary between a word character and a non-word character). Example: `/\bm/` matches "m" in "moon", but `/oo\b/` does not match "oo" in "moon" (since it's followed by "n", a word character).                                                                      |
+| `\B`      | Non-word boundary assertion: Matches where the previous and next characters are both words or both non-words. Example: `/\Bon/` matches "on" in "noon", and `/ye\B/` matches "ye" in "yesterday".                                                                                                                          |
 
 
 
