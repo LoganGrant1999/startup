@@ -3355,7 +3355,12 @@ console.log(x);
     ```javascript
     document.getElementById('byu').style.color = 'green';
     ```
+    or
 
+    ```
+    javascript
+    document.querySelector('#byu').style.color = 'green';
+    ```
 ---
 
 ## HTML Tags
@@ -3382,15 +3387,106 @@ console.log(x);
 ## JavaScript Syntax
 
 ### 21. What is valid JavaScript syntax for `if`, `else`, `for`, `while`, and `switch` statements?
-- **Answer:**
-  - Example for `if-else`:
+
+#### **1. `if-else` Statement:**
+- **Answer:** An `if-else` statement checks a condition and executes code based on whether the condition is true or false.
+- **Example:**
     ```javascript
-    if (condition) {
-      // code
+    let x = 10;
+
+    if (x > 5) {
+      console.log("x is greater than 5");
     } else {
-      // code
+      console.log("x is 5 or less");
     }
     ```
+
+#### **2. `for` Loop:**
+- **Answer:** A `for` loop repeats code a specified number of times.
+- **Example:**
+    ```javascript
+    for (let i = 0; i < 5; i++) {
+      console.log("Iteration:", i);
+    }
+    ```
+- **Explanatory Note:** The loop runs while `i` is less than 5, incrementing `i` each time it runs.
+
+#### **3. `while` Loop:**
+- **Answer:** A `while` loop keeps running as long as the specified condition is `true`.
+- **Example:**
+    ```javascript
+    let i = 0;
+
+    while (i < 5) {
+      console.log("Iteration:", i);
+      i++;
+    }
+    ```
+- **Explanatory Note:** The loop checks the condition `i < 5` before each iteration and stops when it becomes false.
+
+#### **4. `switch` Statement:**
+- **Answer:** A `switch` statement checks multiple conditions and executes code depending on which condition is true.
+- **Example:**
+    ```javascript
+    let color = "blue";
+
+    switch (color) {
+      case "red":
+        console.log("The color is red");
+        break;
+      case "blue":
+        console.log("The color is blue");
+        break;
+      case "green":
+        console.log("The color is green");
+        break;
+      default:
+        console.log("Unknown color");
+    }
+    ```
+- **Explanatory Note:** The `switch` statement matches `color` with the case `"blue"` and logs "The color is blue".
+
+#### **5. `else if` Statement:**
+- **Answer:** You can add multiple conditions using `else if` to test several criteria.
+- **Example:**
+    ```javascript
+    let score = 75;
+
+    if (score >= 90) {
+      console.log("Grade: A");
+    } else if (score >= 80) {
+      console.log("Grade: B");
+    } else if (score >= 70) {
+      console.log("Grade: C");
+    } else {
+      console.log("Grade: D or F");
+    }
+    ```
+- **Explanatory Note:** Each condition is checked in order, and the first one that is true will execute.
+
+#### **6. `do-while` Loop:**
+- **Answer:** A `do-while` loop runs at least once, and then continues based on the condition.
+- **Example:**
+    ```javascript
+    let j = 0;
+
+    do {
+      console.log("Iteration:", j);
+      j++;
+    } while (j < 5);
+    ```
+- **Explanatory Note:** Unlike the `while` loop, the `do-while` loop guarantees at least one execution before checking the condition.
+
+---
+
+### Summary of Key Points:
+- **`if-else`**: Checks a condition, runs one block if true, another if false.
+- **`for` loop**: Repeats code a specific number of times.
+- **`while` loop**: Repeats code as long as the condition is true.
+- **`switch`**: Tests a value against multiple conditions.
+- **`else if`**: Allows for multiple conditions to be checked in sequence.
+- **`do-while`**: Runs the loop once before checking the condition.
+
 
 ---
 
