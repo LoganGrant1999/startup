@@ -2526,3 +2526,272 @@ alertDisplay('called from main.js');
 
 - Fortunately, when you use a web framework bundler, discussed in later instruction, to generate your web app distribution code, you usually don't have to worry about differentiating between global scope and ES module scope. The bundler will inject all the necessary syntax to connect your HTML to your modules. Historically, this was done by removing the modules and placing all of the JS in a namespaced global partition. Now that ES Modules are supported on most browsers, the bundler will expose the ES module directly. 
 
+## Document Object Model
+
+-  The Document Object Model (DOM) is an object representation of the HTML elements that the browser uses to render the display. The browser also exposes the DOM to external code so that you can write programs that dynamically manipulate the HTML.
+
+- The browser provides access to the DOM through a global variable name "document" that points to the root element of the DOM. If you open the browser's debugger console window and type the variable name "document" you will see the DOM for the document the browser is currently rendering:
+
+```
+> document
+
+<html lang="en">
+  <body>
+    <p>text1 <span>text2</span></p>
+    <p>text3</p>
+  </body>
+</html>
+```
+
+```
+
+p {
+  color: red;
+}
+```
+
+- For everything in an HTML doc there is a node in the DOM. This includes elements, attributes, text, comments, and whitespace. All of these nodes form a big tree, with the doc node at the top.
+
+![DOM Image](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/dom/dom.jpg)
+
+- Every element in an HTML doc implements the DOM Element interface, which is derived from the DOM Node interface. The DOM Element Interface provides the means for iterating child elements, accessing the parent element, and manipulating the element's attributes. From your JS code, you can start with the "document" variable and walk through every element in the tree:
+
+```
+function displayElement(el) {
+  console.log(el.tagName);
+  for (const child of el.children) {
+    displayElement(child);
+  }
+}
+
+displayElement(document);
+```
+
+- You can provide a CSS selector to the "querySelectorAll" function in order to select elements from the doc. The "textContent" property contains all of the element's text. You can even access a textual representation of an element's HTML content with the "innerHTML" property.
+
+```
+const listElements = document.querySelectorAll('p');
+for (const el of listElements) {
+  console.log(el.textContent);
+}
+```
+
+- The DOM supports the ability to insert, modify, or delete the elements in the DOM. To create a new element, you first create the element on the DOM doc. You then insert the new element into the DOM tree by appending it to an existing element in the tree:
+
+```
+function insertChild(parentSelector, text) {
+  const newChild = document.createElement('div');
+  newChild.textContent = text;
+
+  const parentElement = document.querySelector(parentSelector);
+  parentElement.appendChild(newChild);
+}
+
+insertChild('#courses', 'new course');
+```
+
+- To delete elements call the "removeChild" function on the parent element:
+
+```
+function deleteElement(elementSelector) {
+  const el = document.querySelector(elementSelector);
+  el.parentElement.removeChild(el);
+}
+
+deleteElement('#courses div');
+```
+
+- The DOM also allows you to inject entire blocks of HTML into an element. The following code finds the first "div" element in the DOM and replaces all the HTML it contains:
+
+```
+const el = document.querySelector('div');
+el.innerHTML = '<div class="injected"><b>Hello</b>!</div>';
+```
+
+- However, directly injecting HTML as a block of text is a common attack vector for hackers. If an untrusted party can inject JS anywhere in your app then that JS can represent itself as the current user of the app. The attacker can then make requests for sensitive data, monitor activity, and steal credentials. The example below shows how the img element can be used to launch an attack as soon as the page is loaded:
+
+```
+<img src="bogus.png" onerror="console.log('All your base are belong to us')" />
+```
+
+- If you are injecting HTML, make sure that it cannot be manipulated by a user. Common injection paths include HTML input controls, URL parameters, and HTTP headers. Either sanitize any HTML that contains variables, or simply use DOM manipulation functions instead of using "innerHTML".
+
+- All DOM elements support the ability to attach a funciton that gets called when an event occurs on the element. These functions are called "event listeners". Here is an example of an event listener that gets called when an element gets clicked:
+
+```
+const submitDataEl = document.querySelector('#submitData');
+submitDataEl.addEventListener('click', function (event) {
+  console.log(event.type);
+});
+```
+
+- There are lots of possible events that you can add a listener to. This includes things like mouse, keyboard, scrolling, animation, video, audio, WebSocket, and clipboard events. Here are some common events:
+
+| Event Category    | Description                |
+|-------------------|----------------------------|
+| Clipboard         | Cut, copied, pasted         |
+| Focus             | An element gets focus       |
+| Keyboard          | Keys are pressed            |
+| Mouse             | Click events                |
+| Text selection    | When text is selected       |
+
+- You can also add event listeners directly in the HTML. FOr example, here is a "onclick" handler that is attached to a button:
+
+```
+<button onclick='alert("clicked")'>click me</button>
+```
+
+## Local Storage
+
+- The browser's "localStorage" API provides the ability to persistently store and retrieve data on a user's browser across user sessions and HTML page renderings. For example, your frontend JS code could store a user's name on one HTML page, and then retrieve the name later when a different HTML page is loaded. The user's name will also be available in local storage the next time the same browser is used to access the same website. 
+
+- In addition to persisting applicaiton data between page renderings, "localStorage" is also used as a cache for when data cannot be obtained from the server. For example, your frontend JS could store the last high scores obtained from the service, and then display those scores in the future if the service is not available
+
+There are 4 main functions that can be used with localStorage:
+
+| Function            | Meaning                                         |
+|---------------------|-------------------------------------------------|
+| `setItem(name, value)` | Sets a named item's value into local storage   |
+| `getItem(name)`      | Gets a named item's value from local storage    |
+| `removeItem(name)`   | Removes a named item from local storage         |
+| `clear()`            | Clears all items in local storage               |
+
+
+- A local storage value must be of type "string", "number", or "boolean". If you want to store a JS object or array, then you must first convert it to a JSON string with "JSON.stringify()" on insertion, and parse it back to JS with "JSON.parse()" when retrieved.
+
+- Once your startup website and run the following code in the browser's dev tools console window:
+
+```
+let user = 'Alice';
+
+let myObject = {
+  name: 'Bob',
+  info: {
+    favoriteClass: 'CS 260',
+    likesCS: true,
+  },
+};
+
+let myArray = [1, 'One', true];
+
+localStorage.setItem('user', user);
+localStorage.setItem('object', JSON.stringify(myObject));
+localStorage.setItem('array', JSON.stringify(myArray));
+
+console.log(localStorage.getItem('user'));
+console.log(JSON.parse(localStorage.getItem('object')));
+console.log(JSON.parse(localStorage.getItem('array')));
+```
+
+- Output:
+
+```
+Alice
+{name: 'Bob', info: {favoriteClass: 'CS 260', likesCS: true}
+[1, 'One', true]}
+```
+
+- Notice that you are able to see the round trip journey of the local storage values in the console output. If you want to see what values are currently set for your application, then open the "Application" tab of the dev tools and select "Storage > Local Storage" and then your domain name. With the dev tools you can add, view, update, and delete any local storage values:
+
+![Local Storage DevTools](https://raw.githubusercontent.com/webprogramming260/.github/main/profile/javascript/localStorage/localStorageDevTools.png)
+
+
+## Promises
+
+- The rendering process of your HTML executes on a single thread. That means that you cannot take a long time processing JS on the main rendering thread. Long running, or blocking tasks, should be executed with the use of a JS promise. The execution of a promise allows the main rendering thread to continue while some action is executed in the background. You create a promise by calling the Promise objet constructor and passing it an executor function that runs the asynchronous operation. Executing asynchronously means that promise constructor may return before the promise executor function runs. The state of the promise execution is always in one of three states:
+
+  - 1. Pending: Currently running asynchronously
+  - 2. Fulfilled: Completed successfully
+  - 3. Rejected: Failed to complete
+
+- We can demonstrate asynchronous execution by using the standard JS setTimeout function to create a delay in the execution of the code. The setTimeout function takes the number of milliseconds to wait and a function to call after that amount of time has expired. We call the delay function in a for loop in the promise executor and also in a for loop outside the promise so that both code blocks are running in parallel.
+
+```
+const delay = (msg, wait) => {
+  setTimeout(() => {
+    console.log(msg, wait);
+  }, 1000 * wait);
+};
+
+new Promise((resolve, reject) => {
+  // Code executing in the promise
+  for (let i = 0; i < 3; i++) {
+    delay('In promise', i);
+  }
+});
+
+// Code executing after the promise
+for (let i = 0; i < 3; i++) {
+  delay('After promise', i);
+}
+
+// OUTPUT:
+//   In promise 0
+//   After promise 0
+//   In promise 1
+//   After promise 1
+//   In promise 2
+//   After promise 2
+```
+
+- Now that we know how to use a promise to execute asynchronously, we need to be able to set the state to "fulfilled" when things complete correctly, or to "rejected" when an error happens. The promise executor function takes two functions as parameters, "resolve" and "reject". Calling "resolve" sets the promise to the "rejected" state.
+
+- Consider the following "coin toss" promise that waits ten seconds and then has a fifty percent chance of resolving or rejecting:
+
+```
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      resolve('success');
+    } else {
+      reject('error');
+    }
+  }, 10000);
+});
+```
+
+- If you log the coinToss promise object to the console immediately after calling the constructor, it will display that it is in the "pending" state:
+
+```
+console.log(coinToss);
+// OUTPUT: Promise {<pending>}
+```
+
+- If you wait ten seconds and then log the coinToss promise object again, the state will either show as "fulfilled" or "rejected" depending upon the way the coin landed:
+
+```
+console.log(coinToss);
+// OUTPUT: Promise {<fulfilled>}
+```
+
+- With the ability to asynchronously execute and set the resulting state, we now need a way to generically do something with the result of a promise after it resolves. This is done with functionality similar to exception handling. The promise object has three functions: "then", "catch", and "finally". The "then" function is called if the promise is fulfilled, the "catch" is called if the promise is "rejected", and "finally" is always called after all the processing is completed.
+
+- We can rework our coinToss example and make it so 10 percent of the time the coin falls off the table and resolves to the rejected state. Otherwise the promise resolves to fulfilled with a result of either "heads" or "tails"
+
+```
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.1) {
+      resolve(Math.random() > 0.5 ? 'heads' : 'tails');
+    } else {
+      reject('fell off table');
+    }
+  }, 10000);
+});
+```
+
+We then chain the "then", "catch", and "finally" functions to the coinToss object in order to handle each of the possible results:
+
+```
+coinToss
+  .then((result) => console.log(`Coin toss result: ${result}`))
+  .catch((err) => console.log(`Error: ${err}`))
+  .finally(() => console.log('Toss completed'));
+
+// OUTPUT:
+//    Coin toss result: tails
+//    Toss completed
+```
+
+## Javascript Async/Await
+
