@@ -1734,6 +1734,37 @@ labeler('fish');
 ```
 ## Javascript Arrow Functions
 
+- Because functions are first order objects in JS, they can be declared anywhere and passed as parameters. This results in code with lots of anonymous functions cluttering thins up. To make code more compact, the arrow syntax was created. This replaces the need for the function keyword with the symbols "=>" placed right after the parameter declaration. This is a function that takes no parameters and always returns 3:
+
+- () => 3;
+
+The follwoing shows two sort functions are equivalent. You need add this compare function to sort to specify that we are sorting numbers, not strings:
+
+
+```javascript
+const a = [1, 2, 3, 4];
+
+// standard function syntax
+a.sort(function (v1, v2) {
+  return v1 - v2;
+});
+
+// arrow function syntax
+a.sort((v1, v2) => v1 - v2);
+
+```javascript
+const a = [1, 2, 3, 4];
+
+// standard function syntax
+a.sort(function (v1, v2) {
+  return v1 - v2;
+});
+
+// arrow function syntax
+a.sort((v1, v2) => v1 - v2);
+```
+
+- 
 
 
 
