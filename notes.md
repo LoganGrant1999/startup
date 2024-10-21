@@ -1209,8 +1209,301 @@ console.count('b');
 // OUTPUT: b: 1
 ```
 
+## Adding Javascript to HTML
+
+- You can insert Javascript into HTML either by directly including it in the HTML code within a "script" element, or by using the "src" attribute of the script element to reference an external Javascript file. 
+
+- index.js
+
+```javascript
+function sayHello() {
+  console.log('hello');
+}
+```
+
+- index.html
+
+```html
+<head>
+  <script src="index.js"></script>
+</head>
+<body>
+  <button onclick="sayHello()">Say Hello</button>
+  <button onclick="sayGoodbye()">Say Goodbye</button>
+  <script>
+    function sayGoodbye() {
+      alert('Goodbye');
+    }
+  </script>
+</body>
+```
+
+- notice that we call the sayHello and sayGoodby js functions from the HTML in the "onclick" attribute of the button element. Special attributes like "onclick" automatically create event listeners for different DOM events that call the code contained in the attribute's value. The code specified by the attribute value can be a simple call to a function or any JS code
+
+```html
+<button onclick="let i=1;i++;console.log(i)">press me</button>
+<!-- OUTPUT: 2 -->
+```
+
+- best practice is to place the script tag with the source at the end of the "body" element
+
+## Javascript Type and Construct
+
+- Variables are declared using either "let" or "const". "let" allows you to change the value of the variable while "const" will cause an error if you attempt to change it. 
+
+```javascript
+let x = 1;
+
+const y = 2;
+```
 
 
+- These are the different primitive types in JS
+
+| Type      | Meaning                                            |
+|-----------|----------------------------------------------------|
+| Null      | The type of a variable that has not been assigned a value. |
+| Undefined | The type of a variable that has not been defined.   |
+| Boolean   | true or false.                                     |
+| Number    | A 64-bit signed number.                            |
+| BigInt    | A number of arbitrary magnitude.                   |
+| String    | A textual sequence of characters.                  |
+| Symbol    | A unique value.                                    |
+
+
+- Boolean, Number (which is floats and ints), and string are most commonly used to create a variable.  You can also have variables refer to Null or Undefined primitive. Because JS doesn't enforce the delcaration of a variable before using it, it is posible to have a variable of type undefined.
+
+- In addition to primitives, here are Javascript object types:
+
+| Type     | Use                                                                 | Example                      |
+|----------|---------------------------------------------------------------------|------------------------------|
+| Object   | A collection of properties represented by name-value pairs. Values can be of any type. | {a:3, b:'fish'}              |
+| Function | An object that has the ability to be called.                        | function a() {}              |
+| Date     | Calendar dates and times.                                           | new Date('1995-12-17')       |
+| Array    | An ordered sequence of any type.                                    | [3, 'fish']                  |
+| Map      | A collection of key-value pairs that support efficient lookups.     | new Map()                    |
+| JSON     | A lightweight data-interchange format used to share information across programs. | {"a":3, "b":"fish"}          |
+
+
+- When dealing with a number variable, JS supports standard math operators like +, -, *, /, and ==. For strings, JS supports + (concaconate) and === (equality. Yes, three equal signs)
+
+- JS is weakly typed. This means that a variable always has a type, but the variable can change type when it is assigned a new value, or that types can be  automatically converted based upon the context that they are used in. Sometimes the results of automatic conversions can be uneexpected from programmers whho are used to strong typed languages:
+
+
+```javascript
+2 + '3';
+// OUTPUT: '23'
+// Explanation: The `+` operator between a number (2) and a string ('3') results in type coercion. The number 2 is converted to the string '2', and the strings are concatenated. 
+// Result: '23'
+
+2 * '3';
+// OUTPUT: 6
+// Explanation: The `*` operator between a number (2) and a string ('3') coerces the string '3' into the number 3. The result is the multiplication 2 * 3, which is 6.
+
+[2] + [3];
+// OUTPUT: '23'
+// Explanation: When the `+` operator is used with arrays, the arrays are coerced into their string representations. `[2]` becomes '2' and `[3]` becomes '3'. The result is string concatenation, resulting in '23'.
+
+true + null;
+// OUTPUT: 1
+// Explanation: Both `true` and `null` are coerced to numbers in arithmetic operations. `true` becomes 1, and `null` becomes 0. The result is 1 + 0, which equals 1.
+
+true + undefined;
+// OUTPUT: NaN
+// Explanation: `true` is coerced to 1, but `undefined` cannot be coerced into a meaningful number, resulting in NaN (Not a Number). Therefore, the result is 1 + NaN, which is NaN.
+```
+
+- Getting unexpected results is especially common when dealing with the equality operator
+
+```javascript
+1 == '1';
+// OUTPUT: true
+// Explanation: JavaScript performs type coercion with `==`. The string '1' is converted to the number 1, 
+// so 1 == 1, resulting in true.
+
+null == undefined;
+// OUTPUT: true
+// Explanation: `null` and `undefined` are considered loosely equal in JavaScript when using `==`, so the comparison evaluates to true.
+
+'' == false;
+// OUTPUT: true
+// Explanation: JavaScript coerces both '' (empty string) and false to 0, so 0 == 0, which results in true.
+```
+
+- The unexpected results happen in JS because it uses complex rules for defining equality that depend on the conversion of a type to a boolean value. It uses strict equality (===) and inequality (!===) operators to get around this. They don't do type conversion and just compute exact equality:
+
+```javascript
+1 === '1';
+// OUTPUT: false
+
+null === undefined;
+// OUTPUT: false
+
+'' === false;
+// OUTPUT: false
+``` 
+
+- Almost always use strict equality
+
+- JS includes if, else and if else statements:
+
+```javascript
+if (a === 1) {
+  //...
+} else if (b === 2) {
+  //...
+} else {
+  //...
+}
+```
+
+- There is also a ternary operator that compacts the if-else representation:
+
+```javascript
+// The ternary operator is a compact form of an if-else statement.
+// Syntax: condition ? expressionIfTrue : expressionIfFalse;
+
+a === 1 ? console.log(1) : console.log('not 1');
+// Explanation:
+// If a is equal to 1, console.log(1) will execute.
+// Otherwise, console.log('not 1') will execute.
+```
+
+- You can use boolean operations in the expression to create complex predicates. Boolean operators include &&(and), || (or), and !(not)
+
+```javascript
+if (true && (!false || true)) {
+  //...
+}
+
+// Explanation:
+// This is a logical condition combining AND (&&) and OR (||) operators with a negation (!).
+
+// Breaking it down:
+// 1. (!false || true):
+//    - !false becomes true.
+//    - So, the condition becomes (true || true), which evaluates to true.
+
+// 2. true && true:
+//    - The first part is true, and the result from step 1 is also true.
+//    - Since both parts of the AND (&&) condition are true, the entire expression evaluates to true.
+
+// This means the code inside the if block will be executed because the condition is true.
+```
+
+- JS supports many common loop constructs. This includes for, for in, for of, while, do while, and switch.
+
+- for loop:
+
+```javascript
+for (let i = 0; i < 2; i++) {
+  console.log(i);
+}
+// OUTPUT: 0 1
+```
+
+- do while loop
+
+```javascript
+// The `do` statement will always run at least once.
+// The `while` statement checks the condition after the `do` block has been executed.
+// If the `while` condition is not met (evaluates to false), the loop will stop.
+// If the `while` condition is met (evaluates to true), the loop will continue to execute the `do` block until the condition becomes false.
+
+let i = 0;
+do {
+  console.log(i);
+  i++;
+} while (i < 2);
+// OUTPUT: 0 1
+```
+
+```javascript
+let i = 0;
+while (i < 2) {
+  console.log(i);
+  i++;
+}
+// OUTPUT: 0 1
+
+// Explanation:
+// This is a traditional while loop.
+// The condition (i < 2) is checked before each iteration.
+// If the condition is true, the code inside the block is executed.
+// The loop stops as soon as the condition becomes false.
+// In this case, the loop runs twice (for i = 0 and i = 1) and then stops when i equals 2.
+```
+
+- for in statements iterate over an object's property names
+
+```javascript
+const obj = { a: 1, b: 'fish' };
+for (const name in obj) {
+  console.log(name);
+}
+// OUTPUT: a
+// OUTPUT: b
+
+// Explanation:
+// The `for...in` loop iterates over all the enumerable properties of the `obj` object.
+// In each iteration, the variable `name` holds the name of a key (property) in the object.
+// For this object, the keys are 'a' and 'b', which are printed as output.
+```
+
+- For arrays, the objects' name is the array index:
+
+```javascript
+const arr = ['a', 'b'];
+for (const name in arr) {
+  console.log(name);
+}
+// OUTPUT: 0
+// OUTPUT: 1
+
+// Explanation:
+// The `for...in` loop iterates over the enumerable properties of an array.
+// For an array, the enumerable properties are the indexes (0, 1, etc.).
+// In this case, `name` holds the index of the current element in each iteration.
+// Therefore, the loop outputs the indexes: 0 and 1.
+```
+
+- If you want the values, use a for of statement for arrays, maps, sets, etc:
+
+```javascript
+const arr = ['a', 'b'];
+for (const val of arr) {
+  console.log(val);
+}
+// OUTPUT: 'a'
+// OUTPUT: 'b'
+
+// Explanation:
+// The `for...of` loop iterates over the values of the array directly.
+// In each iteration, `val` holds the current element in the array.
+// Therefore, the loop outputs the values: 'a' and 'b'.
+```
+
+- All of the looping constructs allow either break or continue statements to abort or abandon the loop
+
+```javascript
+let i = 0;
+while (true) {
+  console.log(i);
+  if (i === 0) {
+    i++;
+    continue;
+  } else {
+    break;
+  }
+}
+
+// OUTPUT: 0 1
+
+// Explanation:
+// - The `while (true)` loop creates an infinite loop, but it's controlled by the `break` statement.
+// - On the first iteration, `i` is 0, so the loop logs 0, increments `i`, and uses `continue` to skip the rest of the iteration.
+// - On the second iteration, `i` is 1, so the loop logs 1 and then breaks, ending the loop.
+```
 
 
 
