@@ -3153,7 +3153,7 @@ console.log(x);
 
 # Midterm Study guide and notes
 
-- 1. What does the link element do in HTML?
+1. What does the link element do in HTML?
 
     - The ```<link>``` element is used to define the relationship between the HTML doc and external sources like CSS files:
 
