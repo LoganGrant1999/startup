@@ -3843,3 +3843,30 @@ These methods provide flexibility depending on how the element is structured and
 These are various ways to work with Promises in JavaScript, each with different outcomes depending on how you handle the resolve and reject cases.
 
 
+## Web Frameworks (REACT)
+
+### Web Frameworks
+- Web frameworks make the job of writing web apps easier by providing tools for completing common app tasks. This includes things like modularizing code, creating single page applications, simplifying reactivity, and supporting diverse hardware devices
+- Some frameworks combine things like HTML and JS into a single file. Abstracting away core web file formats puts the focus on functional components rather than files
+- React combines JS and HTML into its component format. CSS must be declared outside of the JSX file. The component itself leverages the functionality of JS and can be represented as a function or class
+JSX
+JSX
+
+```
+import 'hello.css';
+
+const Hello = () => {
+  let name = 'world';
+
+  return <p>Hello {name}</p>;
+};
+```
+
+CSS
+
+```
+p {
+  color: green;
+}
+```
+
