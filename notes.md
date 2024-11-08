@@ -3870,3 +3870,266 @@ p {
 }
 ```
 
+### React
+- Name React comes from focus on making reactive web page components that automatically change with user interaction or changes in the underlying data
+- React abstracts HTML into a JS variant called JSX. JSX is converted into valid HTML and JS using a preprocessor called Babel. Notice this mixes both HTML and JS into a single representation:
+
+```
+const i = 3;
+const list = (
+  <ol class='big'>
+    <li>Item {i}</li>
+    <li>Item {3 + i}</li>
+  </ol>
+);
+```
+- Babel will convert that into valid JS:
+
+```
+const i = 3;
+const list = React.createElement(
+  'ol',
+  { class: 'big' },
+  React.createElement('li', null, 'Item ', i),
+  React.createElement('li', null, 'Item ', 3 + i)
+);
+```
+
+- The React.createElement function will then generate DOM elements and monitor the data they represent for changes. When a change is discovered, React will trigger dependent changes
+
+### Components
+- React components allow you to modularize the functionality of your app. This allows the underlying code to directly represent the components that a user interacts with. It also enables code reuse as common application components often show up repeatedly.
+- One of the primary purposes of a component is to generate the user interface. This is done with the component's render function. Whatever is returned from the render function is inserted into the component HTML element. 
+- As a simple example, a JSX file containing a React component element named Demo would casue React to load the Demo component, call the render function, and inser the result into the place of the demo element
+```
+<div>
+  Component: <Demo />
+</div>
+```
+
+- Notice that Demo isn't a valid HTML element. The transpiler will replace this tag with the resulting rendered HTML.
+
+React Component:
+
+```
+function Demo() {
+  const who = 'world';
+  return <b>Hello {who}</b>;
+}
+```
+
+Resulting HTML:
+
+```
+<div>Component: <b>Hello world</b></div>
+```
+
+- React components also allow you to pass info to them in the form of element properties. The component receives the porperties in its constructor and then can display them when it renders
+
+JSX
+
+```
+<div>Component: <Demo who="Walke" /><div>
+```
+
+React Component:
+
+```
+function Demo(props) {
+  return <b>Hello {props.who}</b>;
+}
+```
+
+Resulting HTML:
+
+```
+<div>Component: <b>Hello Walke</b></div>
+```
+
+- In addition to properties, a component can have an internal state. Component state is created by calling the React.useState hook function. The useState function returns a variable that contains the current state and a function to update the state. The following example creates a state variable called clicked and toggles the click state in the updateClicked function that gets called when the paragraph text is clicked
+
+```
+const Clicker = () => {
+  const [clicked, updateClicked] = React.useState(false);
+
+  const onClicked = (e) => {
+    updateClicked(!clicked);
+  };
+
+  return <p onClick={(e) => onClicked(e)}>clicked: {`${clicked}`}</p>;
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clicker />);
+```
+
+- You should note that you can use JSX even without a function. A simple variable representing JSX will work anyplace you would otherwise provide a component
+
+```
+const hello = <div>Hello</div>
+
+ReactDOM.render(hello, document.getElementById('root'));
+```
+
+- In addition to the preferred function style components demonstrated above, React also supports class style components. However, you should note that the React team is moving away from the class style representation, and for that reason you should probably not use it. With that said, you are likely to see class style components and so you should be aware of the syntax. Below is the equivalent class style component for the Clicker component that we created above. The major difference is that properties are loaded on the constructor and state is set using a setState function on the component object:
+
+```
+class Clicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: false,
+    };
+  }
+  onClicked() {
+    this.setState({
+      clicked: !this.state.clicked,
+    });
+  }
+  render() {
+    return <p onClick={(e) => this.onClicked(e)}>clicked: {`${this.state.clicked}`}</p>;
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clicker />);
+```
+
+- A components properties and state are used by the React framework to determine the reactivity of the interface. Reactivity controls how a component reacts to actions taken by the user or that happen within the app. Whenever a component's state or properties change, the render function for the component and all of its dependent component render functions are called
+
+- As web programming becomes more complex, we needed a tool chain. Here are some common functional peices in a web app toolchain:
+  - Code repository - Stores code in a shared, versioned location.
+  - Linter - Removes, or warns of, non-idiomatic code usage.
+  - Prettier - Formats code according to a shared standard.
+  - Transpiler - Compiles code into a different format. For example, from JSX to JavaScript,  TypeScript to JavaScript, or SCSS to CSS.
+  - Polyfill - Generates backward compatible code for supporting old browser versions that do not support the latest standards.
+  - Bundler - Packages code into bundles for delivery to the browser. This enables compatibility (for example with ES6 module support), or performance (with lazy loading).
+  - Minifier - Removes whitespace and renames variables in order to make code smaller and more efficient to deploy.
+  - Testing - Automated tests at multiple levels to ensure correctness.
+  - Deployment - Automated packaging and delivery of code from the development environment to the production environment.
+
+### Router
+- A web framework router provides essential functionality for single-page web apps. With a multiple webpage app the headers, footers, nav, and common components must be either duplicated in each HTML page or injected before the server sends the page to the browser. WIth a single page app, the browser only loads one HTML page and then JS is used to manipulate the DOM and give it the appearance of multiple pages. The router defines the routes a user can take through the application, and automatically manipulates the DOM to display the appropriate framework components.
+
+- React doesn't have a stander router package, and there are many to choose from. We'll use react-router-dom Version 6. The simplified routing functionality of React-router-dom derives from the project react-router for its core functionality. 
+
+- A basic implementation of the router consists of a BrowserRouter component that encapsulates the entire application and controls the routing action. The Link, or NavLink, component captures userr navigation events and modifies what is rendered by the Routes component by matching up the to and path attributes
+
+```
+// Inject the router into the application root DOM element
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // BrowserRouter component that controls what is rendered
+  // NavLink component captures user navigation requests
+  // Routes component defines what component is routed to
+  <BrowserRouter>
+    <div className='app'>
+      <nav>
+        <NavLink to='/'>Home</Link>
+        <NavLink to='/about'>About</Link>
+        <NavLink to='/users'>Users</Link>
+      </nav>
+
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/about' element={<About />} />
+          <Route path='/users' element={<Users />} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </main>
+    </div>
+  </BrowserRouter>
+);
+```
+
+### Reactivity
+- Making the UI react to changes in user input or data is one of the architectural foundations of React. React enbales reactivity with three major pieces of a React component: props, state, and render
+
+- When a component's JSX is rendered, React parses the JSX and creates a list of any references to the component's state or prop objects. React then monitors those objects and if it detects that they have changed it will call the component's render function so that the impact of the change is visualized. 
+
+- The following example contains 2 components: a parent <Survey/> component and a child <Question/> component. The Survey has a state named color. The Question has a property named answer. The Survey passes its color state to the Question as a property. This means that any change to the Survey's color will also be reflected in the Question's color. This is a powerful means for a parent to control a child's functionality.
+
+- Be careful about your assumptions of when state is updated. Just because you called updateState doesn't mean that you can access the updated state on the next line of code. The update happens async, therefore you don't know when it will actually happen. You only know that it will
+
+```
+const Survey = () => {
+  const [color, updateColor] = React.useState('#737AB0');
+
+  // When the color changes update the state
+  const onChange = (e) => {
+    updateColor(e.target.value);
+  };
+
+  return (
+    <div>
+      <h1>Survey</h1>
+
+      {/* Pass the Survey color  as a parameter to the Question.
+          When the color changes the Question parameter will also be updated and rendered. */}
+      <Question answer={color} />
+
+      <p>
+        <span>Pick a color: </span>
+        {/* Set the Survey color state as a the value of the color picker.
+            When the color changes, the value will also be updated and rendered. */}
+        <input type='color' onChange={(e) => onChange(e)} value={color} />
+      </p>
+    </div>
+  );
+};
+
+// The Question component
+const Question = ({ answer }) => {
+  return (
+    <div>
+      {/* Answer rerendered whenever the parameter changes */}
+      <p>Your answer: {answer}</p>
+    </div>
+  );
+};
+
+ReactDOM.render(<Survey />, document.getElementById('root'));
+☑ Assignment
+Create a fork of this CodePen and experiment. Try changing the input from using the color and radio button, to using an edit box that reactively displays the text as you type.
+
+When you are done submit your CodePen URL to the Canvas assignment.
+
+Don't forget to update your GitHub startup repository notes.md with all of the things you learned and want to remember.
+
+🧧 Possible solution
+If you get stuck here is a possible solution.
+
+const Survey = () => {
+  const [text, updateText] = React.useState('');
+
+  const onChange = (e) => {
+    updateText(e.target.value);
+  };
+  return (
+    <div>
+      <h1>Survey</h1>
+      <Question answer={text} />
+
+      <p>
+        <span>Type some text: </span>
+        <input
+          type='text'
+          onChange={(e) => onChange(e)}
+          placeholder='type here'
+        />
+      </p>
+    </div>
+  );
+};
+
+const Question = ({ answer }) => {
+  return (
+    <div>
+      <p>You typed: {answer}</p>
+    </div>
+  );
+};
+```
+
+
