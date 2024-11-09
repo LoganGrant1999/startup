@@ -5,9 +5,9 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
 
 ## Design Sketches
 **Sign In Page**
-![Sign-in Page](./Images/sign-in.png)
+![Sign-in Page](sign-in.png)
 **Vote Page**
-![Vote Page](./Images/vote-page.png)
+![Vote Page](vote-page.png)
 
 ## Key Features
 - Secure login over HTTPS
