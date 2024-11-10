@@ -1,20 +1,3 @@
-body {
-  background-color: #2C2C2E;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-width: 375px;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-html{
-  height: 100%;
-  margin: 0;
-  background-color: #212529;
-}
-
 h1 {
   color: #D1D1D1;
   margin: 0;
@@ -23,16 +6,6 @@ h1 {
 
 h3 {
   border-bottom: solid #E5E5E5;
-}
-
-header {
-  flex: 0 55px;
-  color: #E5E5E5;
-  background-color: #0A0A23;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
 }
 
 .streak {
@@ -61,43 +34,6 @@ main {
   align-items: center;
 }
 
-menu {
-  display: flex;
-  flex-direction: row !important;
-  list-style: none;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-}
-
-nav {
-  display: flex;
-  order: 1;
-}
-
-nav a {
-  color: #0DCAF0;
-}
-
-a.nav-link-active {
-  color:#D1D1D1;
-}
-
-nav a:hover{
-  font-weight: bolder;
-}
-
-footer {
-  flex-shrink: 0;
-  background-color: #0A0A23;
-}
-
-footer a {
-  float: right;
-}
-
-
-
 .image-box {
   margin-bottom: 1em;
   padding: 0.5em;
@@ -124,12 +60,6 @@ footer a {
 }
 
 @media (max-height: 600px) {
-  header {
-    display: none;
-  }
-  footer {
-    display: none;
-  }
   main {
     flex: 1 100vh;
   }

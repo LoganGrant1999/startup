@@ -29,12 +29,10 @@ h1 {
 }
 
 nav {
-  margin-left: auto; /* Pushes nav to the right */
+  margin-left: auto;
   display: flex;
   gap: 20px;
 }
-
-
 
 nav a:hover{
   font-weight: bolder;
