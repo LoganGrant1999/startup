@@ -12,6 +12,18 @@ h3 {
   font-weight: bolder;
 }
 
+.list-text {
+  padding-right: 5px;
+  list-style-type: none;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.history {
+  border-radius: 25px;
+  background-color: #0DCAF0 !important;
+}
+
 .email {
   font-weight: bolder;
 }

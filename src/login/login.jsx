@@ -1,5 +1,6 @@
 import React from 'react';
 import './login.css';
+import { Link } from 'react-router-dom';
 
 export function Login() {
   return (
@@ -9,7 +10,8 @@ export function Login() {
       <div>
         <h1>Welcome to FanVote</h1>
       </div>
-      <form method="get" action="predictions.html">
+      
+      <form>
 
         <div class="input-group mb-3">
           <span class="input-group-text">@</span>
@@ -21,11 +23,16 @@ export function Login() {
           <input class="form-control" type="password" placeholder="password" />
         </div>
 
-        <button type="submit" className="btn btn-primary me-2" id="login-button">Login</button>
-        <button type="submit" className="btn btn-secondary" id="create-button">Create</button>
+        <Link to="/predictions">
+          <button type="submit" className="btn btn-primary me-2" id="login-button">Login</button>
+        </Link>
 
+        <Link to="/predictions">
+          <button type="submit" className="btn btn-secondary" id="create-button">Create</button>
+        </Link>
 
       </form>
+
     </div>
 
     <p>

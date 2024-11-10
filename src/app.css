@@ -42,7 +42,7 @@ main {
   font-style:sans-serif;
   color: #E5E5E5 !important;
   background-color: #2C2C2E !important;
-  flex: 1 calc(100vh - 110px);
+  flex: 1;
   min-height: calc(100vh - 110px);
   display: flex;
   flex-direction: column;
