@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Predictions() {
   return (
-    <main className="container-fluid bg-secondary text-center">
+    <main>
       <div>Predictions page displayed here</div>
     </main>
   );
