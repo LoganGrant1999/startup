@@ -46,7 +46,7 @@ div.user-and-leaderboard {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 10px;
+  padding-top: 15px;
   width: 100%;
   text-align: center;
 }
