@@ -3,10 +3,16 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Predictions } from './predictions/predictions';
 import { Account } from './account/account';
+import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
-export default function App() {
+
+function App() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
       <div className="body">
@@ -16,14 +22,22 @@ export default function App() {
             <div className="navbar-brand"></div>
             <menu className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">Home</NavLink>
+                <NavLink className="nav-link" to=''>Home</NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/predictions">Predictions</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/account">My Account</NavLink>
-              </li>
+              {authState === AuthState.Authenticated && (
+                <li className='nav-item'>
+                  <NavLink className='nav-link' to='predictions'>
+                    Predictions
+                  </NavLink>
+                </li>
+              )}
+               {authState === AuthState.Authenticated && (
+                <li className='nav-item'>
+                  <NavLink className='nav-link' to='account'>
+                    Account
+                  </NavLink>
+                </li>
+              )}
             </menu>
           </nav>
           <hr />
@@ -31,8 +45,21 @@ export default function App() {
         
         <main>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/predictions" element={<Predictions />} />
+          <Route
+            path='/'
+            element={
+              <Login
+                userName={userName}
+                authState={authState}
+                onAuthChange={(userName, authState) => {
+                  setAuthState(authState);
+                  setUserName(userName);
+                }}
+              />
+            }
+            exact
+          />
+            <Route path='/predictions' element={<Predictions userName={userName} />} />
             <Route path="/account" element={<Account />} />
           </Routes>
         </main>
@@ -51,3 +78,5 @@ export default function App() {
 function NotFound() {
   return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }
+
+export default App;

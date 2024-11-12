@@ -68,6 +68,44 @@ footer a {
   float: right;
 }
 
+
+main.logger {
+  background-color: #2C2C2E !important; 
+  color: #f8f8f2 !important; 
+  min-height: calc(100vh - 110px);
+  padding: 5px; 
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 110px);
+}
+
+
+.button-group {
+  display: flex;
+  margin-top: 5px; 
+  justify-content: center; 
+  gap: 10px;
+
+}
+
+.description {
+  padding-top: 40px;
+}
+
+
+.login-screen {
+  max-width: 400px; /* Adjust as needed */
+  margin: 0 auto; /* Centers the form */
+  padding: 1em;
+  text-align: center;
+}
+
+
+
+
+
 @media (max-height: 600px) {
   header {
     display: none;
@@ -79,3 +117,5 @@ footer a {
     flex: 1 100vh;
   }
 }
+
+
