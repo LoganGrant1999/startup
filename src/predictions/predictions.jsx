@@ -1,13 +1,16 @@
 import React from 'react';
 import './predict.css';
+import {GameCard} from "./gameCard";
+
 
 export function Predictions() {
+  const userName = localStorage.getItem("userName") || "No UserName Saved";
   return (
     <div className='body'>
       <main>
         <div className="user-and-leaderboard">
           <div className="user">
-            <h3>Player: Current User</h3>
+            <h3>Player: {userName}</h3>
             <div>
               <label htmlFor="count">Prediction Streak:</label>
               <input type="text" id="count" value="--" readOnly />
@@ -27,26 +30,10 @@ export function Predictions() {
         <h1 className="upcoming">Upcoming Games</h1>
 
         <div className="container">
-          <div className="card">
-            <form>
-              <input type="radio" id="selection1" name="game1" value="BYU" />
-              <label htmlFor="selection1">BYU</label>
-              <br /><br />
-
-              {/* Placeholder for calling to 3rd-party sports game API */}
-              <img src="byu-vs-baylor.png" alt="BYU versus Baylor matchup" />
-              <br /><br />
-            </form>
-
-            <form>
-              <input type="radio" id="selection2" name="game1" value="Baylor" />
-              <label htmlFor="selection2">Baylor</label>
-              <br /><br />
-
-              <input type="button" value="Submit Choice" />
-            </form>
-          </div>
-
+          <GameCard team1="BYU" team2="Baylor"/>
+          {/* <GameCard team1="Knicks" team2="Hornets"/>
+          <GameCard team1="Bengals" team2="Panthers"/>
+          <GameCard team1= "Royals" team2="Braves"/> */}
           <div className="card">
             <form>
               <input type="radio" id="selection3" name="game2" value="Knicks" />
