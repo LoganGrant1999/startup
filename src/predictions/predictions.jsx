@@ -13,12 +13,13 @@ export function Predictions() {
             <h3>Player: {userName}</h3>
           </div>
 
+          {/* Placeholders for websocket display of live user votes*/}
           <div className="leaderboard" id="leaderboard-color">
-            <h3 className="leader-title">Leaderboard</h3>
+            <h3 className="leader-title">Recent Votes:</h3>
             <ul className="scores">
-              <li className="user-name">- Kelly has predicted 6 in a row!</li>
-              <li className="user-name">- Chris has predicted 4 in a row!</li>
-              <li className="user-name">- Jake has predicted 3 in a row!</li>
+              <li className="user-name">- Kelly predicted the Bengals will win!</li>
+              <li className="user-name">- Chris predicted the Braves will win!</li>
+              <li className="user-name">- Jake predicted the Cougars will win!</li>
             </ul>
           </div>
         </div>

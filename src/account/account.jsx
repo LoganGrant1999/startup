@@ -7,7 +7,7 @@ export function Account() {
   return (
     <main>
 
-      <h1 className="streak">Your current prediction streak is at 4!</h1>
+      <h1 className="streak">You've made 5 game predictions!</h1>
       <p><span className="email">Account Email:</span> logan@fanvote.click</p>
 
       <h3>Voter History:</h3>
@@ -16,23 +16,23 @@ export function Account() {
       <ul className='history'>
 
         <li className="list-text">
-          - You correctly predicted the Saints would beat the Cowboys!
+          - You predicted the Saints would beat the Cowboys!
         </li>
 
         <li className="list-text">
-          - You correctly predicted the Gamecocks would beat the Wildcats!
+          - You predicted the Gamecocks would beat the Wildcats!
         </li>
 
         <li className="list-text">
-          - You correctly predicted the Braves would beat the Royals!
+          - You predicted the Braves would beat the Royals!
         </li>
 
         <li className="list-text">
-          - You correctly predicted the Saints would beat the Cowboys!
+          - You predicted the Saints would beat the Cowboys!
         </li>
 
         <li className="list-text">
-          - You incorrectly predicted the Tigers would beat the Irish!
+          - You predicted the Tigers would beat the Irish!
         </li>
 
       </ul>
