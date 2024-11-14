@@ -45,11 +45,12 @@ menu {
 div.user-and-leaderboard {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 15px;
   width: 100%;
   text-align: center;
 }
+
 
 div.leaderboard {
   background-color: #0DCAF0 !important;
@@ -70,6 +71,8 @@ div.leaderboard {
 
 .user {
   padding-right: 5px;
+  align-items: center;
+  display: flex;
 }
 
 .user-name {
