@@ -56,6 +56,7 @@ div.leaderboard {
   background-color: #0DCAF0 !important;
   text-align: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   padding: 10px;
@@ -127,8 +128,28 @@ footer a {
   border: 5px solid #E5E5E5;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 768px) {
   main {
     flex: 1 100vh;
   }
-}
+
+    .user-and-leaderboard {
+      flex-direction: row;
+    }
+  
+    .user, .leaderboard {
+      flex-basis: 50%;
+      max-width: 50%;
+      text-align: center;
+    }
+
+    .user {
+      padding-left: 10px;
+      text-align: center;
+    }
+
+    .leaderboard{
+      margin-right: 10px;
+    }
+  }
+  
