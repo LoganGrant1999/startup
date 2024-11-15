@@ -5,11 +5,20 @@ h1 {
 }
 
 h3 {
-  border-bottom: solid #E5E5E5;
+  border-bottom: solid #ffff;
+  margin: 0;
+  padding: 0;
 }
 
 p {
   text-align: center;
+}
+
+table {
+  background-color: #0DCAF0;
+  color: #ffff;
+  font-weight: bolder;
+  border-radius:2%;
 }
 
 .streak {
@@ -86,7 +95,6 @@ main {
 .history .list-text {
   text-align: center;
 }
-
 
 @media (max-height: 600px) {
   main {

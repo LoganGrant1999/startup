@@ -28,7 +28,7 @@ export function Predictions() {
 
         <div className="container">
           {/* Placeholders for calling to 3rd-party sports game API */}
-          <GameCard team1="BYU" team2="Baylor" upcoming_game='byu-vs-baylor.png'/>
+          <GameCard team1="BYU Cougars" team2="Baylor Bears" upcoming_game='byu-vs-baylor.png'/>
           <GameCard team1="Knicks" team2="Hornets" upcoming_game='knicks-vs-hornets.png'/>
           <GameCard team1="Bengals" team2="Panthers" upcoming_game='bengals-vs-panthers.png'/>
           <GameCard team1= "Royals" team2="Braves" upcoming_game='royals-vs-braves.png'/>

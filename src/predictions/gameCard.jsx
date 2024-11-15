@@ -26,9 +26,7 @@ export function GameCard(props) {
                 pick: prediction,
                 loser: loser
             });
-            if (votes.length > 4) {
-               votes.length = 4
-              }
+
           
         localStorage.setItem("votes", JSON.stringify(votes));
         setVoted(true);

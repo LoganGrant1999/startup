@@ -11,7 +11,7 @@ export function Account() {
       const votesText = localStorage.getItem('votes')
       if (votesText) {
         const storeVotes = JSON.parse(votesText);
-        setVotes(storeVotes.slice(0,5));
+        setVotes(storeVotes.slice(-5).reverse());
       }
     }
 
@@ -22,7 +22,7 @@ export function Account() {
     return (
     <main>
 
-      <h1 className="streak">You've made 5 game predictions!</h1>
+      <h1 className="streak">You've made {votes.length} game predictions!</h1>
       <p><span className="email">Account Email:</span> logan@fanvote.click</p>
 
       <h3>Voter History:</h3>
@@ -31,11 +31,6 @@ export function Account() {
 
       <table>
         <thead>
-          <tr>
-            <th>
-              Your Vote History: 
-            </th>
-          </tr>
         </thead>
         <tbody>
           {votes.length > 0 ? (
