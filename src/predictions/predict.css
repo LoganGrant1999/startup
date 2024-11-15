@@ -13,14 +13,14 @@ h1 {
   color: #D1D1D1;
   margin: 0;
   order: 0;
+  border-bottom: #E5E5E5;
 }
 
 h1.upcoming {
   color: #D1D1D1;
-  border-bottom: solid #E5E5E5;
   text-align: center;
   padding-top: 15px;
-
+  border-bottom:2px #E5E5E5 solid;
 }
 
 main {
@@ -52,18 +52,20 @@ div.user-and-leaderboard {
 }
 
 
-div.leaderboard {
+
+.leaderboard {
+  flex: 1;
   background-color: #0DCAF0 !important;
   text-align: center;
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   padding: 10px;
   border-radius: 25px;
-  color:white;
+  color: white;
   font-weight: bolder;
 }
+
 
 .scores {
   background-color: #0DCAF0 !important;
@@ -73,9 +75,13 @@ div.leaderboard {
 }
 
 .user {
-  padding-right: 5px;
-  align-items: center;
-  display: flex;
+  .user {
+    flex: none;
+    width: auto;
+    padding-right: 5px;
+    align-items: center;
+    display: flex;
+  }
 }
 
 .user-name {
@@ -95,8 +101,13 @@ div.leaderboard ul {
 
 h3.leader-title {
   text-align: center;
-  border-bottom: solid #E5E5E5;
 }
+
+.user h3 {
+  margin: 0;
+  border: none;
+}
+
 
 footer {
   flex-shrink: 0;
@@ -145,11 +156,10 @@ footer a {
 
     .user {
       padding-left: 10px;
-      text-align: center;
     }
 
     .leaderboard{
       margin-right: 10px;
-    }
   }
+}
   
