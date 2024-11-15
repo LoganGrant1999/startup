@@ -62,3 +62,15 @@ For this deliverable I properly styled the application into its final appearance
 - [x] **Application Elements**: All application elements have good contrast and whitespace.
 - [x] **Application Text Content**: I used consistent fonts and text colors.
 - [x] **Application Immages**: All application images are responsively designed and have a border. They resize with the size of the window.
+
+# React Deliverable
+For this deliverable I used JavaScript and React so that the application completely works for a single user. I also added placeholders for future technology.
+
+- [x] **Bundled and Transpiled**: Done!
+- [x] **Components**: I created an app component, an account component, a login component, a predictions component, and index component, a gameCard component, and a voteRow component. 
+    - [x] **login**: When you press the login button it takes you to the predictions page
+    - [x] **database**: On the accounts component, I display a voting history of the user's 5 most recent predictions made. This is currently done through local storage but will be done through the database later. I also keep a tally of predictions made in the same way
+    - [x] **WebSocket**: My websocket is not currently a component. I have placeholder data in my  Recent votes box on m y predictions page
+    - [x] **Processing Votes**: I use local storage to save predictions users make on the site, making the predicting aspect of the application essentially functional. I also display a message saying "Vote submitted" whenever a user submits a prediction 
+- [x] **Router**: Routing between login and prediction and account components
+- [x] **Hooks**: I use UseState and UseEffect in my prediction and account components. UseState is used to keep track of whether or not a vote has been submitted and useEffect refreshes the vote history in localStorage each time a new prediction is made  
