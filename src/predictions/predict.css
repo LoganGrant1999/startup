@@ -63,7 +63,8 @@ div.user-and-leaderboard {
   padding: 10px;
   border-radius: 25px;
   color: white;
-  font-weight: bolder;
+  flex-shrink: 1;
+  max-width: 50%;
 }
 
 
@@ -74,15 +75,16 @@ div.user-and-leaderboard {
   width: 100%;
 }
 
+
 .user {
-  .user {
-    flex: none;
-    width: auto;
-    padding-right: 5px;
-    align-items: center;
-    display: flex;
-  }
+  flex: none;
+  width: auto;
+  padding-right: 5px;
+  align-items: center;
+  display: flex;
+  text-align: center;
 }
+
 
 .user-name {
   color: whitesmoke;
@@ -155,7 +157,12 @@ footer a {
     }
 
     .user {
-      padding-left: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: none;
+      width: auto;
+      padding-right: 5px;
     }
 
     .leaderboard{
