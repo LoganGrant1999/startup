@@ -11,7 +11,7 @@ export function Account() {
       const votesText = localStorage.getItem('votes')
       if (votesText) {
         const storeVotes = JSON.parse(votesText);
-        setVotes(storedVotes.slice(0,5));
+        setVotes(storeVotes.slice(0,5));
       }
     }
 
@@ -38,9 +38,9 @@ export function Account() {
           </tr>
         </thead>
         <tbody>
-          {votes.lenth > 0 ? (
-            votes.map((votes, index) => (
-              <VoteRow key={index} pick={pick} loser={loser}/>
+          {votes.length > 0 ? (
+            votes.map((vote, index) => (
+              <VoteRow key={index} vote={vote} />
 
             ))
           ) : (
