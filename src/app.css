@@ -68,7 +68,6 @@ footer a {
   float: right;
 }
 
-
 main.logger {
   background-color: #2C2C2E !important; 
   color: #f8f8f2 !important; 
@@ -80,7 +79,6 @@ main.logger {
   justify-content: center;
   min-height: calc(100vh - 110px);
 }
-
 
 .button-group {
   display: flex;
@@ -94,17 +92,12 @@ main.logger {
   padding-top: 40px;
 }
 
-
 .login-screen {
-  max-width: 400px; /* Adjust as needed */
-  margin: 0 auto; /* Centers the form */
+  max-width: 400px;
+  margin: 0 auto; 
   padding: 1em;
   text-align: center;
 }
-
-
-
-
 
 @media (max-height: 600px) {
   header {
@@ -117,5 +110,3 @@ main.logger {
     flex: 1 100vh;
   }
 }
-
-
