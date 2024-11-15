@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './profile.css';
 import { Link } from 'react-router-dom';
+import { VoteRow } from './voterow';
 
 
 export function Account() {
-  return (
+    const [votes, setVotes] = React.useState([]);
+
+    const freshVotes = () => {
+      const votesText = localStorage.getItem('votes')
+      if (votesText) {
+        const storeVotes = JSON.parse(votesText);
+        setVotes(storedVotes.slice(0,5));
+      }
+    }
+
+    useEffect(() => {
+      freshVotes();
+    }, []);
+
+    return (
     <main>
 
       <h1 className="streak">You've made 5 game predictions!</h1>
@@ -13,29 +28,30 @@ export function Account() {
       <h3>Voter History:</h3>
 
       {/* Placeholder for database data of user voting history */}
-      <ul className='history'>
 
-        <li className="list-text">
-          - You predicted the Saints would beat the Cowboys!
-        </li>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Your Vote History: 
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {votes.lenth > 0 ? (
+            votes.map((votes, index) => (
+              <VoteRow key={index} pick={pick} loser={loser}/>
 
-        <li className="list-text">
-          - You predicted the Gamecocks would beat the Wildcats!
-        </li>
-
-        <li className="list-text">
-          - You predicted the Braves would beat the Royals!
-        </li>
-
-        <li className="list-text">
-          - You predicted the Saints would beat the Cowboys!
-        </li>
-
-        <li className="list-text">
-          - You predicted the Tigers would beat the Irish!
-        </li>
-
-      </ul>
+            ))
+          ) : (
+            <tr>
+              <td>
+                You haven't made any predictions!
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
 
 
       <div className="image-box" id="image">

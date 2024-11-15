@@ -8,6 +8,10 @@ h3 {
   border-bottom: solid #E5E5E5;
 }
 
+p {
+  text-align: center;
+}
+
 .streak {
   font-weight: bolder;
 }
@@ -17,11 +21,19 @@ h3 {
   list-style-type: none;
   color: whitesmoke;
   font-weight: bold;
+  text-align: center;
+  width: 100%;
 }
 
 .history {
   border-radius: 25px;
   background-color: #0DCAF0 !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
 }
 
 .email {
@@ -70,6 +82,11 @@ main {
 .log-out:hover {
   font-weight: bolder;
 }
+
+.history .list-text {
+  text-align: center;
+}
+
 
 @media (max-height: 600px) {
   main {

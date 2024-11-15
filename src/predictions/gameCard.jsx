@@ -1,19 +1,45 @@
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 
 export function GameCard(props) {
 
     const [hasVoted, setVoted] = useState(false)
+    const [prediction, setPrediction] = useState("")
+    const [loser, setLoser] = useState("")
+
+    const selection = (team) => {
+        setPrediction(team)
+            if (team === props.team1) {
+                setLoser(props.team2)
+            }
+            else {
+                setLoser(props.team1)
+            }
+        }
 
     const updateHasVoted = () => {
-        setVoted(true)
-    }
+        if (prediction) {
+            const votes = JSON.parse(localStorage.getItem("votes")) || [];
+            votes.push({
+                game: `${props.team1} vs ${props.team2}`,
+                pick: prediction,
+                loser: loser
+            });
+            if (votes.length > 4) {
+               votes.length = 4
+              }
+          
+        localStorage.setItem("votes", JSON.stringify(votes));
+        setVoted(true);
+        }
+    };
+
 
     return(
         <div className="card">
             <form>
-                <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`}/>
+                <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)}/>
                 <label htmlFor="selection1">{props.team1}</label>
 
                 <br /><br />
@@ -22,7 +48,7 @@ export function GameCard(props) {
                 <img src={props.upcoming_game} alt="upcoming matchup" />
                 <br /><br />
 
-                <input type="radio" id="selection2" name={`${props.team1}-vs-${props.team2}`}/>
+                <input type="radio" id="selection2" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team2)}/>
 
                 <label htmlFor="selection2">{props.team2}</label>
                 <br /><br />
@@ -32,5 +58,5 @@ export function GameCard(props) {
             </form>
         </div>
     );
-}
+};
 
