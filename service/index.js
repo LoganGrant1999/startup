@@ -3,7 +3,7 @@ const uuid = require('uuid');
 const app = express();
 
 let users = {}
-let preictions = []
+let votes = []
 
 const port = process.argv.length > 2 ? process.argv[2]: 3000;
 
@@ -48,9 +48,11 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 
-apiRouter.post('/votes', (_req, res) => {
+apiRouter.post('/votes', (req, res) => {
     votes.push(req.body)
+    console.log(votes)
     res.send(votes)
+    
 })
 
 apiRouter.get('/votes', (_req, res) => {

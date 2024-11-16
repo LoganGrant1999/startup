@@ -8,6 +8,19 @@ export function GameCard(props) {
     const [prediction, setPrediction] = useState("")
     const [loser, setLoser] = useState("")
 
+
+
+    async function saveVote() {
+        const newVote = { name: 'Logan', vote: prediction};
+    
+        await fetch('/api/votes', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(newVote),
+        });
+      }
+
+    
     const selection = (team) => {
         setPrediction(team)
             if (team === props.team1) {
@@ -51,7 +64,7 @@ export function GameCard(props) {
                 <label htmlFor="selection2">{props.team2}</label>
                 <br /><br />
 
-                {!hasVoted ? ( <input type="button" value="Submit Choice" onClick={updateHasVoted} /> ) : ( <p>Vote Sumbitted! ✅</p> )}
+                {!hasVoted ? ( <input type="button" value="Submit Choice" onClick={updateHasVoted && saveVote} /> ) : ( <p>Vote Sumbitted! ✅</p> )}
 
             </form>
         </div>
