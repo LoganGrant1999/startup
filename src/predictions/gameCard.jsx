@@ -7,12 +7,13 @@ export function GameCard(props) {
     const [hasVoted, setVoted] = useState(false)
     const [prediction, setPrediction] = useState("")
     const [loser, setLoser] = useState("")
+    const userName = localStorage.getItem("userName") || "No UserName Saved";
 
 
 
     async function saveVote() {
-        const newVote = { name: 'Logan', vote: prediction};
-    
+        const newVote = { name: userName, vote: prediction, loser: loser};
+
         await fetch('/api/votes', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
