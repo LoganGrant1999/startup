@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Unauthenticated } from './unauthenticated';
 import { Authenticated } from './authenticated';
-import { AuthState } from './authState';
+import { AuthState } from './authstate';
 
 
 export function Login({ userName, authState, onAuthChange }) {

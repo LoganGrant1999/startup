@@ -53,7 +53,6 @@ export function Account() {
         <img src="sports-banner.jpg" alt="banner of multiple sports being played" />
       </div>
 
-      <Link className="log-out" to="/">Log Out</Link>
       
     </main>
   );
