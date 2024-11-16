@@ -10,7 +10,6 @@ export function GameCard(props) {
     const userName = localStorage.getItem("userName") || "No UserName Saved";
 
 
-
     async function saveVote() {
         const newVote = { name: userName, vote: prediction, loser: loser};
 
@@ -21,7 +20,6 @@ export function GameCard(props) {
         });
       }
 
-    
     const selection = (team) => {
         setPrediction(team)
             if (team === props.team1) {
@@ -41,12 +39,10 @@ export function GameCard(props) {
                 loser: loser
             });
 
-          
         localStorage.setItem("votes", JSON.stringify(votes));
         setVoted(true);
         }
     };
-
 
     return(
         <div className="card">
@@ -71,4 +67,3 @@ export function GameCard(props) {
         </div>
     );
 };
-
