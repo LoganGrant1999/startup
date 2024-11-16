@@ -48,12 +48,13 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 
-apiRouter.get('/votes', (_req, res) => {
-    res.send(votes)
-})
 
 apiRouter.post('/votes', (_req, res) => {
     votes.push(req.body)
+    res.send(votes)
+})
+
+apiRouter.get('/votes', (_req, res) => {
     res.send(votes)
 })
 
