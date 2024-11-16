@@ -48,7 +48,6 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 
-
 apiRouter.post('/votes', (_req, res) => {
     votes.push(req.body)
     res.send(votes)
