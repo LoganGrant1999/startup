@@ -44,6 +44,7 @@ export function GameCard(props) {
         }
     };
 
+
     return(
         <div className="card">
             <form>
@@ -61,9 +62,10 @@ export function GameCard(props) {
                 <label htmlFor="selection2">{props.team2}</label>
                 <br /><br />
 
-                {!hasVoted ? ( <input type="button" value="Submit Choice" onClick={updateHasVoted && saveVote} /> ) : ( <p>Vote Sumbitted! ✅</p> )}
+                {!hasVoted ? (<input type="button" value="Submit Choice" onClick={updateHasVoted} />) : (<>{(() => {saveVote();console.log("Vote Submitted!");return null;})()}<p>Vote Submitted! ✅</p></>)}
 
             </form>
         </div>
     );
 };
+

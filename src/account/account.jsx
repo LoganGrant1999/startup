@@ -29,7 +29,7 @@ export function Account() {
         </thead>
         <tbody>
           {votes.length > 0 ? (
-            votes.map((vote, index) => (
+            votes.slice().reverse().map((vote, index) => (
               <VoteRow key={index} vote={vote} />
 
             ))
