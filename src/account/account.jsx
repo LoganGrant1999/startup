@@ -1,19 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './profile.css';
 import { Link } from 'react-router-dom';
 import { VoteRow } from './voterow';
 
-
 export function Account() {
-    const [votes, setVotes] = React.useState([]);
 
-    React.useEffect(() => {
+  const [votes, setVotes] = useState([]);
+  useEffect(() => {
+    const fetchVotes = () => {
       fetch('/api/votes')
-      .then((response) => response.json())
-      .then((votes) => {
-        setVotes(votes);
-      });
-    }, []);
+        .then((response) => response.json())
+        .then((allVotes) => {
+          setVotes(allVotes);
+        })
+    };
+
+    fetchVotes();
+  }, []); 
+
+
 
     return (
     <main>
