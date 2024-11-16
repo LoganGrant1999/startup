@@ -7,23 +7,18 @@ import { VoteRow } from './voterow';
 export function Account() {
     const [votes, setVotes] = React.useState([]);
 
-    const freshVotes = () => {
-      const votesText = localStorage.getItem('votes')
-      if (votesText) {
-        const storeVotes = JSON.parse(votesText);
-        setVotes(storeVotes.slice(-5).reverse());
-      }
-    }
-
-    useEffect(() => {
-      freshVotes();
+    React.useEffect(() => {
+      fetch('/api/votes')
+      .then((response) => response.json())
+      .then((votes) => {
+        setVotes(votes);
+      });
     }, []);
 
     return (
     <main>
 
       <h1 className="streak">You've made {votes.length} game predictions!</h1>
-      <p><span className="email">Account Email:</span> logan@fanvote.click</p>
 
       <h3>Voter History:</h3>
 
