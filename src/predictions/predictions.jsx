@@ -63,7 +63,7 @@ export function Predictions() {
             team1={game.strHomeTeam}
             team2={game.strAwayTeam}
             upcoming_game={game.strThumb || 'nba.png'}
-            date={game.dateEventLocal}
+            date={new Date(game.dateEventLocal).setDate(new Date(game.dateEventLocal).getDate() + 1)}
             />
           ))}
         </div>
