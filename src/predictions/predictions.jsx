@@ -2,18 +2,22 @@ import React from 'react';
 import './predict.css';
 import { GameCard } from "./gameCard";
 
+
+
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
-  const [fetchedData, setFetchedData] = React.useState(null); // State to store fetched data
+  const [games, setGames] = React.useState([]); 
 
   React.useEffect(() => {
     fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); 
-        setFetchedData(data); // Save data to state
-      });
-  }, []); // Empty dependency array ensures this runs once on mount
+        if (data.events) {
+          setGames(data.events); 
+        }
+      })
+      .catch()
+  }, []);
 
   return (
     <div className='body'>
@@ -38,10 +42,13 @@ export function Predictions() {
 
         <div className="container">
           {/* Placeholders for calling to 3rd-party sports game API */}
-          <GameCard team1="BYU Cougars" team2="Baylor Bears" upcoming_game='byu-vs-baylor.png'/>
-          <GameCard team1="Knicks" team2="Hornets" upcoming_game='knicks-vs-hornets.png'/>
-          <GameCard team1="Bengals" team2="Panthers" upcoming_game='bengals-vs-panthers.png'/>
-          <GameCard team1= "Royals" team2="Braves" upcoming_game='royals-vs-braves.png'/>
+          {games.map((game)=> (
+            <GameCard key={game.idEvent}
+            team1={game.strHomeTeam}
+            team2={game.strAwayTeam}
+            upcoming_game={game.strThumb || 'nba.png'}
+            />
+          ))}
         </div>
 
         <br />
@@ -50,11 +57,7 @@ export function Predictions() {
           <img src="sports-banner-color.png" alt="banner of multiple sports being played" />
         </div>
 
-        {/* Display fetched data in JSON format */}
-        <div>
-          <h2>Fetched Data:</h2>
-          <pre>{fetchedData ? JSON.stringify(fetchedData, null, 2) : "Loading data..."}</pre>
-        </div>
+      
       </main>
     </div>
   );
