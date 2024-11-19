@@ -54,7 +54,7 @@ export function Predictions() {
         <br />
 
         <div className="image-box" id="image">
-          <img src="sports-banner-color.png" alt="banner of multiple sports being played" />
+          <img src="banner.png" alt="banner of multiple sports being played" />
         </div>
 
       
