@@ -67,7 +67,7 @@ export function Predictions() {
             />
           ))}
         </div>
-
+          
         <br />
 
         <div className="image-box" id="image">
