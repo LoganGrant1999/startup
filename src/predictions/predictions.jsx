@@ -1,10 +1,20 @@
 import React from 'react';
 import './predict.css';
-import {GameCard} from "./gameCard";
-
+import { GameCard } from "./gameCard";
 
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
+  const [fetchedData, setFetchedData] = React.useState(null); // State to store fetched data
+
+  React.useEffect(() => {
+    fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); 
+        setFetchedData(data); // Save data to state
+      });
+  }, []); // Empty dependency array ensures this runs once on mount
+
   return (
     <div className='body'>
       <main>
@@ -39,8 +49,14 @@ export function Predictions() {
         <div className="image-box" id="image">
           <img src="sports-banner-color.png" alt="banner of multiple sports being played" />
         </div>
+
+        {/* Display fetched data in JSON format */}
+        <div>
+          <h2>Fetched Data:</h2>
+          <pre>{fetchedData ? JSON.stringify(fetchedData, null, 2) : "Loading data..."}</pre>
+        </div>
       </main>
-    </div>  
+    </div>
   );
 }
 
