@@ -7,12 +7,20 @@ export function GameCard(props) {
     const [hasVoted, setVoted] = useState(false)
     const [prediction, setPrediction] = useState("")
     const [loser, setLoser] = useState("")
+    const [date, setDate] = useState("")
     const userName = localStorage.getItem("userName") || "No UserName Saved";
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return new Intl.DateTimeFormat('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }).format(date);
+      }
 
     async function saveVote() {
-        const newVote = { name: userName, vote: prediction, loser: loser};
-
+        const newVote = { name: userName, vote: prediction, loser: loser, date: date};
         await fetch('/api/votes', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
@@ -47,6 +55,7 @@ export function GameCard(props) {
 
     return(
         <div className="card">
+            <p class='date'>{formatDate(props.date)}</p>
             <form>
                 <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)}/>
                 <label htmlFor="selection1">{props.team1}</label>
