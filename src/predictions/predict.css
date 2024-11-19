@@ -20,6 +20,10 @@ label {
   padding-left: 5px;
 }
 
+td {
+  text-align: center;
+}
+
 h1 {
   color: #D1D1D1;
   margin: 0;
