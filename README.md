@@ -1,7 +1,7 @@
 # FanVote
 
 ## Elevator Pitch
-FanVote brings the excitement of live sports to your fingertips by letting you vote in real-time on who you think will win upcoming and ongoing games. Whether it's soccer, basketball, or any other major sport, users can see live updates, and engage in friendly competition with others. FanVote transforms sports watching into an interactive experience, making it fun to see how your votes stack up against your friends and the rest of the world. 
+FanVote brings the excitement of NBA action to your fingertips, letting you vote on who you think will win upcoming basketball games. Engage in friendly competition with fellow fans and see how your predictions stack up against your friends and basketball enthusiasts worldwide. FanVote transforms following the NBA into an interactive and fun experience.
 
 ## Design Sketches
 **Sign In Page**
@@ -12,12 +12,12 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
 ## Key Features
 - Secure login over HTTPS
 - Ability to select team to vote for
-- Display of live and upcoming games to choose from
-- Recent Votes shared on prediction page with live updates when other users place predictions
+- Display of upcoming NBA games and ability to predict the outcome of each
+- Recent Votes shown on the prediction page with live updates when other users place predictions
 - Unique user profiles
 - User predictions persistently stored on their profile
 - Real time predictions displayed when they are made
-- Game Data Auytomatically fetched from [third party API](https://developer.sportradar.com/getting-started/docs/coverage-information)
+- NBA Game Data Auytomatically fetched from [third party API](https://developer.sportradar.com/getting-started/docs/coverage-information)
 
 ## Technologies Overview
 - **HTML**
@@ -32,7 +32,7 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
     - Framework ties together HTML, CSS, and Javascript for interactive frontend
 - **Service**
     - Backend Service endpoints for retrieving votes and submitting votes
-    - Displays upcoming and live sports games using the [SportsRadar](https://developer.sportradar.com/getting-started/docs/coverage-information) service
+    - Displays upcoming NBA games using the [The Sports DB](https://www.thesportsdb.com/) service
 - **DB/Login** 
     - Stores users, votes, and vote history
     - Users can register and login 
@@ -44,12 +44,12 @@ FanVote brings the excitement of live sports to your fingertips by letting you v
 # HTML Deliverable
 For this deliverable, I built out the structure of my application using HTML.
 
-- [x] **HTML Pages**: My application contains 3 HTML pages. There is a login page where users can create an account or login. It also contains a description of FanVote. There is a predictions page where users can see upcoming games, a prediction streak leaderboard, their account name, a navigation menu, a sports picture banner, and they can place their votes for who they think will win each game. There is also an account page where users can see their prediction history, the email they registered their account with, another sports banner picture, and a navigation menu.
+- [x] **HTML Pages**: My application contains 3 HTML pages. There is a login page where users can create an account or login. It also contains a description of FanVote. There is a predictions page where users can see upcoming games, a prediction streak leaderboard, their account name, a navigation menu, a basketball picture banner, and they can place their votes for who they think will win each game. There is also an account page where users can see their prediction history, the email they registered their account with, another basketball banner picture, and a navigation menu.
 - [x] **HTML Tags**: All three pages use html tags properly, including BODY, NAV, MAIN, HEADER, FOOTER.
 - [x] **Links**: The login page automatically links to the predictions page. There is a navigation menu on the predictions and accounts pages that links to the home/login page, the predictions page, and the accounts page. I've also included a link to my GitHub repository at the bottom of each page.
 - [x] **Text**: Each of the prediction choices is represented by a textual description. There is also a textual description of what FanVote is on the login page.
-- [x] **Third Party Service Calls**: Each image of an upcoming game is a placeholder of a third-party service call that will be used to populate upcoming sports games to be voted on from [SportsRadar](https://developer.sportradar.com/getting-started/docs/coverage-information).
-- [x] **Images**: There are 2 different sports banner images, one on the predictions page and one on the account page.
+- [x] **Third Party Service Calls**: Each image of an upcoming game is a placeholder of a third-party service call that will be used to populate upcoming NBA games to be voted on from [the Sports DB](https://www.thesportsdb.com/).
+- [x] **Images**: There are 2 different Basketball banner images, one on the predictions page and one on the account page.
 - [x] **DB/Login**: An input box and submit button are provided for login. The prediction history on the account page represents data pulled from the database and displayed to the user.
 - [x] **WebSocket**: The leaderboard on the predictions page shows where a WebSocket will be used to show a leaderboard in real time of the longest correct prediction streaks.
 
@@ -74,3 +74,12 @@ For this deliverable I used JavaScript and React so that the application complet
     - [x] **Processing Votes**: I use local storage to save predictions users make on the site, making the predicting aspect of the application essentially functional. I also display a message saying "Vote submitted" whenever a user submits a prediction 
 - [x] **Router**: Routing between login and prediction and account components
 - [x] **Hooks**: I use UseState and UseEffect in my prediction and account components. UseState is used to keep track of whether or not a vote has been submitted and useEffect refreshes the vote history in localStorage each time a new prediction is made  
+
+# Service 
+For this deliverable I added backend endpoints that receive predictions and return prediction history and the number of predictions the user makes. I also used [the Sports DB](https://www.thesportsdb.com/)'s API to pull in data of upcoming NBA games that refreshes every hour to ensure that upcoming NBA games are always available to be predicted.
+
+- [x] **Node.js/Express HTTP service**: Done!
+- [x] **Static middleware for frontend**: Done!
+- [x] **Calls to third party endpoints**: I called [the Sports DB](https://www.thesportsdb.com/)'s API in my frontend to obtain data for upcoming NBA games. This data was then populated in my gameCard component to enable user's to vote on who they think will win each upcoming game. I set an interval to call the API each hour to ensure that the upcoming games are up to date
+- [x] **Backend service endpoints**: Placeholders for login that stores the current user on the server. I created endpoints to get user's predicitons and to post their predictions as well
+- [x] **Frontend calls service endpoints**: My frontend calls my endpoints to store user predictions and to retrieve user predictions from the back end to display user predicitons on the account component
