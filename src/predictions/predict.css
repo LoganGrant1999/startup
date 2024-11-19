@@ -9,6 +9,13 @@
   padding: 0;
 }
 
+
+label {
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+
 h1 {
   color: #D1D1D1;
   margin: 0;

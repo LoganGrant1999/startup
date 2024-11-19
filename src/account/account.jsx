@@ -50,7 +50,7 @@ export function Account() {
 
 
       <div className="image-box" id="image">
-        <img src="sports-banner.jpg" alt="banner of multiple sports being played" />
+        <img src="basketball.png" alt="banner of multiple sports being played" />
       </div>
 
       
