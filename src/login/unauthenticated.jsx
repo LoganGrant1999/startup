@@ -57,7 +57,7 @@ export function Unauthenticated(props) {
       </div>
 
       <p className="description">
-      FanVote brings the excitement of live sports to your fingertips by letting you vote in real-time on who you think will win upcoming and ongoing games. Whether it's soccer, basketball, or any other major sport, users can see live updates, and engage in friendly competition with others. FanVote transforms sports watching into an interactive experience, making it fun to see how your votes stack up against your friends and the rest of the world. 
+        FanVote brings the excitement of NBA action to your fingertips, letting you vote on who you think will win upcoming basketball games. Engage in friendly competition with fellow fans and see how your predictions stack up against your friends and basketball enthusiasts worldwide. FanVote transforms following the NBA into an interactive and fun experience.
       </p>
 
 
