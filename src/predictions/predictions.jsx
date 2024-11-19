@@ -2,22 +2,38 @@ import React from 'react';
 import './predict.css';
 import { GameCard } from "./gameCard";
 
-
-
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
   const [games, setGames] = React.useState([]); 
 
   React.useEffect(() => {
-    fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.events) {
-          setGames(data.events); 
-        }
-      })
-      .catch()
-  }, []);
+    const fetchGames = () => {
+      fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.events) {
+            const currentTime = new Date();
+            const upcomingGames = data.events.filter(game => {
+              const gameStart = new Date(`${game.dateEventLocal}T${game.strTimeLocal}`);
+              return gameStart > currentTime;
+            });
+            setGames(upcomingGames);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching games:", error);
+        });
+    };
+
+    fetchGames();
+
+    const interval = setInterval(() => {
+      fetchGames(); 
+    }, 60 * 60 * 1000);
+
+    return () => clearInterval(interval); 
+  }, []); 
+
 
   return (
     <div className='body'>
