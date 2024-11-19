@@ -21,7 +21,7 @@ export function Predictions() {
           }
         })
         .catch((error) => {
-          console.error("Error fetching games:", error);
+          console.error("Couldn't find games:", error);
         });
     };
 
