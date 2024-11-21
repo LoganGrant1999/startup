@@ -78,4 +78,4 @@ export function GameCard(props) {
     );
 };
 
-kjidjuf
+delete
