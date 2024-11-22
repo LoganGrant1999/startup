@@ -73,8 +73,10 @@ secureApiRouter.post('/votes', async (req, res) => {
 })
 
 secureApiRouter.get('/votes', async (_req, res) => {
-  const votes = await DB.getVotes();
-  res.send(votes)
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  const votes = await votesCollection.find({ name: user.email }).toArray();
+  res.send(votes);
 })
 
 app.use(function (err, req, res, next) {
