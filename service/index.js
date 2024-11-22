@@ -72,12 +72,12 @@ secureApiRouter.post('/votes', async (req, res) => {
   res.send(votes);
 })
 
-secureApiRouter.get('/votes', async (_req, res) => {
+secureApiRouter.get('/votes', async (req, res) => {
   const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
-  const votes = await votesCollection.find({ name: user.email }).toArray();
-  res.send(votes);
-})
+  const votes = await DB.getVotes();
+  res.send(votes.filter(vote => vote.name === user.email));
+});
 
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });

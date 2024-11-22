@@ -12,13 +12,16 @@ export function GameCard(props) {
     const formattedDate = formatDate(props.data);
 
     function formatDate(dateString) {
+        if (!dateString) return 'Invalid Date';
         const date = new Date(dateString);
+        if (isNaN(date.getTime())) return 'Invalid Date'; 
         return new Intl.DateTimeFormat('en-US', {
           month: 'short',
           day: 'numeric',
           year: 'numeric',
         }).format(date);
-      }
+    }
+    
 
     async function saveVote() {
         const newVote = { name: userName, vote: prediction, loser: loser, date: formattedDate, game: `${props.team1} vs ${props.team2}`};

@@ -3,30 +3,31 @@ import './predict.css';
 import { GameCard } from "./gameCard";
 
 
-
-
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
   const [games, setGames] = React.useState([]); 
 
   React.useEffect(() => {
     const fetchGames = () => {
-      const API_KEY = import.meta.env.VITE_API_KEY;
-      fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventsnextleague.php?id=4387`)
+      fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
         .then((response) => response.json())
         .then((data) => {
-          if (data.events) {
+          if (data.events && Array.isArray(data.events)) {
             const currentTime = new Date();
             const upcomingGames = data.events.filter(game => {
+              if (!game.dateEventLocal || !game.strTimeLocal) return false; 
               const gameStart = new Date(`${game.dateEventLocal}T${game.strTimeLocal}`);
               return gameStart > currentTime;
             });
             setGames(upcomingGames);
+          } else {
+            console.error('Unexpected API response:', data);
           }
         })
         .catch((error) => {
-          console.error("Couldn't find games:", error);
+          console.error("Couldn't fetch games:", error);
         });
+
     };
 
     fetchGames();
@@ -63,12 +64,14 @@ export function Predictions() {
         <div className="container">
           {/* Placeholders for calling to 3rd-party sports game API */}
           {games.map((game)=> (
-            <GameCard key={game.idEvent}
-            team1={game.strHomeTeam}
-            team2={game.strAwayTeam}
-            upcoming_game={game.strThumb || 'nba.png'}
-            date={new Date(game.dateEventLocal).setDate(new Date(game.dateEventLocal).getDate() + 1)}
+            <GameCard
+              key={game.idEvent}
+              team1={game.strHomeTeam}
+              team2={game.strAwayTeam}
+              upcoming_game={game.strThumb || 'nba.png'}
+              date={game.dateEventLocal ? new Date(game.dateEventLocal) : null}
             />
+
           ))}
         </div>
           
