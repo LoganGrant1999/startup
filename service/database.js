@@ -12,21 +12,20 @@ const votesCollection = db.collection('votes');
 (async function testConnection() {
     await client.connect();
     await db.command({ ping: 1 });
-  })().catch((ex) => {
+})().catch((ex) => {
     console.log(`Unable to connect to database with ${url} because ${ex.message}`);
     process.exit(1);
-  });
+});
   
-  function getUser(email) {
+function getUser(email) {
     return userCollection.findOne({ email: email });
-  }
+}
   
-  function getUserByToken(token) {
+function getUserByToken(token) {
     return userCollection.findOne({ token: token });
-  }
+}
   
-  async function createUser(email, password) {
-    // Hash the password before we insert it into the database
+async function createUser(email, password) {
     const passwordHash = await bcrypt.hash(password, 10);
   
     const user = {
@@ -37,4 +36,21 @@ const votesCollection = db.collection('votes');
     await userCollection.insertOne(user);
   
     return user;
-  }
+}
+
+async function addVote(vote) {
+    await votesCollection.insertOne(vote);
+    return vote;
+}
+
+async function getVotes() {
+    return await votesCollection.find().toArray();
+}
+
+module.exports = {
+    getUser,
+    getUserByToken,
+    createUser,
+    addVote,
+    getVotes,
+};
