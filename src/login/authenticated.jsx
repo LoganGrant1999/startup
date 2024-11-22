@@ -13,23 +13,23 @@ export function Authenticated(props) {
       method: 'delete',
     })
       .catch(() => {
+        
       })
       .finally(() => {
         localStorage.removeItem('userName');
         props.onLogout();
       });
   }
+
   return (
     <div>
       <div className='playerName'>{props.userName}</div>
-      <div className='button-group'>
-        <Button variant='primary' onClick={() => navigate('/predictions')}>
-          Predict
-        </Button>
-        <Button variant='secondary' onClick={() => logout()}>
-          Logout
-        </Button>
-      </div>
+      <Button variant='primary' onClick={() => navigate('/play')}>
+        Play
+      </Button>
+      <Button variant='secondary' onClick={() => logout()}>
+        Logout
+      </Button>
     </div>
   );
 }
