@@ -6,8 +6,7 @@ import { AuthState } from './authState';
 
 export function Login({ userName, authState, onAuthChange }) {
   return (
-    <main className='container-fluid bg-secondary text-center'>
-      <div>
+    <main className='container-fluid bg-secondary text-center logger'>
         {authState !== AuthState.Unknown && <h1>Welcome to FanVote!</h1>}
         {authState === AuthState.Authenticated && (
           <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
@@ -20,7 +19,7 @@ export function Login({ userName, authState, onAuthChange }) {
             }}
           />
         )}
-      </div>
     </main>
-  );
-}
+  
+    );
+  }
