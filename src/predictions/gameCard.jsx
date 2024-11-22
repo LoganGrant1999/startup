@@ -9,6 +9,7 @@ export function GameCard(props) {
     const [loser, setLoser] = useState("")
     const [date, setDate] = useState("")
     const userName = localStorage.getItem("userName") || "No UserName Saved";
+    const formattedDate = formatDate(props.data);
 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -20,7 +21,7 @@ export function GameCard(props) {
       }
 
     async function saveVote() {
-        const newVote = { name: userName, vote: prediction, loser: loser, date: date};
+        const newVote = { name: userName, vote: prediction, loser: loser, date: formattedDate, game: `${props.team1} vs ${props.team2}`};
         await fetch('/api/votes', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
@@ -42,9 +43,11 @@ export function GameCard(props) {
         if (prediction) {
             const votes = JSON.parse(localStorage.getItem("votes")) || [];
             votes.push({
+                name: userName,
                 game: `${props.team1} vs ${props.team2}`,
                 pick: prediction,
-                loser: loser
+                loser: loser,
+                date: formattedDate
             });
 
         localStorage.setItem("votes", JSON.stringify(votes));
