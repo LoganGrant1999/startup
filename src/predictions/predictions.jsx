@@ -11,7 +11,7 @@ export function Predictions() {
 
   React.useEffect(() => {
     const fetchGames = () => {
-      const API_KEY = process.env.REACT_APP_API_KEY;
+      const API_KEY = import.meta.env.VITE_API_KEY;
       fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventsnextleague.php?id=4387`)
         .then((response) => response.json())
         .then((data) => {
