@@ -7,10 +7,6 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-
-let users = {}
-let votes = []
-
 const port = process.argv.length > 2 ? process.argv[2]: 3000;
 
 app.use(express.json());
@@ -69,22 +65,21 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 
-apiRouter.post('/votes', (req, res) => {
-    votes.push(req.body)
-    console.log(votes)
-    res.send(votes)
+secureApiRouter.post('/votes', async (req, res) => {
+  const vote = { ...req.body, ip: req.ip };
+  await DB.addVote(vote)
+  const votes = await DB.getVotes();
+  res.send(votes);
 })
 
-
-apiRouter.get('/votes', (_req, res) => {
-    res.send(votes)
+secureApiRouter.get('/votes', async (_req, res) => {
+  const votes = await DB.getVotes();
+  res.send(votes)
 })
-
 
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
 });
-
 
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
@@ -101,6 +96,4 @@ function setAuthCookie(res, authToken) {
 const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
-  
-  
   
