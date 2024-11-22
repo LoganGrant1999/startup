@@ -2,13 +2,17 @@ import React from 'react';
 import './predict.css';
 import { GameCard } from "./gameCard";
 
+
+
+
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
   const [games, setGames] = React.useState([]); 
 
   React.useEffect(() => {
     const fetchGames = () => {
-      fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
+      const API_KEY = process.env.REACT_APP_API_KEY;
+      fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventsnextleague.php?id=4387`)
         .then((response) => response.json())
         .then((data) => {
           if (data.events) {
