@@ -75,7 +75,7 @@ For this deliverable I used JavaScript and React so that the application complet
 - [x] **Router**: Routing between login and prediction and account components
 - [x] **Hooks**: I use UseState and UseEffect in my prediction and account components. UseState is used to keep track of whether or not a vote has been submitted and useEffect refreshes the vote history in localStorage each time a new prediction is made  
 
-# Service 
+# Service Deliverable
 For this deliverable I added backend endpoints that receive predictions and return prediction history and the number of predictions the user makes. I also used [the Sports DB](https://www.thesportsdb.com/)'s API to pull in data of upcoming NBA games that refreshes every hour to ensure that upcoming NBA games are always available to be predicted.
 
 - [x] **Node.js/Express HTTP service**: Done!
@@ -83,3 +83,13 @@ For this deliverable I added backend endpoints that receive predictions and retu
 - [x] **Calls to third party endpoints**: I called [the Sports DB](https://www.thesportsdb.com/)'s API in my frontend to obtain data for upcoming NBA games. This data was then populated in my gameCard component to enable user's to vote on who they think will win each upcoming game. I set an interval to call the API each hour to ensure that the upcoming games are up to date
 - [x] **Backend service endpoints**: Placeholders for login that stores the current user on the server. I created endpoints to get user's predicitons and to post their predictions as well
 - [x] **Frontend calls service endpoints**: My frontend calls my endpoints to store user predictions and to retrieve user predictions from the back end to display user predicitons on the account component
+
+# DB/Login Deliverable
+For this deliverable I associate the predictions with the logged in user. I stored the predictions and prediction history in the database.
+
+- [x] **MongoDB Atlas database created**: Done!
+- [x] **Stores data in MongoDB**: Done!
+- [x] **User Registration**: Creates a new account in the database
+- [x] **Existing User**: Stores the predictions under the same user if the user already exists. Restricts users from predicting more than once on the same game
+- [x] **Use MongoDB to store credentials**: Stores both user and their predictions
+- [x] **Restricts functionality**: Users can't vote unless they're logged in. Users are also restricted from making multiple predictions on a single game. This is implemented in the front and back end.
