@@ -66,17 +66,17 @@ export function GameCard(props) {
         <div className="card">
             <p class='date'>{formatDate(props.date)}</p>
             <form>
-                <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)} checked={prediction === props.team1} disabled={hasVoted}/>
-                <label htmlFor="selection1">{props.team1}</label>
+                <input type="radio" id={props.game + props.team1} name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)} checked={prediction === props.team1} disabled={hasVoted}/>
+                <label htmlFor={props.game + props.team1}>{props.team1}</label>
 
                 <br /><br />
 
                 <img src={props.upcoming_game} alt="upcoming matchup" />
                 <br /><br />
 
-                <input type="radio" id="selection2" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team2)}checked={prediction === props.team2} disabled={hasVoted}/>
+                <input type="radio" id={props.game + props.team2} name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team2)}checked={prediction === props.team2} disabled={hasVoted}/>
 
-                <label htmlFor="selection2">{props.team2}</label>
+                <label htmlFor={props.game + props.team2}>{props.team2}</label>
                 <br /><br />
 
                 {!hasVoted ? (<input class='submit' type="button" value="Submit Choice" onClick={saveVote} disabled={!prediction} />) : ( <p>Vote Submitted! ✅</p> )}
