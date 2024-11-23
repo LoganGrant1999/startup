@@ -35,6 +35,7 @@ export function Unauthenticated(props) {
 
   return (
     <>
+<<<<<<< HEAD
       <div className='login-screen'>
         <div>
           <div className='input-group mb-3'>
@@ -64,3 +65,35 @@ export function Unauthenticated(props) {
       </div>
    </>   
 )}
+=======
+    <div className='login-screen'>
+      <div>
+        <div className='input-group mb-3'>
+          <span className='input-group-text'>@</span>
+          <input className='form-control' type='text' value={userName} onChange={(e) => setUserName(e.target.value)} placeholder='your@email.com' />
+        </div>
+        <div className='input-group mb-3'>
+          <span className='input-group-text'>🔒</span>
+          <input className='form-control' type='password' onChange={(e) => setPassword(e.target.value)} placeholder='password' />
+        </div>
+        <div className='button-group'>
+          <Button className='left-button' variant='primary' onClick={() => loginUser()} disabled={!userName || !password}>
+            Login
+          </Button>
+          <Button variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
+            Create
+          </Button>
+        </div>
+      </div>  
+    </div>
+
+    <p className="description">
+      FanVote brings the excitement of NBA action to your fingertips, letting you vote on who you think will win upcoming basketball games. Engage in friendly competition with fellow fans and see how your predictions stack up against your friends and basketball enthusiasts worldwide. FanVote transforms following the NBA into an interactive and fun experience.
+    </p>
+
+
+  <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />   
+</>
+);
+}
+>>>>>>> c14051bfd7b49f9df9835069d831fccb90498cc7
