@@ -8,7 +8,7 @@ export function Predictions() {
 
   React.useEffect(() => {
     const fetchGames = () => {
-      fetch(`https://www.thesportsdb.com/api/v1/json/135181/eventsnextleague.php?id=4387`)
+      fetch(`https://www.thesportsdb.com/api/v1/json/${import.meta.env.VITE_SPORTS_API_KEY}/eventsnextleague.php?id=4387`)
         .then((response) => response.json())
         .then((data) => {
           if (data.events && Array.isArray(data.events)) {
