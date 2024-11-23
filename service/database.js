@@ -47,10 +47,18 @@ async function getVotes() {
     return await votesCollection.find().toArray();
 }
 
-module.exports = {
+async function getVoteByUserAndGame(name, game) {
+    console.log(`Checking for existing vote: name=${name}, game=${game}`);
+    return await votesCollection.findOne({ name, game });
+ }
+ 
+ 
+ module.exports = {
     getUser,
     getUserByToken,
     createUser,
     addVote,
     getVotes,
-};
+    getVoteByUserAndGame,
+ };
+ 
