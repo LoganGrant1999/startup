@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 
@@ -7,9 +6,17 @@ export function GameCard(props) {
     const [hasVoted, setVoted] = useState(false)
     const [prediction, setPrediction] = useState("")
     const [loser, setLoser] = useState("")
-    const [date, setDate] = useState("")
     const userName = localStorage.getItem("userName") || "No UserName Saved";
-    const formattedDate = formatDate(props.data);
+    const userVote = props.userVotes.find((vote) => vote.game === props.gameName);
+
+    useEffect(() => {
+        if (userVote) {
+            setPrediction(userVote.vote);
+            setLoser(userVote.loser);
+            setVoted(true);
+        }
+    }, [userVote]);
+
 
     function formatDate(dateString) {
         if (!dateString) return 'Invalid Date';
@@ -24,38 +31,34 @@ export function GameCard(props) {
     
 
     async function saveVote() {
+        if (!prediction) return;
+
+        const formattedDate = formatDate(props.date);
+
         const newVote = { name: userName, vote: prediction, loser: loser, date: formattedDate, game: `${props.team1} vs ${props.team2}`};
-        await fetch('/api/votes', {
+        
+        try {
+        const response = await fetch('/api/votes', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(newVote),
         });
+
+        if (response.status == 200) {
+            setVoted(true);  
+        }
+        else {
+            console.log('error')   
+        } 
+    } 
+    catch (error) {
+        console.error('error')
+        }
       }
 
     const selection = (team) => {
-        setPrediction(team)
-            if (team === props.team1) {
-                setLoser(props.team2)
-            }
-            else {
-                setLoser(props.team1)
-            }
-        }
-
-    const updateHasVoted = () => {
-        if (prediction) {
-            const votes = JSON.parse(localStorage.getItem("votes")) || [];
-            votes.push({
-                name: userName,
-                game: `${props.team1} vs ${props.team2}`,
-                pick: prediction,
-                loser: loser,
-                date: formattedDate
-            });
-
-        localStorage.setItem("votes", JSON.stringify(votes));
-        setVoted(true);
-        }
+        setPrediction(team);
+        setLoser(team === props.team1 ? props.team2 : props.team1);
     };
 
 
@@ -63,21 +66,20 @@ export function GameCard(props) {
         <div className="card">
             <p class='date'>{formatDate(props.date)}</p>
             <form>
-                <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)}/>
+                <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)} checked={prediction === props.team1} disabled={hasVoted}/>
                 <label htmlFor="selection1">{props.team1}</label>
 
                 <br /><br />
 
-                {/* Placeholder for calling to 3rd-party sports game API */}
                 <img src={props.upcoming_game} alt="upcoming matchup" />
                 <br /><br />
 
-                <input type="radio" id="selection2" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team2)}/>
+                <input type="radio" id="selection2" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team2)}checked={prediction === props.team2} disabled={hasVoted}/>
 
                 <label htmlFor="selection2">{props.team2}</label>
                 <br /><br />
 
-                {!hasVoted ? (<input class='submit' type="button" value="Submit Choice" onClick={updateHasVoted} />) : (<>{(() => {saveVote();console.log("Vote Submitted!");return null;})()}<p>Vote Submitted! ✅</p></>)}
+                {!hasVoted ? (<input class='submit' type="button" value="Submit Choice" onClick={saveVote} disabled={!prediction} />) : ( <p>Vote Submitted! ✅</p> )}
 
             </form>
         </div>

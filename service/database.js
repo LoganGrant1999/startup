@@ -58,12 +58,14 @@ async function getUserVotes(name) {
     return await votesCollection.find({name: name}).toArray()
 }
 
+
 module.exports = {
-    getUser,
-    getUserByToken,
-    createUser,
-    addVote,
-    getVotes,
-    getVoteByUserAndGame,
-    getUserVotes
+getUser,
+getUserByToken,
+createUser,
+addVote,
+getVotes,
+getVoteByUserAndGame,
+getUserVotes
 };
+ 
