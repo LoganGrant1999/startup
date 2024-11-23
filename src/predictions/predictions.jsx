@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './predict.css';
 import { GameCard } from "./gameCard";
 
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
   const [games, setGames] = React.useState([]); 
+  const [userVotes, setUserVotes] = useState([]);
 
   React.useEffect(() => {
     const fetchGames = () => {

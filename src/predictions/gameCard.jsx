@@ -61,7 +61,7 @@ export function GameCard(props) {
 
     return(
         <div className="card">
-            <p className='date'>{formatDate(props.date)}</p>
+            <p class='date'>{formatDate(props.date)}</p>
             <form>
                 <input type="radio" id="selection1" name={`${props.team1}-vs-${props.team2}`} onChange={() => selection(props.team1)}/>
                 <label htmlFor="selection1">{props.team1}</label>
@@ -77,7 +77,7 @@ export function GameCard(props) {
                 <label htmlFor="selection2">{props.team2}</label>
                 <br /><br />
 
-                {!hasVoted ? (<input className='submit' type="button" value="Submit Choice" onClick={updateHasVoted} />) : (<>{(() => {saveVote();console.log("Vote Submitted!");return null;})()}<p>Vote Submitted! ✅</p></>)}
+                {!hasVoted ? (<input class='submit' type="button" value="Submit Choice" onClick={updateHasVoted} />) : (<>{(() => {saveVote();console.log("Vote Submitted!");return null;})()}<p>Vote Submitted! ✅</p></>)}
 
             </form>
         </div>
