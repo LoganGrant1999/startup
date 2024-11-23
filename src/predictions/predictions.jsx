@@ -4,10 +4,18 @@ import { GameCard } from "./gameCard";
 
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
-  const [games, setGames] = React.useState([]); 
+  const [games, setGames] = useState([]); 
   const [userVotes, setUserVotes] = useState([]);
 
-  React.useEffect(() => {
+
+  useEffect(() => {
+    const fetchUserVotes = () => {
+      fetch('/api/votes')
+        .then((response) => response.json())
+        .then((votes) => setUserVotes(votes))
+        .catch()
+    };
+
     const fetchGames = () => {
       fetch(`https://www.thesportsdb.com/api/v1/json/${import.meta.env.VITE_SPORTS_API_KEY}/eventsnextleague.php?id=4387`)
         .then((response) => response.json())
@@ -22,12 +30,13 @@ export function Predictions() {
             });
             setGames(upcomingGames);
           } else {
-            console.error('Unexpected API response:', data);
+            console.error('data error', data);
           }
         })
         .catch()
     };
 
+    fetchUserVotes();
     fetchGames();
 
     const interval = setInterval(() => {
