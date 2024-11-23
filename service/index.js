@@ -74,6 +74,8 @@ secureApiRouter.post('/votes', async (req, res) => {
   }
 
   await DB.addVote(vote)
+  let votes = await DB.getUserVotes(vote.name)
+  console.log("Votes", votes)
   res.send(votes);
 })
 
