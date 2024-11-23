@@ -67,10 +67,20 @@ secureApiRouter.use(async (req, res, next) => {
 
 secureApiRouter.post('/votes', async (req, res) => {
   const vote = { ...req.body, ip: req.ip };
+  const existingVote = await DB.getVoteByUserAndGame(vote.name, vote.game);
+
+  if (existingVote) {
+    return res.status(400).send({ msg: 'Already Voted'});
+  }
+
   await DB.addVote(vote)
-  const votes = await DB.getVotes();
   res.send(votes);
 })
+
+
+async function getVoteByUserAndGame (name, game) {
+  return await votesCollection.findOne({ name, game });
+}
 
 secureApiRouter.get('/votes', async (req, res) => {
   const authToken = req.cookies[authCookieName];
