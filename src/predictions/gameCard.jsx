@@ -9,7 +9,6 @@ export function GameCard(props) {
     const userName = localStorage.getItem("userName") || "No UserName Saved";
     const userVote = props.userVotes.find((vote) => vote.game === props.gameName);
 
-
     useEffect(() => {
         if (userVote) {
             setPrediction(userVote.vote);
