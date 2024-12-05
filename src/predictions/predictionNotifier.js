@@ -29,14 +29,9 @@ class PredictionSocket {
   }
 
   sendMessage(type, payload) {
-    if (this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(JSON.stringify({ type, payload }));
-    } else {
-      console.error('WebSocket is not open. Cannot send message.');
-    }
+    this.socket.send(JSON.stringify({ type, payload }));
   }
 }
 
 const predictionSocket = new PredictionSocket();
 export { predictionSocket, GameEvent };
-
