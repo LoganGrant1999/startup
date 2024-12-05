@@ -5,7 +5,7 @@ function peerProxy(httpServer) {
   const wss = new WebSocketServer({ noServer: true });
 
   httpServer.on('upgrade', (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.handleUpgrade(request, socket, head, (ws) => {
       wss.emit('connection', ws, request);
     });
   });
@@ -16,7 +16,7 @@ function peerProxy(httpServer) {
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
 
-    ws.on('message', function message(data) {
+    ws.on('message', (data) => {
       connections.forEach((c) => {
         if (c.id !== connection.id) {
           c.ws.send(data);
@@ -25,11 +25,7 @@ function peerProxy(httpServer) {
     });
 
     ws.on('close', () => {
-      const pos = connections.findIndex((o, i) => o.id === connection.id);
-
-      if (pos >= 0) {
-        connections.splice(pos, 1);
-      }
+      connections = connections.filter((c) => c.id !== connection.id);
     });
 
     ws.on('pong', () => {
@@ -48,9 +44,7 @@ function peerProxy(httpServer) {
     });
   }, 10000);
 
-  httpServer.locals = { wss };
-
-  return wss;
+  return wss; 
 }
 
 module.exports = { peerProxy };
