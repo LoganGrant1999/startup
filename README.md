@@ -93,3 +93,5 @@ For this deliverable I associate the predictions with the logged in user. I stor
 - [x] **Existing User**: Stores the predictions under the same user if the user already exists. Restricts users from predicting more than once on the same game
 - [x] **Use MongoDB to store credentials**: Stores both user and their predictions
 - [x] **Restricts functionality**: Users can't vote unless they're logged in. Users are also restricted from making multiple predictions on a single game. This is implemented in the front and back end.
+
+# WebSocket Deliverable
