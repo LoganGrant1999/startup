@@ -27,8 +27,6 @@ export function Account() {
 
       <h3>Voter History:</h3>
 
-      {/* Placeholder for database data of user voting history */}
-
       <table>
         <thead>
         </thead>
