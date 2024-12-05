@@ -95,3 +95,9 @@ For this deliverable I associate the predictions with the logged in user. I stor
 - [x] **Restricts functionality**: Users can't vote unless they're logged in. Users are also restricted from making multiple predictions on a single game. This is implemented in the front and back end.
 
 # WebSocket Deliverable
+For this deliverable I used webSocket to update predictions on the frontend in realtime.
+
+- [x] **Backend listens for WebSocket connection**: Done!
+- [x] **Frontend makes WebSocket Connection**: Done!
+- [x] **Data Sent Over WebSocket Connection**: Done!
+- [x] **webSocket Data Displayed**: All user predictions display in realtime in the recent votes box. Only the 5 most recent predictions between all users remain on the screen to avoid congestion.
