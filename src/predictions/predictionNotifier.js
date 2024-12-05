@@ -10,7 +10,7 @@ class PredictionSocket {
 
     this.socket.onopen = () => console.log('WebSocket connected');
     this.socket.onclose = () => console.log('WebSocket disconnected');
-    this.socket.onmessage = (event) => this.onMessage(event); 
+    this.socket.onmessage = (event) => this.onMessage(event);
 
     this.handlers = [];
   }
@@ -29,9 +29,14 @@ class PredictionSocket {
   }
 
   sendMessage(type, payload) {
-    this.socket.send(JSON.stringify({ type, payload }));
+    if (this.socket.readyState === WebSocket.OPEN) {
+      this.socket.send(JSON.stringify({ type, payload }));
+    } else {
+      console.error('WebSocket is not open. Cannot send message.');
+    }
   }
 }
 
-const predictionSocketInstance = new PredictionSocket();
-export { predictionSocketInstance as predictionSocket, GameEvent };
+const predictionSocket = new PredictionSocket();
+export { predictionSocket, GameEvent };
+
