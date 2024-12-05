@@ -32,27 +32,28 @@ export function GameCard(props) {
 
     async function saveVote() {
         if (!prediction) return;
-
-        const formattedDate = formatDate(props.date);
-
-        const newVote = { name: userName, vote: prediction, loser: loser, date: formattedDate, game: `${props.team1} vs ${props.team2}`};
-        
+      
+        const newVote = {
+          name: userName,
+          vote: prediction,
+          loser: loser,
+          game: `${props.team1} vs ${props.team2}`,
+        };
+      
         try {
-        const response = await fetch('/api/votes', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(newVote),
-        });
-
-        if (response.status == 200) {
-            setVoted(true);  
-        }
-        else {
-            console.log('error')   
-        } 
-    } 
-    catch (error) {
-        console.error('error')
+          const response = await fetch('/api/votes', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(newVote),
+          });
+      
+          if (response.status === 200) {
+            setVoted(true);
+  
+            websocketClient.sendMessage(GameEvent.NewVote, newVote);
+          }
+        } catch (error) {
+          console.error('Error submitting vote:', error);
         }
       }
 
