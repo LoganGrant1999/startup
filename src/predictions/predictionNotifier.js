@@ -18,4 +18,19 @@ const GameEvent = {
     }
   
 
-  
+    removeHandler(handler) {
+        this.handlers = this.handlers.filter((h) => h !== handler);
+      }
+    
+      onMessage(event) {
+        const message = JSON.parse(event.data);
+        this.handlers.forEach((handler) => handler(message));
+      }
+    
+      sendMessage(type, payload) {
+        this.socket.send(JSON.stringify({ type, payload }));
+      }
+    }
+    
+    const predictionSocket = new predictionSocket();
+    export { predictionSocket, GameEvent };
