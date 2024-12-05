@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { predictionSocket, GameEvent } from './predictionNotifier';
 
 export function GameCard(props) {
 
