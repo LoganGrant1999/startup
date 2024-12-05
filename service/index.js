@@ -71,14 +71,20 @@ secureApiRouter.post('/votes', async (req, res) => {
   const existingVote = await DB.getVoteByUserAndGame(vote.name, vote.game);
 
   if (existingVote) {
-    return res.status(400).send({ msg: 'Already Voted'});
+    return res.status(400).send({ msg: 'Already Voted' });
   }
 
-  await DB.addVote(vote)
-  let votes = await DB.getUserVotes(vote.name)
-  console.log("Votes", votes)
+  await DB.addVote(vote);
+
+  req.app.locals.wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ type: 'new-vote', payload: vote }));
+    }
+  });
+
+  const votes = await DB.getUserVotes(vote.name);
   res.send(votes);
-})
+});
 
 
 async function getVoteByUserAndGame (name, game) {
