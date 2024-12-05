@@ -1,9 +1,11 @@
 const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
 
-function peerProxy(httpServer) {
+function peerProxy(httpServer, app) {
   const wss = new WebSocketServer({ noServer: true });
 
+  app.locals.wss = wss; 
+  
   httpServer.on('upgrade', (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, function done(ws) {
       wss.emit('connection', ws, request);
@@ -36,7 +38,6 @@ function peerProxy(httpServer) {
       connection.alive = true;
     });
   });
-
 
   setInterval(() => {
     connections.forEach((c) => {
