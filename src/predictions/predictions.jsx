@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './predict.css';
-import { GameCard } from './gameCard';
+import GameCard from './gameCard';
 import { predictionSocket, GameEvent } from './predictionNotifier';
 
 export function Predictions() {
@@ -10,14 +10,18 @@ export function Predictions() {
 
   useEffect(() => {
     const fetchGames = () => {
-      fetch(`https://www.thesportsdb.com/api/v1/json/${import.meta.env.VITE_SPORTS_API_KEY}/eventsnextleague.php?id=4387`)
+      fetch(
+        `https://www.thesportsdb.com/api/v1/json/${import.meta.env.VITE_SPORTS_API_KEY}/eventsnextleague.php?id=4387`
+      )
         .then((response) => response.json())
         .then((data) => {
           if (data.events && Array.isArray(data.events)) {
             const currentTime = new Date();
             const upcomingGames = data.events.filter((game) => {
               if (!game.dateEventLocal || !game.strTimeLocal) return false;
-              const gameStart = new Date(`${game.dateEventLocal}T${game.strTimeLocal}`);
+              const gameStart = new Date(
+                `${game.dateEventLocal}T${game.strTimeLocal}`
+              );
               game.adjustedDate = gameStart;
               return gameStart > currentTime;
             });
@@ -43,7 +47,7 @@ export function Predictions() {
 
     const handleWebSocketMessage = (message) => {
       if (message.type === GameEvent.NewVote) {
-        setUserVotes((prev) => [message.payload, ...prev].slice(0, 5)); 
+        setUserVotes((prev) => [message.payload, ...prev].slice(0, 5));
       }
     };
 
@@ -69,7 +73,8 @@ export function Predictions() {
               {userVotes.length > 0 ? (
                 userVotes.map((vote, index) => (
                   <li key={index} className="user-name">
-                    - {vote.name} predicted the {vote.vote} would beat the {vote.loser}!
+                    - {vote.name} predicted the {vote.vote} would beat the{' '}
+                    {vote.loser}!
                   </li>
                 ))
               ) : (
@@ -106,4 +111,3 @@ export function Predictions() {
 }
 
 export default Predictions;
-
