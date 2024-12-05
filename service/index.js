@@ -87,6 +87,7 @@ secureApiRouter.post('/votes', async (req, res) => {
 });
 
 
+
 async function getVoteByUserAndGame (name, game) {
   return await votesCollection.findOne({ name, game });
 }
