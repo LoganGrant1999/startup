@@ -43,7 +43,7 @@ export function Predictions() {
 
     const handleWebSocketMessage = (message) => {
       if (message.type === GameEvent.NewVote) {
-        setUserVotes((prev) => [message.payload, ...prev].slice(0, 5)); // Keep only the 5 most recent votes
+        setUserVotes((prev) => [message.payload, ...prev].slice(0, 5)); 
       }
     };
 
