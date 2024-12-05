@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './predict.css';
 import { GameCard } from "./gameCard";
+import { predictionSocket, GameEvent } from './predictionNotifier';
 
 export function Predictions() {
   const userName = localStorage.getItem("userName") || "No UserName Saved";
@@ -44,7 +45,22 @@ export function Predictions() {
     }, 60 * 60 * 1000);
 
     return () => clearInterval(interval);
+
+
+    const handleWebSocketMessage = (message) => {
+      if (message.type === GameEvent.NewVote) {
+        setRecentVotes((prev) => {
+          const updated = [message.payload, ...prev];
+          return updated.slice(0, 5); 
+        });
+      }
+    };
+
+    websocketClient.addHandler(handleWebSocketMessage);
+    return () => websocketClient.removeHandler(handleWebSocketMessage);
+
   }, []);
+
 
   return (
     <div className='body'>
