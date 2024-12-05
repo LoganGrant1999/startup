@@ -1,11 +1,9 @@
 const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
 
-function peerProxy(httpServer, app) {
+function peerProxy(httpServer) {
   const wss = new WebSocketServer({ noServer: true });
 
-  app.locals.wss = wss; 
-  
   httpServer.on('upgrade', (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, function done(ws) {
       wss.emit('connection', ws, request);
@@ -49,6 +47,10 @@ function peerProxy(httpServer, app) {
       }
     });
   }, 10000);
+
+  httpServer.locals = { wss };
+
+  return wss;
 }
 
 module.exports = { peerProxy };
